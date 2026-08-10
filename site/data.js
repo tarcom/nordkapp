@@ -592,8 +592,9 @@ window.SOVE = {
     { land:"Sverige", d:"Allemansrätten, samme princip. Rastepladser langs E4 og E20 tillader som regel én overnatning. Det er den mindst spændende del af turen at sove på, men også den nemmeste." }
   ],
   praktisk: [
-    ["Nætterne bliver kolde","Sidst i august kan det være 3-5 grader på vidden. Tesla'ens Camp Mode holder varmen, men den koster typisk 10-15 % batteri per nat — regn med det, når du planlægger ladning."],
-    ["Myg i Lapland","August er bedre end juli, men Finnmarksvidda og finsk Lapland har stadig myg. Myggenet til vinduerne er den bedste 100-kroners investering på turen."],
+    ["Camp Mode løser tre ting på én gang","Varme, når det er 3-5 grader på vidden. Fugt, så ruderne ikke dugger til. Og strøm til 12 V-udtaget hele natten, så køletasken kører. Til gengæld koster den et par kWh per nat — mere når det er koldt — så den skal med i ladeplanen."],
+    ["Sov hvor du kan lade, så er Camp Mode gratis","Det er her CEE-adapteren tjener sig ind. Står du på en campingplads med strøm, kan du køre Camp Mode hele natten uden at røre køreforbruget. Det gør de betalte pladser på Lofoten til en bedre handel, end prisen antyder."],
+    ["Myg i Lapland","August er bedre end juli, men Finnmarksvidda og finsk Lapland har stadig myg. Med Camp Mode er ruderne lukkede, så du skal ikke bruge net — myggene kommer ind ad døren. Det generende er udenfor: madlavning, fotostop, og ikke mindst når du står stille i mørket og venter på nordlys."],
     ["Lys om natten","Fra dag 3 og nordpå er det aldrig helt mørkt før sent i august — men det bliver mørkt nok. Tag en solskærm eller gardiner, ellers vågner du kl. 4."],
     ["Toiletter og bad","Rastepladserne i Norge har som regel toilet. Til bad: svømmehaller i byerne koster småpenge, og campingpladser sælger ofte adgang til bad uden at man overnatter."],
     ["Skift mellem seng og bil","Halvdelen i bilen er en god plan. Læg de rigtige senge på de dage, hvor du har kørt langt — dag 3, dag 6 og dag 10 — og sov i bilen på de korte dage, hvor du kommer tidligt frem."]
@@ -637,11 +638,10 @@ window.PAKKELISTE = {
     ]},
 
     { navn:"At sove i bilen", ting:[
-      { t:"Sovepose til omkring 0 grader", kritisk:true, d:"Komforttemperatur, ikke ekstremtemperatur. 3-5 grader på vidden sidst i august er normalt." },
+      { t:"Sovepose - en let én er nok", d:"Med Camp Mode er der 18-20 grader i bilen, så en 0-graders pose er overflødig. Tag alligevel noget der kan klare 5-10 grader plus et lag uld: den nat du står med for lidt strøm til at køre Camp Mode, vil du gerne have marginen." },
       { t:"Pude og lagen", d:"Madras uden lagen bliver klam efter to nætter." },
       { t:"Solskærme eller gardiner til alle ruder", kritisk:true, d:"Det bliver lyst igen omkring kl. 4 nordpå. Uden mørklægning sover du ikke. De skal også give privatliv på en rasteplads." },
-      { t:"Myggenet til vinduerne", kritisk:true, d:"Du skal have en sprække åben mod kondens, og finsk Lapland har stadig myg i august. Den bedste hundredekroneseddel på hele turen." },
-      { t:"Mikrofiberklud til kondens", d:"En nats åndedræt sætter sig på alle ruder. Tør af inden du kører." },
+      { t:"Myggene kommer ind ad døren, ikke ad ruden", d:"Med Camp Mode er ruderne lukkede, så du skal ikke bruge net. Til gengæld følger der myg med hver gang du åbner døren om aftenen i Lapland — luk hurtigt, og slå dem ihjel før du lægger dig." },
       { t:"Pandelampe", kritisk:true },
       { t:"Ørepropper", d:"Rastepladser ligger ved vejen, og lastbiler kører hele natten." },
       { t:"Foldbar spand eller pose til skidt", d:"Der er ikke skraldespand alle steder, og efterlader man noget, er det den slags der får rastepladser lukket for overnatning." },
@@ -675,7 +675,7 @@ window.PAKKELISTE = {
 
     { navn:"Køletaske og mad", ting:[
       { t:"Køletaske med 12 V", kritisk:true },
-      { t:"Tjek at 12 V-udtaget holder liv om natten", kritisk:true, d:"Model 3 lægger sig til at sove og slukker for 12 V-udtaget. Camp Mode holder det tændt — men Camp Mode koster også 10-15 % batteri per nat. Test det hjemme, inden køletasken står med maden i." },
+      { t:"Regn Camp Mode med i ladeplanen", kritisk:true, d:"Camp Mode holder 12 V-udtaget i live hele natten, så køletasken kører — men den bruger et par kWh, og mere når det er koldt. Ankom til sovestedet med en buffer, ikke med 10 %." },
       { t:"Termokande", d:"Kaffe på en rasteplads klokken syv om morgenen ved Polarsirkelen er halvdelen af turen." },
       { t:"Turkomfur og gaspatron", d:"Norge er halvanden gang så dyrt som herhjemme. Et komfur tjener sig ind på tre-fire måltider. Gaspatroner må gerne med på bilfærgerne." },
       { t:"Bestik, kop, tallerken, dåseåbner" },
@@ -693,7 +693,8 @@ window.PAKKELISTE = {
 
     { navn:"Krop og apotek", ting:[
       { t:"Fast medicin i original emballage", kritisk:true, d:"Nok til hele turen plus et par dage. Recepter fra Danmark kan ikke uden videre indløses i Norge." },
-      { t:"Myggemiddel med DEET", kritisk:true, d:"Finnmarksvidda og finsk Lapland. August er bedre end juli, men ikke myggefrit." },
+      { t:"Myggemiddel med DEET", kritisk:true, d:"Til udendørs brug — i bilen er du dækket af Camp Mode og lukkede ruder. Finnmarksvidda og finsk Lapland er stadig ikke myggefri i august." },
+      { t:"Myggehovednet", d:"Vejer ingenting og fylder ingenting. Det afgørende øjeblik er nordlysvagten: du står stille i mørket i en time i Lapland, og det er præcis når de finder dig." },
       { t:"Håndkøbs smertestillende" },
       { t:"Lille førstehjælpstaske", d:"Du er alene, og der er langt mellem folk på flere af vandringerne." },
       { t:"Vådservietter og håndsprit", d:"Halvdelen af nætterne uden bad." },
