@@ -198,6 +198,35 @@
     valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
     '<p class="altbund">' + esc(A.bund) + "</p>";
 
+  /* ---------- fri plan ---------- */
+  var F = window.FRIPLAN;
+  document.getElementById("friplan").innerHTML =
+    '<p class="dom">' + esc(F.dom) + "</p>" +
+
+    '<div class="hvorfor">' + F.hvorfor.map(function (h) {
+      return '<div class="hkort"><h3>' + esc(h.t) + "</h3><p>" + esc(h.d) + "</p></div>";
+    }).join("") + "</div>" +
+
+    '<h3 class="fhd">De fire datoer</h3>' +
+    '<p class="lead">' + esc(F.frister.intro) + "</p>" +
+    '<div class="frister"><div class="frow fhead"><span></span>' +
+      "<span>Efter planen</span><span>Absolut sidste</span></div>" +
+      F.frister.raekker.map(function (r) {
+        return '<div class="frow' + (r.vendepunkt ? " vend" : "") + '">' +
+          '<span class="fsted">' + esc(r.sted) +
+            '<em>' + esc(r.hvorfor) + "</em></span>" +
+          '<span class="fnormal">' + esc(r.normal) + "</span>" +
+          '<span class="fsidste">' + esc(r.sidste) + "</span></div>";
+      }).join("") + "</div>" +
+    '<p class="fluft">' + F.frister.luft + "</p>" +
+
+    '<h3 class="fhd">Fem regler der får det til at virke</h3>' +
+    '<div class="pgroup"><ul>' + F.regler.map(function (r) {
+      return "<li><b>" + esc(r[0]) + "</b>" + esc(r[1]) + "</li>";
+    }).join("") + "</ul></div>" +
+
+    '<p class="sadvarsel">' + esc(F.fare) + "</p>";
+
   /* ---------- karakterer og rangering ---------- */
   function stjerner(n, klasse) {
     var s = "";

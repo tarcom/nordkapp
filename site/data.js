@@ -509,6 +509,42 @@ window.ALTERNATIVER = {
   bund: "Der er ingen stor besparelse at finde. Aalborg-Nordkapp er 2.500 km hver vej, og alt under omkring 4.800 km betyder, at noget væsentligt skæres væk. Vil du under det, er det ikke ruten der skal ændres — så skal Nordkapp eller Lofoten ud af planen."
 };
 
+/* At rejse uden at booke: hvor det virker, og hvor det ikke gør. */
+window.FRIPLAN = {
+  dom: "Ja, det kan lade sig gøre — og madrassen er grunden. Uden den ville det være en dårlig idé i august; med den er overnatning aldrig en blokering, men et valg. Til gengæld er der tre datoer, der ikke må skride, og præcis én dags luft i hele planen.",
+
+  hvorfor: [
+    { t:"Bilen fjerner den eneste rigtige risiko", d:"De to steder hvor man reelt kan komme til at stå uden tag over hovedet i august er Lofoten og Honningsvåg. Begge steder har du en lovlig plads at sove: betalt parkering med toilet ved Haukland og Ramberg, og selve Nordkapp-platået, hvor billetten gælder 24 timer. Du kan altså aldrig blive tvunget til at køre videre, fordi der ikke var en seng." },
+    { t:"Sidst i august er bedre end du tror", d:"Både norske og finske skoler er begyndt igen, så den indenlandske ferietrafik er ovre. Der er stadig udenlandske turister på Lofoten og ved Nordkapp, men presset er mærkbart lavere end i juli. I byerne — Trondheim, Bodø, Tromsø, Alta, Rovaniemi, Oulu — finder du stort set altid noget samme dag." },
+    { t:"Campingpladsernes hytter står ikke på Booking.com", d:"Norske campingpladser har hytter til langt under hotelpris, og de tager som regel folk ind fra gaden. Oveni har de CEE-strøm, så Camp Mode kører gratis. Det er den bedste fallback på turen, og den er nærmest usynlig, hvis man kun kigger ét sted." }
+  ],
+
+  frister: {
+    intro: "Turen er ikke bundet af overnatninger, men af to faste endepunkter: færgen fra Hirtshals mandag den 17. og at du skal være hjemme fredag den 28. Alt derimellem kan improviseres — så længe du er de her fire steder senest på de her datoer. Regnet baglæns fra fredag.",
+    raekker: [
+      { sted:"På Lofoten", normal:"tor 20. aug", sidste:"fre 21. aug",
+        hvorfor:"Derfra er der tre køredage til Nordkapp: Tromsø, Alta, klippen." },
+      { sted:"Ved Nordkapp", normal:"man 24. aug", sidste:"tir 25. aug",
+        hvorfor:"Der er 1.584 km til Turku. Det er to hårde dage — 827 og 757 km — og de kan ikke gøres til én.", vendepunkt:true },
+      { sted:"Ombord i Turku", normal:"ons 26. aug", sidste:"tor 27. aug",
+        hvorfor:"Natfærgen sejler ca. kl. 20 og lander i Stockholm kl. 7." },
+      { sted:"I Göteborg", normal:"tor 27. aften", sidste:"fre 28. middag",
+        hvorfor:"Fra Stockholm er der 477 km. Kører du kl. 7, er du fremme ved 13-tiden." }
+    ],
+    luft: "Der er præcis <b>én dags luft</b> i hele planen, og det er hviledagen på Lofoten. Bruger du den på at komme videre, er du tilbage på skemaet. Bruger du den på at ligge i solen, har du ingen tilbage. Begge dele er fine — du skal bare vide hvilken af dem du gør."
+  },
+
+  regler: [
+    ["Book altid mens du har dækning","Det er ikke sengen der er problemet, det er signalet. Der er huller på E69, Finnmarksvidda og strækningen Karasjok-Inari. Find stedet ved 15-tiden mens du holder et sted med net — ikke kl. 21 på vidden."],
+    ["Bodø-færgen er den eneste der skal planlægges","Den sejler få gange i døgnet og fyldes i august. Book den 2-3 dage før, når du kan se dit eget tempo. Bliver den fuld, koster det ikke turen: kør E6 til Bognes-færgen, som sejler ofte og ikke skal bookes, og kom ind i Lofoten nordfra i stedet."],
+    ["Vælg steder med nøgleboks","Små gæstgiverier i Norge lukker receptionen kl. 18-20. Kommer du kl. 22, står du udenfor. Filtrér efter selvbetjent indtjekning, eller sov i bilen den nat."],
+    ["Book hjemturen sent på dagen","Stena-billetten fredag bør være en eftermiddags- eller aftenafgang, ikke morgen. Det er dét, der gør din ene dags luft brugbar helt til sidst — ellers forsvinder den i en færge du ikke kan nå."],
+    ["Beslut om aftenen, ikke om morgenen","Ad hoc fungerer bedst, når du vælger næste dags mål aftenen før, ud fra vejrudsigten. yr.no er præcis i Norge, og på Lofoten og Senja afgør vejret alligevel, om vandreturene overhovedet giver mening."]
+  ],
+
+  fare: "Det eneste sted planen kan gå i stykker er efter Nordkapp. Nordfra og hjem er der 2.600 km og fire dage, og der er ingen genveje tilbage — Sverige er 294 km længere, og at køre tilbage gennem Norge er 598 km længere. Så længe du står på klippen senest tirsdag den 25., kan alt andet improviseres."
+};
+
 /* Karakterskalaen. Forankret i hvad du skal GØRE, ikke i vage kvalitetsord. */
 window.SKALA = {
   intro: "Alt på kortet har fået 1-5 stjerner. Skalaen handler om hvad stedet er værd at gøre for — ikke om det er «pænt», for det er alting heroppe.",

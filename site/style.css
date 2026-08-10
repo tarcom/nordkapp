@@ -219,6 +219,52 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .iw{font-family:var(--body);max-width:250px}
 .iw a{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.5px;color:var(--aurora);text-decoration:none;border-bottom:1px solid rgba(95,217,166,.4);padding-bottom:1px}
 
+/* ---------- fri plan ---------- */
+.dom{
+  font-size:1.06rem;color:var(--ice);margin:0 0 24px;max-width:64ch;
+  padding:18px 22px;border-radius:11px;
+  background:rgba(95,217,166,.08);border-left:3px solid var(--aurora);
+}
+.hvorfor{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:0 0 34px}
+.hkort{border:1px solid var(--line);border-radius:11px;padding:19px 21px;background:var(--panel)}
+.hkort h3{font-family:var(--display);font-size:1rem;font-weight:600;letter-spacing:-.015em;margin:0 0 8px;color:var(--ice)}
+.hkort p{margin:0;font-size:.88rem;color:var(--glacial);line-height:1.6}
+
+.fhd{
+  font-family:var(--display);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;
+  margin:0 0 12px;padding-top:8px;
+}
+.frister{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 16px}
+.frow{
+  display:grid;grid-template-columns:minmax(160px,1fr) 118px 118px;gap:16px;
+  align-items:baseline;padding:15px 20px;background:var(--night);
+}
+.frow.fhead{
+  padding:9px 20px;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--glacial);opacity:.6;
+}
+.frow.vend{background:rgba(232,163,61,.07)}
+.fsted{font-size:.98rem;color:var(--ice);font-weight:600;display:flex;flex-direction:column;gap:3px}
+.fsted em{font-style:normal;font-size:.83rem;color:var(--glacial);font-weight:400;opacity:.85;line-height:1.5}
+.fnormal,.fsidste{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.fnormal{color:var(--aurora)}
+.fsidste{color:var(--sun);font-weight:600}
+.fluft{
+  margin:0 0 34px;padding:16px 20px;border-radius:10px;font-size:.94rem;color:var(--glacial);
+  background:rgba(232,163,61,.08);border-left:3px solid var(--sun);
+}
+.fluft b{color:var(--ice);font-weight:600}
+#friplan .pgroup{margin:0 0 22px}
+
+@media(max-width:680px){
+  .frow{grid-template-columns:1fr 96px;gap:6px 12px;padding:13px 15px}
+  .frow.fhead{display:none}
+  .fsted{grid-column:1/-1}
+  .fnormal::before{content:"planen: ";opacity:.55}
+  .fsidste::before{content:"sidste: ";opacity:.55}
+  .fnormal,.fsidste{grid-column:auto;font-size:11px}
+}
+
 /* ---------- karakterer og rangering ---------- */
 .stj{display:inline-flex;gap:3px;flex:none;vertical-align:middle}
 .stj span{width:8px;height:8px;border-radius:50%;background:rgba(189,214,223,.16)}
