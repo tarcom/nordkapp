@@ -302,6 +302,21 @@ window.POI = [
   { kat:"vandring", navn:"Otsamo ved Inari", lat:68.9400, lon:27.0050, dag:9,
     t:"3-4 timer · udsigt over Inarisøen", tid:"3-4 timer",
     d:"Fjeldet nord for Inari med udsigt ud over søen og dens 3.000 øer. Godt sted at forstå, hvor stort Lapland faktisk er." },
+  { kat:"vandring", navn:"Pielpajärvi ødemarkskirke", lat:68.9500, lon:27.1200, dag:9,
+    t:"4 km hver vej · let · kirke fra 1760 midt i skoven", tid:"2-3 timer", stjerne:true,
+    d:"En træbygget kirke fra 1760'erne, der står helt alene i ødemarken nordøst for Inari — ingen vej, kun en sti gennem fyrreskoven. Det var her samerne mødtes til vintermarked. Et af de mest stemningsfulde steder i finsk Lapland, og næsten ingen turister finder derud." },
+  { kat:"vandring", navn:"Urho Kekkonen NP, Saariselkä", lat:68.4200, lon:27.4100, dag:9,
+    t:"Finlands næststørste nationalpark · ligger direkte på E75", tid:"2 timer - flere dage",
+    d:"2.550 km² fjeldhede og urskov med et net af gratis ødemarkshytter. Kiilopää-toppen tager to timer tur/retur fra vejen, og der er røgsauna og et iskoldt å-bad nedenfor. Du kører lige forbi indgangen." },
+  { kat:"vandring", navn:"Pyhä-Luosto · Isokuru", lat:67.0100, lon:27.2300, dag:9,
+    t:"+62 km / +1,1 t · Finlands dybeste kløft", tid:"2-3 timer", stjerne:true,
+    d:"Finlands ældste fredede natur. Isokuru er en 220 meter dyb kløft med trappe og gangbro hele vejen ned, og den ligger kun en times omvej fra E75. Den bedste enkeltstående naturoplevelse på hele den finske strækning, målt på hvad den koster." },
+  { kat:"vandring", navn:"Auttiköngäs-vandfaldet", lat:66.4000, lon:27.4500, dag:10,
+    t:"Kort natursti med hængebro · øst for Rovaniemi", tid:"1 time",
+    d:"16 meter højt vandfald med en afmærket rundtur på et par kilometer og en hængebro over strømmen. Nemt stop, hvis du kommer den vej." },
+  { kat:"vandring", navn:"Ounasvaara, Rovaniemi", lat:66.4930, lon:25.7600, dag:10,
+    t:"Bybjerget · kort tur · udsigt over Kemijoki", tid:"1 time",
+    d:"Rovaniemis udsigtsbakke lige uden for byen. Kort og nem, og et godt sted at strække benene inden den lange etape sydpå." },
 
   /* ---- udsigt og seværdigheder ---- */
   { kat:"udsigt", navn:"Dovrefjell", lat:62.2170, lon:9.5450, dag:2,
@@ -358,8 +373,18 @@ window.POI = [
     t:"Fra 1689 · står stadig ved åen" },
   { kat:"udsigt", navn:"Arktikum, Rovaniemi", lat:66.5100, lon:25.7250, dag:10,
     t:"Det bedste museum om Lapland · åbner kl. 9", stjerne:true },
+  { kat:"udsigt", navn:"Ukonkivi i Inarisøen", lat:68.9800, lon:27.4500, dag:9,
+    t:"Samernes helligste ø · bådtur fra Inari" },
+  { kat:"udsigt", navn:"Tankavaara guldlandsby", lat:68.1800, lon:27.7500, dag:9,
+    t:"Guldmuseum på E75 · du må vaske guld selv" },
+  { kat:"udsigt", navn:"Oulu", lat:65.0121, lon:25.4720, dag:10,
+    t:"Halvvejs · torvet ved havnen og markedshallen" },
+  { kat:"udsigt", navn:"Kalajoki klitter", lat:64.2600, lon:23.9500, dag:10,
+    t:"Sandklitter og kilometerlang strand på Vt8" },
   { kat:"udsigt", navn:"Rauma gamle by", lat:61.1290, lon:21.5110, dag:10,
     t:"UNESCO-træby · 600 bevarede huse · bedste finske stop", stjerne:true },
+  { kat:"udsigt", navn:"Naantali & Mumindalen", lat:60.4680, lon:22.0250, dag:10,
+    t:"+16 km fra Turku · træby fra 1400-tallet · Mumitrolde" },
   { kat:"udsigt", navn:"Gränna & Visingsö", lat:58.0270, lon:14.4650, dag:11,
     t:"Polkagris ved Vättern · 25 min færge til øen" },
 
@@ -410,7 +435,13 @@ window.POI = [
   { kat:"omvej", navn:"Senja", lat:69.4830, lon:17.5610, dag:6,
     t:"+159 km / +3 t · «Norge i miniature» · Segla ligger her", stjerne:true },
   { kat:"omvej", navn:"Andenes hvalsafari", lat:69.3170, lon:16.1330, dag:6,
-    t:"+178 km / +5,4 t via færgen til Senja · kaskelothvaler" }
+    t:"+178 km / +5,4 t via færgen til Senja · kaskelothvaler" },
+  { kat:"omvej", navn:"Oulanka NP · Karhunkierros", lat:66.3000, lon:29.3100, dag:10,
+    t:"+243 km / +3,8 t · Finlands bedste vandreterræn", stjerne:true },
+  { kat:"omvej", navn:"Kvarken skærgård", lat:63.3500, lon:21.4500, dag:10,
+    t:"+89 km / +1,9 t · UNESCO · landet hæver sig 8 mm om året" },
+  { kat:"omvej", navn:"Skærgårdsringen ved Turku", lat:60.1900, lon:21.9000, dag:10,
+    t:"+120 km / +2,8 t · gratis færger mellem øerne", stjerne:true }
 ];
 
 /* Alternativer - målte svar på "kan den gøres kortere?" */
@@ -498,12 +529,44 @@ window.OMVEJE = {
       d:"Hvide sandstrande og turkist vand på 69°N. Ser ud som om nogen har flyttet Caribien 3.000 km for langt mod nord og glemt at skrue op for varmen.",
       pris:"To en halv time. Nem at klemme ind på formiddagen inden Alta." },
 
+    { navn:"Pyhä-Luosto", km:62, t:1.1, maalt:true, dag:9, karat:4,
+      hvor:"Kort afstikker fra E75 mellem Sodankylä og Rovaniemi",
+      d:"Isokuru er Finlands dybeste kløft — 220 meter ned mellem to fjelde, med trappe og gangbro hele vejen. Det er Finlands ældste fredede natur, og den ligger praktisk talt på vejen.",
+      pris:"En time. Det er den billigste rigtige naturoplevelse på hele turen." },
+
+    { navn:"Skærgårdsringen ved Turku", km:120, t:2.8, maalt:true, dag:10, karat:4,
+      hvor:"Fra Turku ud i skærgården og tilbage, inden færgen",
+      d:"Vejen hopper fra ø til ø gennem Finlands skærgårdshav — verdens største målt i antal øer. Færgerne mellem øerne er en del af vejnettet og derfor gratis, og de sejler næsten konstant.",
+      pris:"Under tre timer. Perfekt hvis du alligevel venter på en færge, du ikke har booket.",
+      note:"Nogle af forbindelserne på den store ring sejler kun i sommersæsonen og lukker sidst i august. Den korte tur til Nagu og tilbage kører hele året." },
+
+    { navn:"Oulanka NP · Karhunkierros", km:243, t:3.8, maalt:true, dag:10, karat:4,
+      hvor:"Øst om via Kuusamo i stedet for lige ned ad Vt4 til Oulu",
+      d:"Finlands bedste vandreterræn: stryg, hængebroer og fyrreskov i en kløft ved den russiske grænse. «Lille Bjørnerunde» er en 12 km rundtur, der tager en formiddag; den store er 82 km.",
+      pris:"Knap fire timer ekstra kørsel plus en halv dag til fods. Det er den finske pendant til Kystriksveien — dyr, men det eneste sted Finland bliver dramatisk." },
+
+    { navn:"Kvarken skærgård", km:89, t:1.9, maalt:true, dag:10, karat:3,
+      hvor:"Fra Vaasa på vestkysten, undervejs mod Turku",
+      d:"UNESCO-område, hvor landet stadig hæver sig cirka 8 mm om året efter istiden — nye øer dukker bogstaveligt talt op. Replot-broen er Finlands længste.",
+      pris:"To timer. Mest for geologien; landskabet er lavt og stille." },
+
     { navn:"Knivskjellodden", km:0, t:6, maalt:false, dag:8, karat:4,
       hvor:"Fra E69 lige før Nordkapp",
       d:"Europas faktisk nordligste punkt, 1.457 meter længere nordpå end Nordkapp. Ingen entré, ingen bus, næsten ingen mennesker — kun 9 km vandring hver vej og en bog i en kasse, du kan skrive dig i.",
       pris:"Ingen ekstra kørsel, men en hel dag til fods. Til gengæld er det den eneste måde reelt at stå nordligst." }
   ],
-  bund: "Tager du Senja og Sommarøy, koster det 275 km og 5,4 timer — og det er den bedste handel på listen. Vil du også have Kystriksveien, skal der findes en hel dag, og så er hviledagen på Lofoten det eneste sted den kan komme fra."
+  bund: "Tager du Senja og Sommarøy, koster det 275 km og 5,4 timer — og det er den bedste handel på listen. Vil du også have Kystriksveien, skal der findes en hel dag, og så er hviledagen på Lofoten det eneste sted den kan komme fra.",
+
+  finland: {
+    titel: "Hvorfor Finland så tomt ud",
+    tekst: [
+      "Den første udgave af kortet havde seks punkter i Finland mod tredive i Norge, og det var misvisende. Tre ting forklarer det, og kun den ene handler om Finland.",
+      "<b>Du kører den hurtige linje gennem Finland og den smukke gennem Norge.</b> E75 og Vt4 ned gennem midten er transitkorridoren — den er lagt for at komme sydpå, ikke for at se noget. I Norge kører du E6 og E10 langs en kyst, der er blandt Europas mest seværdige vejstrækninger. Det er ikke en fair sammenligning mellem to lande; det er en sammenligning mellem en motorvej og en panoramarute.",
+      "<b>Finland er landskabeligt fladere, og det er ikke til diskussion.</b> Der er ingen fjorde, og det højeste punkt er Halti på 1.324 meter — som i øvrigt ligger på grænsen og kun kan nås fra norsk side. Men Finlands natur er vandret i stedet for lodret: sø, skov, lys og stilhed. Den belønner at man stopper og bliver, ikke at man kører forbi og kigger. Det er en dårlig match for en bilrute og en god match for en madras i bagagerummet.",
+      "<b>Og så var det min egen slagside.</b> Norske bilturs-seværdigheder er gennemdokumenterede; Finlands gode steder er mindre internationalt kendte, og min første liste afspejlede hvad der er nemt at komme i tanke om, ikke hvad der er. Der er nu tolv finske punkter mere på kortet, blandt andet Pielpajärvi-ødemarkskirken, Urho Kekkonen-nationalparken og Pyhä-Luosto."
+    ],
+    folk: "Færre mennesker er derimod ikke forklaringen. Finland har cirka 5,6 millioner indbyggere, Norge cirka 5,5 — og tætheden er næsten identisk. Går man tættere på: finsk Lapland har omkring 180.000 mennesker på et areal på størrelse med Portugal, norske Finnmark har omkring 76.000 på det halve. Der er lige tomt begge steder. Til gengæld er der <b>langt færre turister</b> i finsk Lapland i august, fordi det primært er en vinterdestination — mens Lofoten og Nordkapp er på deres højeste. Det mærker du."
+  }
 };
 
 /* At sove i bilen: regler og virkelighed i de fire lande. */

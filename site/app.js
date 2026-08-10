@@ -174,7 +174,10 @@
         (o.note ? '<p class="o-note">' + esc(o.note) + "</p>" : "") +
         "</article>";
     }).join("") +
-    '<p class="altbund">' + esc(O.bund) + "</p>";
+    '<p class="altbund">' + esc(O.bund) + "</p>" +
+    '<article class="finland"><h3>' + esc(O.finland.titel) + "</h3>" +
+      O.finland.tekst.map(function (p) { return "<p>" + p + "</p>"; }).join("") +
+      '<p class="ffolk">' + O.finland.folk + "</p></article>";
 
   /* ---------- sove i bilen ---------- */
   var S = window.SOVE;
