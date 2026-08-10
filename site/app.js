@@ -241,22 +241,27 @@
   var shell = document.querySelector(".map-shell");
   var tip = document.getElementById("maptip");
 
-  function visTip(html, x, y) {
-    tip.innerHTML = html;
-    tip.hidden = false;
+  /* Musens position følges på dokumentniveau. Google sender ikke altid et
+     domEvent med sine hændelser, og en manglende domEvent fik tidligere hele
+     hover-handleren til at fejle lydløst. */
+  var mus = { x: 0, y: 0 };
+  document.addEventListener("mousemove", function (e) {
     var box = shell.getBoundingClientRect();
-    var left = Math.min(Math.max(x + 16, 8), box.width - tip.offsetWidth - 8);
-    var top = y - tip.offsetHeight - 14;
-    if (top < 8) top = y + 22;
-    tip.style.left = left + "px";
+    mus.x = e.clientX - box.left;
+    mus.y = e.clientY - box.top;
+  }, { passive: true });
+
+  function visTip(html) {
+    tip.innerHTML = html;
+    tip.classList.add("vis");
+    var box = shell.getBoundingClientRect();
+    var left = Math.min(Math.max(mus.x + 16, 8), box.width - tip.offsetWidth - 8);
+    var top = mus.y - tip.offsetHeight - 14;
+    if (top < 8) top = mus.y + 22;
+    tip.style.left = Math.max(left, 8) + "px";
     tip.style.top = top + "px";
   }
-  function skjulTip() { tip.hidden = true; }
-
-  function tipPos(e) {
-    var box = shell.getBoundingClientRect();
-    return [e.domEvent.clientX - box.left, e.domEvent.clientY - box.top];
-  }
+  function skjulTip() { tip.classList.remove("vis"); }
 
   /* Directions-svar caches, så kun første besøg koster API-kald. */
   var CACHE_KEY = "nordkapp.ruter.v1";
@@ -284,6 +289,13 @@
 
     var bounds = new google.maps.LatLngBounds();
     var linjer = {};
+    var info = new google.maps.InfoWindow();
+
+    function aabnInfo(html, pos, anker) {
+      info.setContent('<div class="iw">' + html + "</div>");
+      if (anker) { info.open(map, anker); }
+      else { info.setPosition(pos); info.open(map); }
+    }
 
     function tegnLinje(seg, path, gkm, gt) {
       path.forEach(function (p) { bounds.extend(p); });
@@ -292,9 +304,11 @@
         path: path, map: map, strokeColor: AURORA, strokeOpacity: 0.9,
         strokeWeight: 3, zIndex: 2
       });
-      // Usynlig, tyk linje ovenpå gør ruten nem at ramme med musen.
+      // Næsten usynlig, tyk linje ovenpå gør ruten nem at ramme.
+      // Bemærk 0.001 og ikke 0: en helt gennemsigtig linje bliver slet ikke
+      // ramt af musen i Google Maps.
       var ramme = new google.maps.Polyline({
-        path: path, map: map, strokeOpacity: 0, strokeWeight: 16,
+        path: path, map: map, strokeOpacity: 0.001, strokeWeight: 16,
         zIndex: 3, clickable: true
       });
       linjer[seg.key] = synlig;
@@ -306,14 +320,16 @@
 
       ramme.addListener("mouseover", function () {
         synlig.setOptions({ strokeWeight: 6, strokeColor: ICE });
+        visTip(txt);
       });
+      ramme.addListener("mousemove", function () { visTip(txt); });
       ramme.addListener("mouseout", function () {
         synlig.setOptions({ strokeWeight: 3, strokeColor: AURORA });
         skjulTip();
       });
-      ramme.addListener("mousemove", function (e) {
-        var p = tipPos(e);
-        visTip(txt, p[0], p[1]);
+      ramme.addListener("click", function (e) {
+        skjulTip();
+        aabnInfo(txt, e.latLng);
       });
     }
 
@@ -332,12 +348,15 @@
       var path = [{ lat: f.fra[0], lng: f.fra[1] }, { lat: f.til[0], lng: f.til[1] }];
       path.forEach(function (p) { bounds.extend(p); });
       new google.maps.Polyline({
+        // Selve stregerne kommer fra icons, derfor opacity 0 på linjen.
+        // clickable:false så den ikke stjæler hændelser fra ramme-linjen.
         path: path, map: map, geodesic: true, strokeOpacity: 0, zIndex: 1,
+        clickable: false,
         icons: [{ icon: { path: "M 0,-1 0,1", strokeOpacity: 0.85, strokeColor: SUN,
                           strokeWeight: 3, scale: 3 }, offset: "0", repeat: "14px" }]
       });
       var ramme = new google.maps.Polyline({
-        path: path, map: map, geodesic: true, strokeOpacity: 0,
+        path: path, map: map, geodesic: true, strokeOpacity: 0.001,
         strokeWeight: 16, zIndex: 3, clickable: true
       });
       var b = { "nu": "Book hjemmefra", "fra Norge": "Book fra Norge",
@@ -345,54 +364,58 @@
       var txt = "<b>⛴ " + esc(f.navn) + "</b>" +
         '<span class="tl">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) + "</span>" +
         (b ? '<span class="tl g">' + b + "</span>" : "");
-      ramme.addListener("mousemove", function (e) {
-        var p = tipPos(e);
-        visTip(txt, p[0], p[1]);
-      });
+      ramme.addListener("mouseover", function () { visTip(txt); });
+      ramme.addListener("mousemove", function () { visTip(txt); });
       ramme.addListener("mouseout", skjulTip);
+      ramme.addListener("click", function (e) { skjulTip(); aabnInfo(txt, e.latLng); });
     });
 
     /* ---- markører ---- */
     var grupper = {};
     Object.keys(KAT).forEach(function (k) { grupper[k] = []; });
 
-    function tilfoej(kat, lat, lon, txt, z, stor, farve) {
+    function tilfoej(kat, lat, lon, txt, z, stor, farve, klik) {
       var k = KAT[kat];
       var m = new google.maps.Marker({
         position: { lat: lat, lng: lon }, map: map, zIndex: z || 5,
+        clickable: true,
+        // optimized:false giver hver markør sit eget element. Med den
+        // fælles canvas-optimering er hover på symbol-ikoner upålidelig.
+        optimized: false,
         icon: { path: google.maps.SymbolPath.CIRCLE,
                 scale: stor ? k.r + 2.5 : k.r,
                 fillColor: farve || k.farve, fillOpacity: 1,
                 strokeColor: NIGHT, strokeWeight: 2 }
       });
-      m.addListener("mouseover", function (e) {
-        var p = tipPos(e);
-        visTip(txt, p[0], p[1]);
-      });
+      m.addListener("mouseover", function () { visTip(txt); });
       m.addListener("mouseout", skjulTip);
+      m.addListener("click", function () {
+        skjulTip();
+        aabnInfo(txt + (klik ? '<a href="' + klik + '" target="_blank" rel="noopener">Åbn i Google Maps →</a>' : ""), null, m);
+      });
       grupper[kat].push(m);
       bounds.extend({ lat: lat, lng: lon });
       return m;
     }
 
+    function gmLink(lat, lon) {
+      return "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon;
+    }
+
     window.STOPS.forEach(function (s) {
       var txt = "<b>" + esc(s.navn) + "</b>" +
         '<span class="tl">' + s.lat.toFixed(2) + "°N · " + esc(s.dag) +
-        (s.natter ? " · " + s.natter + (s.natter > 1 ? " nætter" : " nat") : "") + "</span>" +
-        '<span class="tl g">Klik for Google Maps</span>';
-      var m = tilfoej("stop", s.lat, s.lon, txt, s.top ? 20 : 10,
-                      s.top || s.hjem, s.top ? SUN : null);
-      m.addListener("click", function () {
-        window.open("https://www.google.com/maps/search/?api=1&query=" +
-                    s.lat + "," + s.lon, "_blank", "noopener");
-      });
+        (s.natter ? " · " + s.natter + (s.natter > 1 ? " nætter" : " nat") : "") + "</span>";
+      tilfoej("stop", s.lat, s.lon, txt, s.top ? 20 : 10,
+              s.top || s.hjem, s.top ? SUN : null, gmLink(s.lat, s.lon));
     });
 
     window.POI.forEach(function (p) {
       var txt = "<b>" + (p.stjerne ? "★ " : "") + esc(p.navn) + "</b>" +
         '<span class="tl">' + esc(p.t) + "</span>" +
         '<span class="tl g">Dag ' + p.dag + (p.tid ? " · " + esc(p.tid) : "") + "</span>";
-      tilfoej(p.kat, p.lat, p.lon, txt, p.stjerne ? 8 : 6, p.stjerne);
+      tilfoej(p.kat, p.lat, p.lon, txt, p.stjerne ? 8 : 6, p.stjerne,
+              null, gmLink(p.lat, p.lon));
     });
 
     map.fitBounds(bounds, { top: 40, right: 40, bottom: 40, left: 40 });
