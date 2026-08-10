@@ -601,6 +601,116 @@ window.SOVE = {
   advarsel: "Jeg har markeret sovesteder på kortet som <b>kandidater</b>, ikke som garantier. Jeg kan ikke se skiltningen fra Aalborg, og reglerne ændrer sig fra sæson til sæson — særligt på Lofoten. Tjek altid skiltet på stedet."
 };
 
+/* ---------------------------------------------------------------------------
+   Pakkeliste. kritisk = kan ikke købes undervejs, eller noget går i stykker
+   hvis den mangler. d = kun hvor der er noget ikke-indlysende at sige.
+   Afkrydsning gemmes i browseren.
+   --------------------------------------------------------------------------- */
+window.PAKKELISTE = {
+  intro: "Skruet sammen til præcis denne tur: alene, elbil, madras i bagagerummet, fire lande, vandreture undervejs, og nætter der kan komme ned på 3-5 grader på vidden. Det markerede kan du ikke bare købe på vejen — eller også vælter det noget, hvis det mangler.",
+
+  grupper: [
+    { navn:"Dokumenter og penge", ting:[
+      { t:"Pas", kritisk:true, d:"Alle fire lande er i Schengen, men færgeselskaberne kræver billed-ID, og der har været genindførte grænsekontroller. Pas er det simpleste." },
+      { t:"Kørekort" , kritisk:true },
+      { t:"Registreringsattest", d:"Ligger tit i handskerummet — tjek at den faktisk er der." },
+      { t:"Forsikringspolice", d:"Grønt kort kræves ikke inden for EØS, men policenummeret er rart at have ved et uheld." },
+      { t:"Det blå EU-sygesikringskort", kritisk:true, d:"Gælder også i Norge, som er med i EØS. Dækker nødvendig behandling." },
+      { t:"Rejseforsikring", d:"Det blå kort dækker ikke hjemtransport. Tjek om dit kreditkort allerede har det." },
+      { t:"Stena-billetten", kritisk:true, d:"Den eneste færge du booker hjemmefra. Gem den offline — ikke kun i en mail du skal have net for at åbne." },
+      { t:"AutoPASS-aftale oprettet", kritisk:true, d:"Skal gøres FØR afrejse på autopass.no, ellers kommer bompengene med posten plus gebyr. Giver også rabat på de norske færger." },
+      { t:"Betalingskort med lavt valutagebyr", d:"Fire valutaer på tolv dage. Gebyret løber op." },
+      { t:"Lidt kontanter i nødsfald", d:"Norge er nærmest kontantløst, så det er kun til hvis kortet dør." }
+    ]},
+
+    { navn:"Bilen og ladning", ting:[
+      { t:"Type 2-kabel", kritisk:true, d:"Til destinationsladere på hoteller og campingpladser. Lynladerne har fast kabel, men det har AC-standerne ikke." },
+      { t:"Mobil lader (granny-kabel)", d:"Model 3 har CCS2 indbygget, så du skal ikke bruge nogen lynlade-adapter i Europa." },
+      { t:"CEE-blå adapter til den mobile lader", kritisk:true, d:"Nordiske campingpladser bruger blå CEE-stik, ikke Schuko. Uden adapteren kan du ikke lade på en campingplads overhovedet — og det er den billigste strøm på turen." },
+      { t:"Ladebrikker og apps", d:"Norge: Recharge, Kople, Mer, Eviny. Finland: K-Lataus, Virta. Opret dem hjemmefra — flere kræver SMS-bekræftelse, og det er surt i et dødt netområde." },
+      { t:"A Better Routeplanner installeret", d:"Bilens egen planlægger er god i Norge, mindre god i finsk Lapland." },
+      { t:"Advarselstrekant", kritisk:true, d:"Lovpligtig i Norge, Sverige og Finland." },
+      { t:"Refleksvest", kritisk:true, d:"Skal kunne nås fra førersædet — ikke ligge i bagagerummet. Påbudt i norskindregistrerede biler og stærkt anbefalet i alle." },
+      { t:"Dækreparationssæt og kompressor", kritisk:true, d:"Model 3 har intet reservehjul. På E69 og Finnmarksvidda er der langt til nærmeste værksted." },
+      { t:"Sprinklervæske og en klud", d:"Insekter på forruden bliver et reelt problem på de finske etaper." },
+      { t:"Startkabler eller jumpstarter", d:"Ikke til køresystemet, men Model 3'ens 12 V-batteri kan drille — og så kan du ikke engang åbne bilen normalt." }
+    ]},
+
+    { navn:"At sove i bilen", ting:[
+      { t:"Sovepose til omkring 0 grader", kritisk:true, d:"Komforttemperatur, ikke ekstremtemperatur. 3-5 grader på vidden sidst i august er normalt." },
+      { t:"Pude og lagen", d:"Madras uden lagen bliver klam efter to nætter." },
+      { t:"Solskærme eller gardiner til alle ruder", kritisk:true, d:"Det bliver lyst igen omkring kl. 4 nordpå. Uden mørklægning sover du ikke. De skal også give privatliv på en rasteplads." },
+      { t:"Myggenet til vinduerne", kritisk:true, d:"Du skal have en sprække åben mod kondens, og finsk Lapland har stadig myg i august. Den bedste hundredekroneseddel på hele turen." },
+      { t:"Mikrofiberklud til kondens", d:"En nats åndedræt sætter sig på alle ruder. Tør af inden du kører." },
+      { t:"Pandelampe", kritisk:true },
+      { t:"Ørepropper", d:"Rastepladser ligger ved vejen, og lastbiler kører hele natten." },
+      { t:"Foldbar spand eller pose til skidt", d:"Der er ikke skraldespand alle steder, og efterlader man noget, er det den slags der får rastepladser lukket for overnatning." },
+      { t:"Hurtigtørrende håndklæde", d:"Svømmehaller i byerne koster småpenge og er den nemme adgang til bad." }
+    ]},
+
+    { navn:"Vandring og vejr", ting:[
+      { t:"Vandrestøvler", kritisk:true, d:"Gåede til, ikke nye. Reinebringens 1.566 trin er ikke stedet at opdage vabler." },
+      { t:"Regnjakke og regnbukser", kritisk:true, d:"Lofoten og Senja skifter vejr på en halv time. Det er ikke et spørgsmål om det bliver vådt." },
+      { t:"Uldundertøj", kritisk:true, d:"Base layer i merino. Bomuld holder på fugten og køler dig ned." },
+      { t:"Fleece og en let dunjakke", d:"Lagdeling slår én tyk jakke, når du både skal gå op ad et fjeld og stå stille på Nordkapp i blæst." },
+      { t:"Hue og handsker", kritisk:true, d:"Nordkapp i slutningen af august med vind er ikke behageligt uden. Solen går ned 20.56, og så falder temperaturen hurtigt." },
+      { t:"Vandrestave", d:"Mest for nedturen. Reinebringen ned ad de trin belaster knæene mere end op." },
+      { t:"Dagrygsæk", kritisk:true },
+      { t:"Drikkedunk", d:"Vandet i norske fjeldbække kan drikkes de fleste steder." },
+      { t:"Knopplaster og lidt tape", kritisk:true, d:"Vabler på dag 5 ødelægger Segla på dag 6." },
+      { t:"Solbriller", kritisk:true, d:"Solen står lavt hele dagen på 70 grader nord — den sidder i øjnene i timevis, ikke bare ved solnedgang." },
+      { t:"Solcreme", d:"Undervurderet heroppe. Refleksion fra vand og lys hele dagen." }
+    ]},
+
+    { navn:"Elektronik", ting:[
+      { t:"Bærbar og oplader", kritisk:true },
+      { t:"Powerbank", kritisk:true, d:"Til vandringerne, hvor bilen ikke er i nærheden." },
+      { t:"Pixel Buds og etui", d:"Oplad etuiet inden de lange etaper — dag 3, 6, 9 og 10 er der mange timer at fylde." },
+      { t:"USB-C-kabler og en flerport-oplader", d:"Mindst ét kabel mere end du tror. De går i stykker på ferier." },
+      { t:"Telefonholder til bilen" },
+      { t:"Offline-kort hentet ned", kritisk:true, d:"Google Maps offline for hele Norge og Finland FØR du kører. Der er rigtige huller i dækningen på E69, Finnmarksvidda og strækningen Karasjok-Inari." },
+      { t:"Musik og podcasts hentet offline", d:"Samme grund. 74 timer bag rattet er lang tid med sin egen selskab." },
+      { t:"Ingen rejseadapter nødvendig", d:"Danmark, Sverige, Norge og Finland bruger alle Schuko-kompatible stik. Du skal ikke slæbe en adapter med." }
+    ]},
+
+    { navn:"Køletaske og mad", ting:[
+      { t:"Køletaske med 12 V", kritisk:true },
+      { t:"Tjek at 12 V-udtaget holder liv om natten", kritisk:true, d:"Model 3 lægger sig til at sove og slukker for 12 V-udtaget. Camp Mode holder det tændt — men Camp Mode koster også 10-15 % batteri per nat. Test det hjemme, inden køletasken står med maden i." },
+      { t:"Termokande", d:"Kaffe på en rasteplads klokken syv om morgenen ved Polarsirkelen er halvdelen af turen." },
+      { t:"Turkomfur og gaspatron", d:"Norge er halvanden gang så dyrt som herhjemme. Et komfur tjener sig ind på tre-fire måltider. Gaspatroner må gerne med på bilfærgerne." },
+      { t:"Bestik, kop, tallerken, dåseåbner" },
+      { t:"Foldekniv" },
+      { t:"Køb ind i Sverige på dag 1", d:"Sidste billige indkøb inden Norge er i Göteborg-området. Alt stiger, når du krydser grænsen ved Svinesund." }
+    ]},
+
+    { navn:"Nordlys og foto", ting:[
+      { t:"Stativ", kritisk:true, d:"Nordlys kan ikke fotograferes på fri hånd. Uden stativ får du grønne udtværede pletter — og du er der i den rigtige sæson, sidst i august." },
+      { t:"Kamera med manuel indstilling", d:"Telefonen kan mere end man tror, men lang lukketid kræver stadig at den står stille." },
+      { t:"Ekstra batterier", kritisk:true, d:"Kulde halverer batteritiden. Hav dem i inderlommen, ikke i tasken." },
+      { t:"Fjernudløser eller selvudløser", d:"Selv et let tryk ryster billedet ved 15 sekunders lukketid." },
+      { t:"Nordlysvarsel installeret", d:"Følg KP-indeks på yr.no eller Norsk Lysvarsel. Bedste chancer: Lofoten dag 4-5, Nordkapp dag 8, Lapland dag 9." }
+    ]},
+
+    { navn:"Krop og apotek", ting:[
+      { t:"Fast medicin i original emballage", kritisk:true, d:"Nok til hele turen plus et par dage. Recepter fra Danmark kan ikke uden videre indløses i Norge." },
+      { t:"Myggemiddel med DEET", kritisk:true, d:"Finnmarksvidda og finsk Lapland. August er bedre end juli, men ikke myggefrit." },
+      { t:"Håndkøbs smertestillende" },
+      { t:"Lille førstehjælpstaske", d:"Du er alene, og der er langt mellem folk på flere af vandringerne." },
+      { t:"Vådservietter og håndsprit", d:"Halvdelen af nætterne uden bad." },
+      { t:"Toiletsager og en rulle papir", d:"Ikke alle rastepladser har toilet, og ikke alle toiletter har papir." }
+    ]},
+
+    { navn:"Kan trygt købes undervejs", ikkepak:true, ting:[
+      { t:"Mad og drikke", d:"Dagligvarer findes i alle byer. Køb bare stort ind i Sverige dag 1." },
+      { t:"Sprinklervæske og småting til bilen", d:"Fås på enhver tankstation." },
+      { t:"Gaspatroner", d:"Sportsbutikker og større tankstationer i Norge." },
+      { t:"Souvenirs", d:"Til gengæld er alt ved Nordkapp dyrt. Køb i Honningsvåg i stedet for på platået." }
+    ]}
+  ],
+
+  bund: "Det du helst ikke vil opdage klokken 23 på en rasteplads ved Saltstraumen: mørklægning, myggenet, sovepose og hue. Og det du helst ikke vil opdage på grænsen: at AutoPASS ikke er oprettet."
+};
+
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
   { gruppe:"Book hjemmefra", ikon:"kalender", punkter:[

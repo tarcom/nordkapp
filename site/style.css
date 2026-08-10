@@ -272,6 +272,57 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 }
 .sadvarsel b{font-weight:600}
 
+/* ---------- pakkeliste ---------- */
+.pakbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 26px}
+.pakbar-tal{font-family:var(--mono);font-size:11px;color:var(--glacial);white-space:nowrap}
+.pakbar-tal b{color:var(--sun);font-size:15px;font-weight:600}
+.pakbar-spor{flex:1;min-width:120px;height:6px;border-radius:3px;background:rgba(189,214,223,.1);overflow:hidden}
+.pakbar-spor span{display:block;height:100%;background:var(--aurora);border-radius:3px;transition:width .25s}
+.pakbar button{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--glacial);background:transparent;border:1px solid var(--line);
+  border-radius:16px;padding:5px 13px;cursor:pointer;
+}
+.pakbar button:hover{color:var(--ice);border-color:var(--glacial)}
+
+.pakgruppe{border:1px solid var(--line);border-radius:12px;padding:20px 24px;background:var(--panel);margin:0 0 14px}
+.pakgruppe h3{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  font-family:var(--display);font-size:1.08rem;font-weight:600;letter-spacing:-.015em;margin:0 0 14px;
+}
+.pakantal{font-family:var(--mono);font-size:10.5px;color:var(--glacial);opacity:.6;font-weight:400}
+.pakgruppe ul{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.paklinje label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:8px 10px;border-radius:8px;margin:0 -10px}
+.paklinje label:hover{background:rgba(189,214,223,.045)}
+.paklinje input{position:absolute;opacity:0;width:0;height:0}
+.pakboks{
+  flex:none;width:17px;height:17px;margin-top:2px;border-radius:5px;
+  border:1.5px solid var(--steel);position:relative;transition:background .15s,border-color .15s;
+}
+.paklinje input:focus-visible + .pakboks{outline:2px solid var(--aurora);outline-offset:2px}
+.paklinje.af .pakboks{background:var(--aurora);border-color:var(--aurora)}
+.pakboks::after{
+  content:"";position:absolute;left:5px;top:1.5px;width:5px;height:9px;
+  border:solid var(--night);border-width:0 2px 2px 0;transform:rotate(43deg);opacity:0;
+}
+.paklinje.af .pakboks::after{opacity:1}
+.paktekst{display:flex;flex-direction:column;gap:2px}
+.paktekst b{font-size:.94rem;color:var(--ice);font-weight:600;line-height:1.45}
+.paktekst>span{font-size:.86rem;color:var(--glacial);line-height:1.55}
+.paklinje.af .paktekst b{color:var(--glacial);text-decoration:line-through;text-decoration-color:rgba(189,214,223,.4)}
+.paklinje.af .paktekst>span{opacity:.5}
+.krit{
+  font-style:normal;font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--night);background:var(--sun);
+  border-radius:4px;padding:2px 6px;margin-left:9px;vertical-align:2px;font-weight:600;
+}
+.paklinje.af .krit{background:var(--steel);color:var(--glacial)}
+.pakgruppe.ikkepak{border-style:dashed;background:transparent}
+.pakgruppe.ikkepak h3{color:var(--glacial)}
+.paklinje.ikke{padding:8px 0;display:flex;flex-direction:column;gap:2px}
+.paklinje.ikke b{font-size:.92rem;color:var(--glacial);font-weight:600}
+.paklinje.ikke span{font-size:.85rem;color:var(--glacial);opacity:.75}
+
 /* ---------- færge-mærkat ---------- */
 .card{position:relative}
 .bookmaerke{

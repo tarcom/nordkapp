@@ -221,6 +221,82 @@
       }).join("") + "</ul></div>" +
     '<p class="sadvarsel">' + S.advarsel + "</p>";
 
+  /* ---------- pakkeliste ---------- */
+  var P = window.PAKKELISTE;
+  var PAK_KEY = "nordkapp.pakket.v1";
+
+  function laesPakket() {
+    try { return JSON.parse(localStorage.getItem(PAK_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  var pakket = laesPakket();
+
+  /* Stabil nøgle ud fra navnet, så afkrydsning overlever at listen omrokeres. */
+  function noegle(s) {
+    return s.toLowerCase()
+      .replace(/[æå]/g, "a").replace(/ø/g, "o")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+  }
+
+  var pakLister = P.grupper.filter(function (g) { return !g.ikkepak; });
+  var antalIalt = pakLister.reduce(function (a, g) { return a + g.ting.length; }, 0);
+
+  function tegnPakke() {
+    var talt = 0;
+    pakLister.forEach(function (g) {
+      g.ting.forEach(function (t) { if (pakket[noegle(t.t)]) talt++; });
+    });
+
+    document.getElementById("pakke-liste").innerHTML =
+      '<p class="lead">' + esc(P.intro) + "</p>" +
+      '<div class="pakbar"><div class="pakbar-tal"><b>' + talt + "</b> af " + antalIalt +
+        ' pakket</div><div class="pakbar-spor"><span style="width:' +
+        (antalIalt ? (talt / antalIalt * 100).toFixed(1) : 0) + '%"></span></div>' +
+        (talt ? '<button type="button" id="pak-nulstil">Nulstil</button>' : "") + "</div>" +
+
+      P.grupper.map(function (g) {
+        var n = g.ting.filter(function (t) { return pakket[noegle(t.t)]; }).length;
+        return '<section class="pakgruppe' + (g.ikkepak ? " ikkepak" : "") + '">' +
+          "<h3>" + esc(g.navn) +
+            (g.ikkepak ? "" : '<span class="pakantal">' + n + "/" + g.ting.length + "</span>") +
+          "</h3><ul>" +
+          g.ting.map(function (t) {
+            var k = noegle(t.t), af = !!pakket[k];
+            if (g.ikkepak) {
+              return '<li class="paklinje ikke"><b>' + esc(t.t) + "</b>" +
+                (t.d ? "<span>" + esc(t.d) + "</span>" : "") + "</li>";
+            }
+            return '<li class="paklinje' + (af ? " af" : "") + '">' +
+              '<label><input type="checkbox" data-k="' + k + '"' + (af ? " checked" : "") + ">" +
+              '<span class="pakboks"></span>' +
+              '<span class="paktekst"><b>' + esc(t.t) +
+                (t.kritisk ? '<em class="krit">vigtig</em>' : "") + "</b>" +
+                (t.d ? "<span>" + esc(t.d) + "</span>" : "") +
+              "</span></label></li>";
+          }).join("") + "</ul></section>";
+      }).join("") +
+      '<p class="altbund">' + esc(P.bund) + "</p>";
+  }
+
+  tegnPakke();
+
+  document.getElementById("pakke-liste").addEventListener("change", function (e) {
+    var b = e.target;
+    if (!b || b.type !== "checkbox") return;
+    var k = b.getAttribute("data-k");
+    if (b.checked) { pakket[k] = 1; } else { delete pakket[k]; }
+    try { localStorage.setItem(PAK_KEY, JSON.stringify(pakket)); } catch (err) { /* privat tilstand */ }
+    tegnPakke();
+  });
+
+  document.getElementById("pakke-liste").addEventListener("click", function (e) {
+    if (e.target && e.target.id === "pak-nulstil") {
+      pakket = {};
+      try { localStorage.removeItem(PAK_KEY); } catch (err) { /* privat tilstand */ }
+      tegnPakke();
+    }
+  });
+
   /* ---------- praktisk ---------- */
   document.getElementById("praktisk-liste").innerHTML = window.PRAKTISK.map(function (g) {
     return '<section class="pgroup"><h3>' + esc(g.gruppe) + "</h3><ul>" +
