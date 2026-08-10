@@ -167,7 +167,9 @@
     return '<article class="altblok"><h3>' + esc(b.titel) + "</h3>" +
       '<p class="lead">' + esc(b.intro) + "</p>" +
       '<div class="vtabel">' + rows + "</div>" +
-      '<p class="vkonk">' + esc(b.konklusion) + "</p></article>";
+      '<p class="vkonk">' + esc(b.konklusion) + "</p>" +
+      (b.afgoerende ? '<p class="vafg">' + b.afgoerende + "</p>" : "") +
+      "</article>";
   }
 
   function jaevnblok(j) {
@@ -195,7 +197,7 @@
   }
 
   document.getElementById("alt-indhold").innerHTML =
-    valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
+    valgblok(A.maal) + valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
     '<p class="altbund">' + esc(A.bund) + "</p>";
 
   /* ---------- fri plan ---------- */
@@ -225,7 +227,22 @@
       return "<li><b>" + esc(r[0]) + "</b>" + esc(r[1]) + "</li>";
     }).join("") + "</ul></div>" +
 
-    '<p class="sadvarsel">' + esc(F.fare) + "</p>";
+    '<p class="sadvarsel">' + esc(F.fare) + "</p>" +
+
+    '<h3 class="fhd">' + esc(F.nod.titel) + "</h3>" +
+    '<p class="lead">' + esc(F.nod.intro) + "</p>" +
+    '<p class="fnoegle">' + F.nod.noegletal + "</p>" +
+    '<div class="nodliste">' + F.nod.raekker.map(function (n) {
+      return '<div class="nod' + (n.bedst ? " bedst" : "") + '">' +
+        '<div class="n-hd"><h4>' + esc(n.sted) +
+          (n.bedst ? '<em>den rigtige</em>' : "") + "</h4>" +
+          '<span class="n-spar">sparer ' + esc(n.sparer) + "</span></div>" +
+        '<p class="n-rute">' + esc(n.rute) + "</p>" +
+        '<p class="n-mister">Mister <b>' + n.mister + "</b> af turens 13 femstjernede</p>" +
+        "<p>" + esc(n.d) + "</p></div>";
+    }).join("") + "</div>" +
+    '<p class="fluft">' + F.nod.pointe + "</p>" +
+    '<p class="n-naar">' + esc(F.nod.naar) + "</p>";
 
   /* ---------- karakterer og rangering ---------- */
   function stjerner(n, klasse) {

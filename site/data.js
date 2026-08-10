@@ -485,6 +485,21 @@ window.ALTERNATIVER = {
     konklusion: "Larvik sparer 300 kr og 163 km — men gevinsten er dag 2. Den falder fra 519 til 353 km, og bliver dermed turens letteste køredag lige inden dag 3, som er den hårdeste med 719 km. Det er den rigtige rækkefølge at have dem i."
   },
 
+  maal: {
+    titel: "Skal Nordkapp overhovedet være målet?",
+    intro: "Som steder betragtet er der ingen tvivl: Lofoten er bedre end Nordkapp. Lofoten er noget man opholder sig i — granittinder direkte op af havet, otte vandreture, fiskevær, strande, og fire femstjernede steder inden for en times kørsel. Nordkapp er et punkt man rører ved: en klippe, en globus, en udsigtshal og en entré. Er der tåge, hvilket der ofte er på 307 meter, har du ingenting. Men Nordkapp konkurrerer ikke som destination — det konkurrerer som begrundelse. Spørgsmålet er, hvad de tre strukturer koster.",
+    rows: [
+      { navn:"Nordkapp som mål — den nuværende plan", km:4801, t:72.1, valgt:true,
+        note:"71°N, E69 langs Porsangerfjorden, Alta Museum, Finnmarksvidda, finsk Lapland og natfærgen. Enorm variation — men kun halvanden dag på Lofoten." },
+      { navn:"Lofoten + Senja, hjem gennem Finland", km:4188, t:62.0,
+        note:"Dropper Nordkapp og bruger dagene på øerne i stedet: 4½ dag på Lofoten og Senja mod halvanden nu. Beholder Finland, Lapland og natfærgen, så hjemturen bliver ikke kedelig." },
+      { navn:"Lofoten som vendepunkt, hjem gennem Sverige", km:3548, t:51.2,
+        note:"Kortest, og 1.253 km mindre kørsel. Men hjemturen bliver 2.122 km gennem svensk skov og kystslette — fire dage uden noget at se på. Det er den svageste af de tre." }
+    ],
+    konklusion: "Vender du om på Lofoten, halverer du kørslen — men du bytter turens mest varierede fjerdedel ud med fire dages tom svensk motorvej. Vil du droppe Nordkapp, så gør det rigtigt: bliv på øerne, tag Senja med, og kør hjem gennem Finland alligevel. Så bliver turen bedre og ikke bare kortere.",
+    afgoerende: "Det afgørende argument er afstanden hjemmefra. <b>Lofoten ligger 1.426 km væk — det er en uges ferie, du kan tage igen.</b> Nordkapp ligger 2.500 km væk, og den tur laver de fleste én gang i livet. Derfor: tag Nordkapp nu, mens du alligevel er kørt hele vejen op, og tag tilbage til Lofoten en anden gang med bedre tid. Er du omvendt sikker på, at det her er din ene store nordtur, så er Lofoten det sted, du vil huske."
+  },
+
   jaevn: {
     titel: "Alternativet: tolv jævne dage i stedet for fire hårde",
     intro: "Turen er ikke lang i kilometer per dag — 4.900 km på 12 dage er 410 km i snit. Problemet er fordelingen: fire dage ligger på 700-875 km, og resten er korte. Flytter man overnatningerne, kan ingen dag komme over 652 km — for præcis samme rute og næsten samme samlede afstand.",
@@ -542,7 +557,26 @@ window.FRIPLAN = {
     ["Beslut om aftenen, ikke om morgenen","Ad hoc fungerer bedst, når du vælger næste dags mål aftenen før, ud fra vejrudsigten. yr.no er præcis i Norge, og på Lofoten og Senja afgør vejret alligevel, om vandreturene overhovedet giver mening."]
   ],
 
-  fare: "Det eneste sted planen kan gå i stykker er efter Nordkapp. Nordfra og hjem er der 2.600 km og fire dage, og der er ingen genveje tilbage — Sverige er 294 km længere, og at køre tilbage gennem Norge er 598 km længere. Så længe du står på klippen senest tirsdag den 25., kan alt andet improviseres."
+  fare: "Det eneste sted planen kan gå i stykker er efter Nordkapp. Nordfra og hjem er der 2.600 km og fire dage, og der er ingen genveje tilbage — Sverige er 294 km længere, og at køre tilbage gennem Norge er 598 km længere. Så længe du står på klippen senest tirsdag den 25., kan alt andet improviseres.",
+
+  nod: {
+    titel: "Nødudgangen: hvor du kan droppe Nordkapp",
+    intro: "Tanken om at vurdere det på Lofoten og køre øst mod Finland i stedet er rigtig at have — men Lofoten er det dårligste sted at træffe beslutningen. Her er hvad den koster de tre steder, den kan træffes.",
+    noegletal: "Nordkapp koster kun <b>308 km og 5 timer</b> som omvej, når du først står i Alta. Alta → Karasjok direkte er 197 km; Alta → Nordkapp → Karasjok er 505 km. Det er hele prisen for det, turen er opkaldt efter.",
+    raekker: [
+      { sted:"På Lofoten", dag:"dag 5", sparer:"1.029 km · 17 t", mister:8,
+        rute:"Reine → Narvik → Kiruna → Pajala → Rovaniemi",
+        d:"Sparer mest og koster mest. Du opgiver hele den arktiske del af turen på det tidspunkt, hvor du ved mindst om dit eget tempo. Otte af turens tretten femstjernede ligger nord for dette punkt." },
+      { sted:"I Tromsø", dag:"dag 6", sparer:"726 km · 12 t", mister:5, bedst:true,
+        rute:"Tromsø → Kilpisjärvi → Muonio → Rovaniemi ad E8",
+        d:"Den rigtige nødudgang, hvis der endelig skal bruges én. E8 går direkte fra Tromsø ind i Finland forbi Lyngsalpene og over Kilpisjärvi med Saana-fjeldet — det er ikke en trist tilbagetrækning, men en smuk vej i sig selv. Du har allerede fået Lofoten, Senja og Tromsø, og du får Finland i stedet." },
+      { sted:"I Alta", dag:"dag 7", sparer:"308 km · 5 t", mister:4,
+        rute:"Alta → Karasjok → Inari, uden om Magerøya",
+        d:"Sparer så lidt, at det næsten aldrig er rigtigt. Du er 250 km fra klippen, og fristen siger, at du må være der helt frem til tirsdag den 25. Herfra skal der være noget alvorligt galt, før det giver mening." }
+    ],
+    pointe: "Prisen falder, jo tættere du kommer: 1.029 km på Lofoten, 726 i Tromsø, 308 i Alta. Beslutningen bliver altså både billigere og bedre oplyst af at blive udskudt. <b>Flyt den til Alta.</b> Der ved du præcis, hvordan turen er gået, og du kan stadig spare de 308 km, hvis du har brug for det.",
+    naar: "Den ægte grund til at bruge nødudgangen er ikke, at du er en halv dag bagud — det klarer hviledagen. Det er noget strukturelt: bilen, helbredet, flere dages storm, eller en lukket fjeldvej. Sker det, er Tromsø-udgangen din, og den er god."
+  }
 };
 
 /* Karakterskalaen. Forankret i hvad du skal GØRE, ikke i vage kvalitetsord. */
