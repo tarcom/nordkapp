@@ -40,9 +40,8 @@ Google Maps JavaScript API. Nøglen ligger synligt i `index.html` — sådan
 virker API'et, og derfor er den **referrer-låst til aogj.com**. Sæt et dagligt
 forbrugsloft i Google Cloud, så en kopieret nøgle ikke kan koste penge.
 
-Ruten tegnes fra forudberegnet geometri i `geom.js`, **ikke** via Directions
-API. Det er med vilje: hvert sidevisning koster så kun ét kortopslag i stedet
-for tolv ruteopslag.
+Se afsnittet «Kortet: hover, filtre og Directions» nedenfor for hvordan ruten
+tegnes og caches.
 
 Fordi nøglen er låst til aogj.com, virker Google-kortet **ikke** når man åbner
 `site/index.html` lokalt. Siden opdager det (`gm_authFailure`, plus en 4
