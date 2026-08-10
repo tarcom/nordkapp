@@ -75,10 +75,12 @@ Måling mod rigtige rutedata væltede to antagelser:
   Stockholm → Göteborg → Stena → Aalborg er 540 km / 6,6 t plus én færge,
   som alligevel sejles på udturen.
 
-Og fandt én risiko, der ikke er løst, men beskrevet på siden:
-**dag 10 er 875 km / 12,1 t mod en færge, der lukker check-in ca. kl. 19.**
-Alternativet — at sove i Kemi i stedet for Rovaniemi — står i `data.js`
-under `BESLUTNINGER`.
+Dag 10 var turens eneste rigtige risiko — 875 km / 12,1 t mod en færge der
+lukker check-in ca. kl. 19. **Den forsvandt, da færgestrategien blev lagt om:**
+kun Stena bookes hjemmefra, Turku tages som den kommer. Uden booket afgang
+er en forsinkelse bare næste afgang, og kan man slet ikke komme med, koster
+omvejen rundt om Bottenvigen 294 km. Alternativet med overnatning i Kemi
+står stadig i `data.js` under `BESLUTNINGER`.
 
 ## Kortet: hover, filtre og Directions
 
