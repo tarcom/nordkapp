@@ -103,6 +103,54 @@
       esc(f.selskab.split(" /")[0]) + "</a></p></article>";
   }).join("");
 
+  /* ---------- alternativer ---------- */
+  var A = window.ALTERNATIVER;
+
+  function valgblok(b) {
+    var maxKm = Math.max.apply(null, b.rows.map(function (r) { return r.km; }));
+    var rows = b.rows.map(function (r) {
+      return '<div class="vrow' + (r.valgt ? " valgt" : "") + '">' +
+        '<div class="vnavn">' + esc(r.navn) +
+          (r.valgt ? '<span class="vmaerke">valgt</span>' : "") + "</div>" +
+        '<div class="vbar"><span style="width:' + (r.km / maxKm * 100).toFixed(1) + '%"></span></div>' +
+        '<div class="vtal">' + DK(r.km) + " km<br><em>" +
+          String(r.t).replace(".", ",") + " t</em></div>" +
+        '<p class="vnote">' + esc(r.note) + "</p></div>";
+    }).join("");
+    return '<article class="altblok"><h3>' + esc(b.titel) + "</h3>" +
+      '<p class="lead">' + esc(b.intro) + "</p>" +
+      '<div class="vtabel">' + rows + "</div>" +
+      '<p class="vkonk">' + esc(b.konklusion) + "</p></article>";
+  }
+
+  function jaevnblok(j) {
+    var maxKm = Math.max.apply(null, j.dage.map(function (d) { return Math.max(d.alt, d.nu); }));
+    var rows = j.dage.map(function (d) {
+      var bedre = d.alt < d.nu, vaerre = d.alt > d.nu;
+      return '<div class="jrow">' +
+        '<div class="jdag">' + d.n + "</div>" +
+        '<div class="jnavn">' + esc(d.titel) + "</div>" +
+        '<div class="jbars">' +
+          '<span class="jb nu" style="width:' + (d.nu / maxKm * 100).toFixed(1) + '%"></span>' +
+          '<span class="jb alt' + (bedre ? " ned" : vaerre ? " op" : "") +
+            '" style="width:' + (d.alt / maxKm * 100).toFixed(1) + '%"></span>' +
+        "</div>" +
+        '<div class="jtal">' + DK(d.nu) + " → <b>" + DK(d.alt) + "</b></div>" +
+        "</div>";
+    }).join("");
+    return '<article class="altblok"><h3>' + esc(j.titel) + "</h3>" +
+      '<p class="lead">' + esc(j.intro) + "</p>" +
+      '<div class="jlegend"><span class="k nu"></span>nuværende plan' +
+        '<span class="k alt"></span>jævn variant · km per dag</div>' +
+      '<div class="jtabel">' + rows + "</div>" +
+      '<p class="vkonk">' + esc(j.konklusion) + "</p>" +
+      '<p class="jpris"><b>Hvad det koster</b>' + esc(j.pris) + "</p></article>";
+  }
+
+  document.getElementById("alt-indhold").innerHTML =
+    valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
+    '<p class="altbund">' + esc(A.bund) + "</p>";
+
   /* ---------- praktisk ---------- */
   document.getElementById("praktisk-liste").innerHTML = window.PRAKTISK.map(function (g) {
     return '<section class="pgroup"><h3>' + esc(g.gruppe) + "</h3><ul>" +
@@ -142,7 +190,10 @@
     var map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: 65, lng: 17 }, zoom: 4,
       styles: DARK, mapTypeControl: true, streetViewControl: false,
-      fullscreenControl: true, scrollwheel: false,
+      fullscreenControl: true, zoomControl: true,
+      // cooperative: Ctrl+hjul zoomer på PC, to fingre på mobil.
+      // Siden scroller normalt når man bare ruller forbi kortet.
+      gestureHandling: "cooperative",
       mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU }
     });
 
@@ -217,6 +268,11 @@
     js.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
     js.onload = function () {
       var map = L.map(el, { scrollWheelZoom: false }).setView([65, 17], 4);
+      // Samme opførsel som Google: Ctrl+hjul zoomer, alm. hjul scroller siden.
+      el.addEventListener("wheel", function (e) {
+        if (e.ctrlKey) { e.preventDefault(); map.scrollWheelZoom.enable(); }
+        else { map.scrollWheelZoom.disable(); }
+      }, { passive: false });
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         attribution: "© OpenStreetMap, © CARTO", maxZoom: 18
       }).addTo(map);

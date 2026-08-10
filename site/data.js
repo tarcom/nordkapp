@@ -252,6 +252,60 @@ window.BESLUTNINGER = [
     valg:"" }
 ];
 
+/* Alternativer - målte svar på "kan den gøres kortere?" */
+window.ALTERNATIVER = {
+  retur: {
+    titel: "Hjemturen: Finland eller Sverige?",
+    intro: "Det nærliggende spørgsmål er, om man kan spare vej ved at køre ned gennem Sverige i stedet for Finland. Jeg har målt alle fire måder at komme fra Nordkapp til Aalborg på. Svaret er nej — og forskellen er større end man skulle tro.",
+    rows: [
+      { navn:"Finland + natfærge Turku → Stockholm", km:2055, t:28.3, valgt:true,
+        note:"Nuværende rute. Og de 11 timer på Østersøen sover du igennem — de tæller reelt ikke." },
+      { navn:"Sverige indland ad E45, «Inlandsvägen»", km:2305, t:34.0,
+        note:"250 km og knap 6 timer længere. Smuk vej gennem Lapland, men ingen genvej." },
+      { navn:"Sverige østkyst ad E4", km:2349, t:31.8,
+        note:"294 km længere. Hurtige veje, men du kører hele Bottenvigen rundt i stedet for at skære over." },
+      { navn:"Samme vej tilbage ad E6 gennem Norge", km:2653, t:42.0,
+        note:"598 km og næsten 14 timer længere. Og du ser det samme igen." }
+    ],
+    konklusion: "Finland vinder af to grunde: Bottenvigen skæres over i stedet for rundt, og natfærgen laver 11 timers transport om til en nats søvn. Ingen svensk rute har noget tilsvarende."
+  },
+
+  norge: {
+    titel: "Den ene rigtige besparelse: en anden færge nordpå",
+    intro: "Der er ét sted, hvor der reelt er kilometer at hente — og det er i den sydlige ende, ikke den nordlige.",
+    rows: [
+      { navn:"Hirtshals → Larvik (Color Line, 3¾ t)", km:721, t:10.5, valgt:true,
+        note:"Aalborg → Hirtshals er kun 68 km, og du sættes af midt i Norge." },
+      { navn:"Frederikshavn → Göteborg (Stena, 3¼ t)", km:881, t:12.4,
+        note:"Nuværende. Billigere billet, men 159 km og næsten 2 timer mere bag rattet." }
+    ],
+    konklusion: "159 km og 1,9 timers kørsel sparet, mod en halv time længere overfart. Prisen er, at du er i Norge fra dag 1 — dyrere mad og strøm — og at Oslo ryger som stop. Hjemturen kan stadig gå over Göteborg med Stena; ruten behøver ikke være symmetrisk."
+  },
+
+  jaevn: {
+    titel: "Alternativet: tolv jævne dage i stedet for fire hårde",
+    intro: "Turen er ikke lang i kilometer per dag — 4.900 km på 12 dage er 410 km i snit. Problemet er fordelingen: fire dage ligger på 700-875 km, og resten er korte. Flytter man overnatningerne, kan ingen dag komme over 652 km — for præcis samme rute og næsten samme samlede afstand.",
+    pris: "Prisen er hviledagen på Lofoten. Du får én nat i Reine i stedet for to, og turen har så ingen buffer, hvis noget skrider.",
+    dage: [
+      { n:1,  titel:"Aalborg → Oslo",              alt:361, nu:361 },
+      { n:2,  titel:"Oslo → Trondheim",            alt:519, nu:519 },
+      { n:3,  titel:"Trondheim → Mo i Rana",       alt:472, nu:719 },
+      { n:4,  titel:"Mo i Rana → Bodø → Reine",    alt:231, nu:2   },
+      { n:5,  titel:"Reine → Tromsø",              alt:583, nu:0   },
+      { n:6,  titel:"Tromsø → Alta",               alt:385, nu:583 },
+      { n:7,  titel:"Alta → Nordkapp",             alt:250, nu:385 },
+      { n:8,  titel:"Nordkapp → Inari",            alt:382, nu:250 },
+      { n:9,  titel:"Inari → Oulu",                alt:549, nu:709 },
+      { n:10, titel:"Oulu → Turku + natfærge",     alt:652, nu:875 },
+      { n:11, titel:"Stockholm → Göteborg",        alt:477, nu:477 },
+      { n:12, titel:"Göteborg → Aalborg",          alt:63,  nu:63  }
+    ],
+    konklusion: "Samme rute, samme 12 dage, 4.924 km mod 4.944. Men den længste dag falder fra 875 til 652 km, og færgedagen bliver ufarlig: afgang fra Oulu kl. 7, i Turku ved 16-tiden, seks timer før afgang."
+  },
+
+  bund: "Der er ingen stor besparelse at finde. Aalborg-Nordkapp er 2.500 km hver vej, og alt under omkring 4.800 km betyder, at noget væsentligt skæres væk. Vil du under det, er det ikke ruten der skal ændres — så skal Nordkapp eller Lofoten ud af planen."
+};
+
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
   { gruppe:"Book nu", ikon:"kalender", punkter:[

@@ -75,6 +75,8 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .map-legend{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0 0;font-family:var(--mono);font-size:11px;color:var(--glacial)}
 .map-legend i{display:inline-block;width:22px;height:0;border-top:3px solid var(--aurora);vertical-align:middle;margin-right:7px}
 .map-legend .f i{border-top:3px dashed var(--sun)}
+.map-legend .hint{margin-left:auto;opacity:.6}
+@media(max-width:680px){.map-legend .hint{margin-left:0}}
 .gm-style .gm-style-iw-c{background:var(--fjord);border-radius:10px;padding:2px}
 .gm-style .gm-style-iw-tc::after{background:var(--fjord)}
 .iw{font-family:var(--body);color:var(--ice);padding:4px 6px 2px;min-width:150px}
@@ -142,6 +144,69 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 }
 .navlink:hover{color:var(--ice);border-color:var(--ice)}
 .navlink.ferry{color:var(--sun);border-color:rgba(232,163,61,.35)}
+
+/* ---------- alternativer ---------- */
+.altblok{border:1px solid var(--line);border-radius:12px;padding:26px;background:var(--panel);margin:0 0 18px}
+.altblok h3{font-family:var(--display);font-size:1.25rem;font-weight:600;letter-spacing:-.02em;margin:0 0 10px}
+.altblok .lead{margin:0 0 22px;max-width:66ch}
+
+.vtabel{display:grid;gap:4px}
+.vrow{
+  display:grid;grid-template-columns:minmax(150px,1.35fr) minmax(80px,1fr) 76px;
+  gap:8px 14px;align-items:center;padding:12px 14px;border-radius:9px;
+}
+.vrow.valgt{background:rgba(95,217,166,.08);box-shadow:inset 0 0 0 1px rgba(95,217,166,.22)}
+.vnavn{font-size:.93rem;color:var(--ice)}
+.vmaerke{
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--night);background:var(--aurora);border-radius:4px;padding:2px 6px;margin-left:9px;
+  vertical-align:2px;font-weight:600;
+}
+.vbar{height:7px;border-radius:4px;background:rgba(189,214,223,.09);overflow:hidden}
+.vbar span{display:block;height:100%;border-radius:4px;background:var(--steel)}
+.vrow.valgt .vbar span{background:var(--aurora)}
+.vtal{font-family:var(--mono);font-size:12px;text-align:right;color:var(--ice);line-height:1.45}
+.vtal em{font-style:normal;color:var(--glacial);opacity:.75;font-size:11px}
+.vnote{grid-column:1/-1;margin:2px 0 0;font-size:.86rem;color:var(--glacial);opacity:.85}
+.vkonk{
+  margin:22px 0 0;padding-top:16px;border-top:1px dashed var(--line);
+  font-size:.93rem;color:var(--ice);
+}
+
+.jlegend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--glacial);margin:0 0 14px}
+.jlegend .k{width:16px;height:7px;border-radius:3px;display:inline-block}
+.jlegend .k.nu{background:var(--steel)}
+.jlegend .k.alt{background:var(--aurora);margin-left:14px}
+.jtabel{display:grid;gap:3px}
+.jrow{display:grid;grid-template-columns:24px minmax(130px,1.1fr) minmax(90px,1.4fr) 86px;gap:12px;align-items:center;padding:5px 0}
+.jdag{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;text-align:right}
+.jnavn{font-size:.86rem;color:var(--glacial)}
+.jbars{display:grid;gap:2px}
+.jb{display:block;height:6px;border-radius:3px;min-width:1px}
+.jb.nu{background:var(--steel)}
+.jb.alt{background:var(--glacial)}
+.jb.alt.ned{background:var(--aurora)}
+.jb.alt.op{background:var(--sun)}
+.jtal{font-family:var(--mono);font-size:11px;text-align:right;color:var(--glacial)}
+.jtal b{color:var(--ice);font-weight:600}
+.jpris{
+  margin:16px 0 0;padding:12px 15px;border-radius:8px;font-size:.9rem;color:var(--glacial);
+  background:rgba(232,163,61,.08);border-left:2px solid var(--sun);
+}
+.jpris b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);margin-bottom:3px}
+.altbund{
+  margin:0;padding:22px 26px;border-radius:12px;font-size:.97rem;color:var(--ice);
+  background:rgba(189,214,223,.05);border:1px solid var(--line);
+}
+
+@media(max-width:680px){
+  .vrow{grid-template-columns:1fr 74px}
+  .vbar{grid-column:1/-1;order:3}
+  .vnote{order:4}
+  .jrow{grid-template-columns:20px 1fr 78px;gap:8px}
+  .jbars{grid-column:2/-1;order:3}
+  .jnavn{font-size:.82rem}
+}
 
 /* ---------- færger ---------- */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
