@@ -25,6 +25,8 @@
            "<span>" + s[2] + "</span></dd></div>";
   }).join("");
 
+  document.getElementById("legend-km").textContent = DK(T.km) + " km";
+
   var koeredage = window.DAYS.filter(function (d) { return d.km > 5; }).length;
   document.getElementById("foot-sum").textContent =
     T.days + " dage · " + DK(T.km) + " km · " + koeredage +
@@ -142,7 +144,8 @@
     return '<article class="card' + (f.book === "nu" ? " nu" : "") + '">' +
       (maerke ? '<span class="bookmaerke' + (f.book === "nu" ? " nu" : "") + '">' + maerke + "</span>" : "") +
       "<h3>" + esc(f.navn) + "</h3>" +
-      '<p class="meta">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) + "</p>" +
+      '<p class="meta">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) +
+        (f.pris ? " · " + esc(f.pris) : "") + "</p>" +
       "<p>" + esc(f.note) + "</p>" +
       '<p><a class="navlink" href="' + f.link + '" target="_blank" rel="noopener">Book hos ' +
       esc(f.selskab.split(" /")[0]) + "</a></p></article>";
@@ -412,7 +415,7 @@
   function skjulTip() { tip.classList.remove("vis"); }
 
   /* Directions-svar caches, så kun første besøg koster API-kald. */
-  var CACHE_KEY = "nordkapp.ruter.v1";
+  var CACHE_KEY = "nordkapp.ruter.v2";
   function laesCache() {
     try { return JSON.parse(localStorage.getItem(CACHE_KEY)) || {}; }
     catch (e) { return {}; }

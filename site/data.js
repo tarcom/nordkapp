@@ -7,17 +7,17 @@
 
 window.TRIP = {
   from: "2026-08-17", to: "2026-08-28",
-  km: 4944, hours: 73.7, days: 12,
+  km: 4801, hours: 72.1, days: 12,
   ferryHours: 21,
   north: 71.1709
 };
 
 /* Færger. min = varighed i minutter. */
 window.FERRIES = [
-  { id:"stena_ud", navn:"Frederikshavn → Göteborg", selskab:"Stena Line", min:195,
-    dag:1, fra:[57.4370,10.5443], til:[57.6975,11.9285], book:"nu",
-    note:"Book morgenafgangen. Sparer ~600 km mod at køre ned over Øresund.",
-    link:"https://www.stenaline.dk/ruter/frederikshavn-goteborg" },
+  { id:"colorline_ud", navn:"Hirtshals → Larvik", selskab:"Color Line", min:225,
+    dag:1, fra:[57.5880,9.9600], til:[59.0530,10.0290], book:"nu", pris:"~1.000 kr",
+    note:"Den eneste færge der skal bookes hjemmefra. 300 kr billigere end Göteborg, i land 16.45, og den sætter dig af 163 km tættere på Trondheim.",
+    link:"https://www.colorline.dk/hirtshals-larvik" },
 
   { id:"moskenes", navn:"Bodø → Moskenes", selskab:"Torghatten Nord", min:195,
     dag:4, fra:[67.2804,14.3805], til:[67.9330,12.9950], book:"fra Norge",
@@ -30,36 +30,38 @@ window.FERRIES = [
     link:"https://www.vikingline.fi" },
 
   { id:"stena_hjem", navn:"Göteborg → Frederikshavn", selskab:"Stena Line", min:195,
-    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443], book:"nu",
-    note:"Hjemturen. Tjek om en returbillet sammen med udturen er billigere.",
+    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443], book:"nu", pris:"~1.300 kr",
+    note:"Hjemturen. Dyrere end Color Line, men fra Stockholm er Göteborg 173 km og næsten tre timer tættere på end Larvik — det æder prisforskellen med renter.",
     link:"https://www.stenaline.dk/ruter/frederikshavn-goteborg" }
 ];
 
 /* Dag for dag. km/t = kørsel den dag (OSRM, uden pauser). */
 window.DAYS = [
-  { n:1, dato:"2026-08-17", ugedag:"Mandag", titel:"Aalborg → Oslo",
-    km:361, t:4.4, faerge:"Stena 3¼ t", sea:true,
-    geom:["d1_aalborg_frederikshavn","d1_goteborg_oslo"],
-    nav:{ fra:"Aalborg", til:"Oslo, Norge", via:["Frederikshavn"] },
-    tekst:"Kort kørsel til Frederikshavn og morgenfærgen over. Fra Göteborg er det motorvej hele vejen til Oslo — E6 langs Bohuslän-kysten. Du er fremme sidst på eftermiddagen med aftenen fri.",
-    sol:"Sol ned 20.59 i Aalborg",
+  { n:1, dato:"2026-08-17", ugedag:"Mandag", titel:"Aalborg → Lillehammer",
+    km:385, t:4.9, faerge:"Color Line 3¾ t", sea:true,
+    geom:["d1_aalborg_hirtshals","d1_larvik_lillehammer"],
+    nav:{ fra:"Aalborg", til:"Lillehammer, Norge", via:["Hirtshals","Larvik"] },
+    tekst:"Kun 68 km til Hirtshals, og så sætter færgen dig af midt i Norge kl. 16.45. Op ad E18 forbi Oslo og videre ad E6 langs Mjøsa. Fremme ved 21-tiden — første nat i bilen.",
+    sol:"Sol ned 21.03 ved Mjøsa",
     se:[
-      ["Bohuslän-kysten","E6 kører langs skærgården nord for Göteborg — stop i Smögen eller Fjällbacka hvis du har tid til overs"],
-      ["Svinesund-broen","grænsen mellem Sverige og Norge, markant bue over fjorden"],
-      ["Oslo","Operaen du kan gå på taget af, Vigelandsparken, Akershus festning"]
+      ["Vestfold-kysten","E18 nordpå fra Larvik gennem det gamle hvalfangerland. Sandefjord og Tønsberg ligger lige ved vejen"],
+      ["Oslo passeres","du har været her før, så kør forbi — tunnelringen er hurtig uden for myldretiden",1],
+      ["Mjøsa","Norges største sø. E6 følger den i 100 km, og verdens ældste hjuldamper, «Skibladner», sejler stadig her",1],
+      ["Lillehammer","OL-byen fra 1994. Maihaugen er et af Nordens største frilandsmuseer, hvis du når det næste morgen"]
     ] },
 
-  { n:2, dato:"2026-08-18", ugedag:"Tirsdag", titel:"Oslo → Trondheim",
-    km:519, t:8.0,
-    geom:["d2_oslo_trondheim"],
-    nav:{ fra:"Oslo, Norge", til:"Trondheim, Norge", via:["Lillehammer","Dombås"] },
-    tekst:"E6 op gennem Gudbrandsdalen og over Dovrefjell. Turens første rigtige fjeldkørsel, og en af de smukkeste strækninger i Sydnorge. Fremme i Trondheim til aften.",
+  { n:2, dato:"2026-08-18", ugedag:"Tirsdag", titel:"Lillehammer → Trondheim",
+    km:353, t:5.9,
+    geom:["d2_lillehammer_trondheim"],
+    nav:{ fra:"Lillehammer, Norge", til:"Trondheim, Norge", via:["Dombås","Oppdal"] },
+    tekst:"Turens letteste køredag, og det er med vilje: i morgen venter 719 km. Op gennem Gudbrandsdalen og over Dovrefjell, fremme i Trondheim tidligt på eftermiddagen med hele resten af dagen i byen.",
     sol:"Sol ned 21.24 i Trondheim",
     se:[
-      ["Mjøsa","Norges største sø — E6 følger den i 100 km. Verdens ældste hjuldamper, «Skibladner», sejler her"],
-      ["Lillehammer","OL-byen fra 1994. Maihaugen er et af Nordens største frilandsmuseer"],
+      ["Gudbrandsdalen","dalen der bærer hele Norges historie — E6 følger Lågen hele vejen op"],
       ["Dovrefjell","højfjeld med moskusokser. Udsigtspavillonen Snøhetta ved Hjerkinn er arkitektur værd at stoppe for",1],
-      ["Oppdal","sidste stop før nedkørslen mod Trondheimsfjorden"]
+      ["Oppdal","sidste stop før nedkørslen mod Trondheimsfjorden"],
+      ["Nidarosdomen","Nordens største middelalderkatedral, bygget over Olav den Helliges grav. Du har eftermiddagen til den",1],
+      ["Bakklandet og Gamle Bybro","de skæve trævillaer langs elven. Bedst til fods sidst på dagen"]
     ] },
 
   { n:3, dato:"2026-08-19", ugedag:"Onsdag", titel:"Trondheim → Bodø",
@@ -208,7 +210,7 @@ window.DAYS = [
 
 /* De store stop - det du bliver længere end en kaffepause. */
 window.STOPS = [
-  { navn:"Oslo",       lat:59.9133, lon:10.7390, dag:"Dag 1",     natter:1 },
+  { navn:"Lillehammer", lat:61.1153, lon:10.4662, dag:"Dag 1",     natter:1 },
   { navn:"Trondheim",  lat:63.4305, lon:10.3952, dag:"Dag 2",     natter:1 },
   { navn:"Bodø",       lat:67.2844, lon:14.3818, dag:"Dag 3",     natter:1 },
   { navn:"Reine",      lat:67.9324, lon:13.0887, dag:"Dag 4-5",   natter:2, hoej:true },
@@ -224,25 +226,32 @@ window.STOPS = [
 
 /* Beslutninger hvor jeg har ændret eller udfordret det oprindelige udkast. */
 window.BESLUTNINGER = [
-  { id:"oslo", titel:"Til Trondheim over Oslo, ikke gennem Sverige",
+  { id:"faerge", titel:"Færgen nordpå: Larvik, ikke Göteborg",
     status:"aendret",
-    foer:"Göteborg → Mora → Östersund → Trondheim · 1.056 km · 16,1 t",
-    efter:"Göteborg → Oslo → Trondheim ad E6 · 816 km · 11,6 t",
-    tekst:"Udkastet sagde, at inlandsruten gennem Sverige var den hurtige. Målt er den 240 km og 4½ time langsommere. E6 over Oslo er motorvej til Lillehammer og god landevej derfra, og den giver dig Gudbrandsdalen og Dovrefjell i stedet for skov. Den svenske rute er smukkere på en stille måde og har Åre og Siljan — men den koster en halv køredag, som du får hårdt brug for i Finland.",
-    valg:"Vil du hellere have Dalarna og Jämtland, så flyt de fire en halve timer et andet sted fra — ikke fra dag 9 og 10." },
+    foer:"Frederikshavn → Göteborg · ~1.300 kr · i land 17.30 · 881 km til Trondheim",
+    efter:"Hirtshals → Larvik · ~1.000 kr · i land 16.45 · 721 km til Trondheim",
+    tekst:"Jeg antog, at Stena var den billige løsning. Da du hentede priserne, viste det sig omvendt: Göteborg er 300 kr dyrere, lander senest, og er tilmed den længste vej til Trondheim. Den taber på alle tre parametre, og der er ingen grund til at vælge den på udturen. Til gengæld bliver den ved med at være rigtig på hjemturen — fra Stockholm ligger Göteborg 173 km og næsten tre timer tættere på end Larvik, og det æder prisforskellen med renter.",
+    valg:"Den egentlige gevinst er ikke de 300 kr, men rækkefølgen: dag 2 falder fra 519 til 353 km og bliver turens letteste køredag — lige inden dag 3, som med 719 km er den hårdeste. Det er den rigtige vej at have dem i." },
+
+  { id:"kristiansand", titel:"Kristiansand er en bedre tur, men til en anden rejse",
+    status:"beholdt",
+    foer:"Kristiansand · i land 13.25 · 876 km og 12,6 t til Trondheim",
+    efter:"Larvik · i land 16.45 · 721 km og 10,5 t til Trondheim",
+    tekst:"Kristiansand giver dig fire ekstra timer i dagslys, og du har ikke været der — modsat Oslo. Setesdal, Telemark og især Gaustatoppen er alt sammen nyt for dig, og Gaustatoppen er en Preikestolen-agtig oplevelse: 1.883 meter med udsigt over en sjettedel af Norge, og en bane inde i selve fjeldet hvis benene ikke skal bruges. Problemet er geografien. Kristiansand ligger i Norges sydvestlige hjørne, og Trondheim ligger nordøst. De fire ekstra timer bliver ædt af 155 km mere vej, og dag 2 ender på 715 km og 12 timer — umiddelbart efterfulgt af dag 3 på 719 km. To tolvtimersdage i træk allerede i starten.",
+    valg:"Gaustatoppen kan heller ikke klemmes ind fra Larvik: derfra er der kun 174 km til Rjukan, men næste dag er der stadig 703 km til Trondheim. Turen koster en hel dag, og den eneste ledige dag er hviledagen på Lofoten. Sydnorge er en rigtig god tur — den skal bare være sin egen." },
 
   { id:"hjem", titel:"Hjem over Göteborg, ikke over Øresund",
     status:"aendret",
     foer:"Stockholm → Helsingborg → Helsingør → Storebælt → Aalborg · 1.019 km · 11,5 t · to broafgifter",
     efter:"Stockholm → Göteborg → Stena → Aalborg · 540 km · 6,6 t · én færge",
-    tekst:"Du sejler alligevel Stena på udturen, så returbilletten er ofte billigere end de to broer tilsammen. Ruten sparer 479 km og næsten fem timers kørsel, og du slipper for både Storebælt og Øresund. Bonus: tager du aftenfærgen torsdag, er du hjemme et helt døgn før deadline.",
+    tekst:"Ruten sparer 479 km og næsten fem timers kørsel mod at køre ned over Skåne, og du slipper for både Storebælt og Øresund. Stena koster ganske vist 300 kr mere end Color Line — men fra Stockholm ligger Göteborg 173 km og næsten tre timer tættere på end Larvik, så prisforskellen er tjent hjem inden du er ombord. Bonus: tager du aftenfærgen torsdag, er du hjemme et helt døgn før deadline.",
     valg:"Undtagelsen er hvis I vil bruge en dag i København eller Malmö på vejen hjem — så er Øresund-ruten sin merpris værd." },
 
   { id:"booking", titel:"Book Göteborg og Bodø — men lad Turku stå åben",
     status:"aendret",
     foer:"Book alle fire færger hjemmefra og lås planen",
-    efter:"Book Stena nu · book Bodø fra Norge · tag Turku som den kommer",
-    tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Stena Frederikshavn → Göteborg skal bookes nu: det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
+    efter:"Book Color Line nu · book Bodø fra Norge · tag Turku som den kommer",
+    tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Hirtshals → Larvik skal bookes nu: det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
     valg:"Sikkerhedsnettet er, at Turku-færgen ikke er nødvendig. Kan du ikke komme med, kører du rundt om Bottenvigen over Tornio og Haparanda — det koster 294 km og en halv køredag, ikke turen. Derfor er det billigt at lade den stå åben. Book den 2-3 dage før fra vejen, når du kan se dit eget tempo." },
 
   { id:"dag10", titel:"Uden booket færge forsvinder dag 10-risikoen",
@@ -463,15 +472,17 @@ window.ALTERNATIVER = {
   },
 
   norge: {
-    titel: "Den ene rigtige besparelse: en anden færge nordpå",
-    intro: "Der er ét sted, hvor der reelt er kilometer at hente — og det er i den sydlige ende, ikke den nordlige.",
+    titel: "Færgen nordpå: prisen vendte regnestykket om",
+    intro: "Jeg gik ud fra, at Stena til Göteborg var den billige. Det er den ikke — den er 300 kr dyrere end begge Color Line-ruterne, den lander senest, og den er tilmed den længste vej til Trondheim. Da priserne kom på bordet, tabte den på alle tre parametre.",
     rows: [
-      { navn:"Hirtshals → Larvik (Color Line, 3¾ t)", km:721, t:10.5, valgt:true,
-        note:"Aalborg → Hirtshals er kun 68 km, og du sættes af midt i Norge." },
-      { navn:"Frederikshavn → Göteborg (Stena, 3¼ t)", km:881, t:12.4,
-        note:"Nuværende. Billigere billet, men 159 km og næsten 2 timer mere bag rattet." }
+      { navn:"Hirtshals → Larvik · i land 16.45 · ~1.000 kr", km:721, t:10.5, valgt:true,
+        note:"Kortest til Trondheim, billigst, og kun 45 minutter senere i land end Göteborg." },
+      { navn:"Hirtshals → Kristiansand · i land 13.25 · ~1.000 kr", km:876, t:12.6,
+        note:"Fire timer tidligere i land — men Kristiansand ligger i det forkerte hjørne. De ekstra timer ædes af 155 km mere vej." },
+      { navn:"Frederikshavn → Göteborg · i land 17.30 · ~1.300 kr", km:881, t:12.4,
+        note:"Dyrest, senest i land, og 160 km længere end Larvik. Ingen grund til at vælge den på udturen." }
     ],
-    konklusion: "159 km og 1,9 timers kørsel sparet, mod en halv time længere overfart. Prisen er, at du er i Norge fra dag 1 — dyrere mad og strøm — og at Oslo ryger som stop. Hjemturen kan stadig gå over Göteborg med Stena; ruten behøver ikke være symmetrisk."
+    konklusion: "Larvik sparer 300 kr og 163 km — men gevinsten er dag 2. Den falder fra 519 til 353 km, og bliver dermed turens letteste køredag lige inden dag 3, som er den hårdeste med 719 km. Det er den rigtige rækkefølge at have dem i."
   },
 
   jaevn: {
@@ -479,8 +490,8 @@ window.ALTERNATIVER = {
     intro: "Turen er ikke lang i kilometer per dag — 4.900 km på 12 dage er 410 km i snit. Problemet er fordelingen: fire dage ligger på 700-875 km, og resten er korte. Flytter man overnatningerne, kan ingen dag komme over 652 km — for præcis samme rute og næsten samme samlede afstand.",
     pris: "Prisen er hviledagen på Lofoten. Du får én nat i Reine i stedet for to, og turen har så ingen buffer, hvis noget skrider.",
     dage: [
-      { n:1,  titel:"Aalborg → Oslo",              alt:361, nu:361 },
-      { n:2,  titel:"Oslo → Trondheim",            alt:519, nu:519 },
+      { n:1,  titel:"Aalborg → Lillehammer",       alt:385, nu:385 },
+      { n:2,  titel:"Lillehammer → Trondheim",     alt:353, nu:353 },
       { n:3,  titel:"Trondheim → Mo i Rana",       alt:472, nu:719 },
       { n:4,  titel:"Mo i Rana → Bodø → Reine",    alt:231, nu:2   },
       { n:5,  titel:"Reine → Tromsø",              alt:583, nu:0   },
@@ -492,7 +503,7 @@ window.ALTERNATIVER = {
       { n:11, titel:"Stockholm → Göteborg",        alt:477, nu:477 },
       { n:12, titel:"Göteborg → Aalborg",          alt:63,  nu:63  }
     ],
-    konklusion: "Samme rute, samme 12 dage, 4.924 km mod 4.944. Men den længste dag falder fra 875 til 652 km, og færgedagen bliver ufarlig: afgang fra Oulu kl. 7, i Turku ved 16-tiden, seks timer før afgang."
+    konklusion: "Samme rute, samme 12 dage, 4.782 km mod 4.801. Men den længste dag falder fra 875 til 652 km, og færgedagen bliver ufarlig: afgang fra Oulu kl. 7, i Turku ved 16-tiden, seks timer før afgang."
   },
 
   bund: "Der er ingen stor besparelse at finde. Aalborg-Nordkapp er 2.500 km hver vej, og alt under omkring 4.800 km betyder, at noget væsentligt skæres væk. Vil du under det, er det ikke ruten der skal ændres — så skal Nordkapp eller Lofoten ud af planen."
@@ -618,7 +629,7 @@ window.PAKKELISTE = {
       { t:"Forsikringspolice", d:"Grønt kort kræves ikke inden for EØS, men policenummeret er rart at have ved et uheld." },
       { t:"Det blå EU-sygesikringskort", kritisk:true, d:"Gælder også i Norge, som er med i EØS. Dækker nødvendig behandling." },
       { t:"Rejseforsikring", d:"Det blå kort dækker ikke hjemtransport. Tjek om dit kreditkort allerede har det." },
-      { t:"Stena-billetten", kritisk:true, d:"Den eneste færge du booker hjemmefra. Gem den offline — ikke kun i en mail du skal have net for at åbne." },
+      { t:"Color Line-billetten til Larvik", kritisk:true, d:"Den eneste færge du booker hjemmefra. Gem den offline — ikke kun i en mail du skal have net for at åbne." },
       { t:"AutoPASS-aftale oprettet", kritisk:true, d:"Skal gøres FØR afrejse på autopass.no, ellers kommer bompengene med posten plus gebyr. Giver også rabat på de norske færger." },
       { t:"Betalingskort med lavt valutagebyr", d:"Fire valutaer på tolv dage. Gebyret løber op." },
       { t:"Lidt kontanter i nødsfald", d:"Norge er nærmest kontantløst, så det er kun til hvis kortet dør." }
@@ -715,7 +726,8 @@ window.PAKKELISTE = {
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
   { gruppe:"Book hjemmefra", ikon:"kalender", punkter:[
-    ["Stena Frederikshavn → Göteborg","Det eneste der skal bookes nu. Morgenafgang mandag 17. Tag returen Göteborg → Frederikshavn med det samme — returbillet er typisk billigere end to enkelte, og den er den billigste vej hjem."],
+    ["Color Line Hirtshals → Larvik","Det eneste der skal bookes nu. Mandag 17., så du er i land 16.45. ~1.000 kr — 300 kr under Stena til Göteborg."],
+    ["Stena Göteborg → Frederikshavn","Hjemturen fredag 28. eller torsdag aften. Dyrere (~1.300 kr), men fra Stockholm er Göteborg langt den korteste vej hjem. Bemærk at du ikke får returrabat, når udturen går med et andet rederi — tjek om det ændrer regnestykket."],
     ["Én seng ved Nordkapp","Honningsvåg har begrænset kapacitet, og det er den ene nat hvor du ikke vil stå uden noget. Resten kan tages undervejs."]
   ]},
 
@@ -729,7 +741,7 @@ window.PRAKTISK = [
     ["AutoPASS i Norge","Opret aftale på autopass.no <b>før</b> afrejse, eller brug din BroBizz. Uden brik bliver nummerpladen fotograferet og regningen sendt med posten plus gebyr."],
     ["AutoPASS for ferje","Samme brik giver rabat på de norske bilfærger — også Bodø → Moskenes. Den betaler sig hjem på én overfart."],
     ["Trængselsskat i Sverige","Både Stockholm og Göteborg opkræver af udenlandske biler. Faktureres via Epass24 med posten. Kører du gennem Göteborg midt på dagen, er det småpenge — men den kommer."],
-    ["Oslo bomring","Passeres på vej ind og ud dag 1-2. Dækket af AutoPASS-aftalen."],
+    ["Oslo bomring","Passeres på vej nordpå dag 1. Dækket af AutoPASS-aftalen."],
     ["Finland","Ingen vejafgifter overhovedet. Eneste land på turen uden."]
   ]},
 
