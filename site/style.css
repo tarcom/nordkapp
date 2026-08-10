@@ -18,7 +18,7 @@ html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--night);color:var(--ice);
   font-family:var(--body);font-size:16px;line-height:1.65;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
 }
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 a{color:var(--aurora)}
@@ -58,11 +58,55 @@ h1 .lat{color:var(--sun);font-variant-numeric:tabular-nums}
 .stat dd span{font-size:.82rem;color:var(--glacial);font-family:var(--body);font-weight:400}
 
 /* ---------- sections ---------- */
-section{padding:76px 0 0}
+section{padding:76px 0 0;scroll-margin-top:74px}
 .sec-head{display:flex;align-items:baseline;gap:16px;margin:0 0 26px;flex-wrap:wrap}
 h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem);letter-spacing:-.025em;margin:0}
 .sec-note{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.7;letter-spacing:.1em;text-transform:uppercase}
 .lead{color:var(--glacial);max-width:62ch;margin:-10px 0 26px}
+
+/* ---------- menu ---------- */
+.menu{
+  position:sticky;top:10px;z-index:30;
+  display:flex;align-items:center;gap:8px;
+  margin:38px 0 0;padding:6px;
+  background:rgba(8,22,31,.86);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:15px;
+  box-shadow:0 6px 24px rgba(0,0,0,.35);
+}
+.menu-top{
+  flex:none;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
+  color:var(--sun);text-decoration:none;padding:8px 11px;border-radius:10px;
+  background:rgba(232,163,61,.1);
+}
+.menu-top:hover{background:rgba(232,163,61,.2)}
+.menu-links{
+  display:flex;gap:2px;overflow-x:auto;scroll-behavior:smooth;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.menu-links::-webkit-scrollbar{display:none}
+.menu-links a{
+  flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.03em;
+  color:var(--glacial);text-decoration:none;white-space:nowrap;
+  padding:8px 12px;border-radius:10px;transition:color .15s,background .15s;
+}
+.menu-links a:hover{color:var(--ice);background:rgba(189,214,223,.07)}
+.menu-links a.her{color:var(--night);background:var(--aurora);font-weight:600}
+
+/* Overgangen fra hero: giv menuen luft uden at den hopper */
+.menu + section{padding-top:60px}
+
+@media(max-width:680px){
+  .menu{top:8px;margin-top:30px;border-radius:13px}
+  .menu-links a{padding:8px 11px}
+  /* fade i højre kant som antyder at der er mere at scrolle til */
+  .menu::after{
+    content:"";position:absolute;right:6px;top:6px;bottom:6px;width:28px;
+    background:linear-gradient(90deg,transparent,rgba(8,22,31,.92));
+    pointer-events:none;border-radius:0 12px 12px 0;
+  }
+}
+@media(prefers-reduced-motion:reduce){.menu-links{scroll-behavior:auto}}
 
 /* ---------- kort ---------- */
 .map-shell{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--fjord)}

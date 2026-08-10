@@ -30,6 +30,42 @@
     T.days + " dage · " + DK(T.km) + " km · " + koeredage +
     " køredage · 4 færger · længste etape 875 km (dag 10)";
 
+  /* ---------- menu: marker det afsnit man læser ---------- */
+  (function () {
+    var baand = document.getElementById("menu-links");
+    if (!baand) return;
+    var led = [].slice.call(baand.querySelectorAll("a"));
+    var afsnit = led.map(function (a) {
+      return document.getElementById(a.getAttribute("href").slice(1));
+    });
+    var aktiv = null;
+
+    function saet(i) {
+      if (i === aktiv || i < 0) return;
+      aktiv = i;
+      led.forEach(function (a, j) { a.classList.toggle("her", j === i); });
+      // Hold det aktive punkt synligt i den vandrette liste på mobil,
+      // uden at flytte selve siden (derfor ikke scrollIntoView).
+      var b = baand.getBoundingClientRect(), a = led[i].getBoundingClientRect();
+      if (a.left < b.left + 4) { baand.scrollLeft += a.left - b.left - 12; }
+      else if (a.right > b.right - 4) { baand.scrollLeft += a.right - b.right + 12; }
+    }
+
+    if (!("IntersectionObserver" in window)) return;
+    var synlige = {};
+    var obs = new IntersectionObserver(function (poster) {
+      poster.forEach(function (p) {
+        synlige[p.target.id] = p.isIntersecting;
+      });
+      // Første afsnit i dokumentrækkefølge som stadig er i læsefeltet.
+      for (var i = 0; i < afsnit.length; i++) {
+        if (afsnit[i] && synlige[afsnit[i].id]) { saet(i); return; }
+      }
+    }, { rootMargin: "-80px 0px -65% 0px", threshold: 0 });
+
+    afsnit.forEach(function (s) { if (s) obs.observe(s); });
+  })();
+
   /* ---------- beslutninger ---------- */
   document.getElementById("beslut").innerHTML = window.BESLUTNINGER.map(function (b) {
     var tag = { aendret: "Ændret", advarsel: "Vær opmærksom", beholdt: "Beholdt" }[b.status];
@@ -46,6 +82,10 @@
       (b.valg ? '<p class="b-valg"><b>Alternativet</b>' + esc(b.valg) + "</p>" : "") +
       "</article>";
   }).join("");
+
+  var TAL = ["nul", "ét", "to", "tre", "fire", "fem", "seks", "syv", "otte", "ni", "ti"];
+  document.getElementById("beslut-note").textContent =
+    (TAL[window.BESLUTNINGER.length] || window.BESLUTNINGER.length) + " valg og hvorfor";
 
   /* ---------- dag for dag ---------- */
   function navUrl(nav) {

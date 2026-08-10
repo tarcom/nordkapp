@@ -14,7 +14,7 @@
 
 <div class="wrap">
 
-<header class="hero">
+<header class="hero" id="top">
   <p class="eyebrow">17.–28. august 2026 · Tesla Model 3 · 12 dage · solo</p>
   <h1>Fra <span class="lat">57°N</span><br>til <span class="lat">71°N</span></h1>
   <p class="standfirst">Aalborg til Europas nordligste klippe og hjem igen gennem Finland.
@@ -33,6 +33,22 @@
 
   <dl class="stats" id="stats"></dl>
 </header>
+
+<nav class="menu" id="menu" aria-label="Sidens afsnit">
+  <a class="menu-top" href="#top" title="Til toppen">71°N</a>
+  <div class="menu-links" id="menu-links">
+    <a href="#kort">Ruten</a>
+    <a href="#beslutninger">Beslutninger</a>
+    <a href="#dage">Dag for dag</a>
+    <a href="#karakterer">Rangering</a>
+    <a href="#omveje">Omveje</a>
+    <a href="#sove">Sove i bilen</a>
+    <a href="#alternativer">Kortere?</a>
+    <a href="#faerger">Færger</a>
+    <a href="#pakkeliste">Pakkeliste</a>
+    <a href="#praktisk">Praktisk</a>
+  </div>
+</nav>
 
 <section id="kort">
   <div class="sec-head">
@@ -55,11 +71,12 @@
 
 <section id="beslutninger">
   <div class="sec-head">
-    <h2>Fire beslutninger</h2>
-    <span class="sec-note">Hvad jeg ændrede og hvorfor</span>
+    <h2>Beslutninger</h2>
+    <span class="sec-note" id="beslut-note">Hvad jeg ændrede og hvorfor</span>
   </div>
   <p class="lead">Jeg målte alle etaper mod rigtige rutedata i stedet for at bruge de runde tal.
-  To steder holdt den oprindelige plan ikke, ét sted er der en reel risiko, og ét sted var fristelsen at skære forkert.</p>
+  To steder holdt den oprindelige plan ikke, ét sted lå der en risiko der siden er forsvundet,
+  og to steder var fristelsen at skære det forkerte væk.</p>
   <div class="beslut" id="beslut"></div>
 </section>
 
@@ -108,7 +125,7 @@
 <section id="faerger">
   <div class="sec-head">
     <h2>Færgerne</h2>
-    <span class="sec-note">Alle fire skal bookes</span>
+    <span class="sec-note">Kun én skal bookes hjemmefra</span>
   </div>
   <div class="cards" id="ferries"></div>
 </section>
