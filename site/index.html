@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>57°N → 71°N · Nordkapp-turen 2026</title>
+<meta name="description" content="12 dage fra Aalborg til Nordkapp og hjem gennem Finland. Rute, afstande, seværdigheder og praktik — dag for dag.">
+<meta name="theme-color" content="#08161F">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">17.–28. august 2026 · Tesla Model 3 · 12 dage · solo</p>
+  <h1>Fra <span class="lat">57°N</span><br>til <span class="lat">71°N</span></h1>
+  <p class="standfirst">Aalborg til Europas nordligste klippe og hjem igen gennem Finland.
+  Ti køredage, fire færger og knap 5.000 kilometer — uden en eneste dyr Østersø-overfart.</p>
+
+  <div class="spine">
+    <div class="spine-track"></div>
+    <div class="spine-marks">
+      <div class="spine-mark"><b>57°</b>Aalborg</div>
+      <div class="spine-mark"><b>63°</b>Trondheim</div>
+      <div class="spine-mark"><b>67°</b>Lofoten</div>
+      <div class="spine-mark"><b>69°</b>Tromsø</div>
+      <div class="spine-mark"><b>71°</b>Nordkapp</div>
+    </div>
+  </div>
+
+  <dl class="stats" id="stats"></dl>
+</header>
+
+<section id="kort">
+  <div class="sec-head">
+    <h2>Ruten</h2>
+    <span class="sec-note">Klik på et stop</span>
+  </div>
+  <p class="lead">Den grønne streg er den faktiske vejgeometri, ikke en streg mellem byer —
+  hentet fra rutemotoren, så afstandene på siden er dem bilen rent faktisk kører.</p>
+  <div class="map-shell">
+    <div id="map"></div>
+  </div>
+  <div class="map-legend">
+    <span><i></i>Kørsel · 4.944 km</span>
+    <span class="f"><i></i>Færge · 4 overfarter</span>
+  </div>
+</section>
+
+<section id="beslutninger">
+  <div class="sec-head">
+    <h2>Fire beslutninger</h2>
+    <span class="sec-note">Hvad jeg ændrede og hvorfor</span>
+  </div>
+  <p class="lead">Jeg målte alle etaper mod rigtige rutedata i stedet for at bruge de runde tal.
+  To steder holdt den oprindelige plan ikke, ét sted er der en reel risiko, og ét sted var fristelsen at skære forkert.</p>
+  <div class="beslut" id="beslut"></div>
+</section>
+
+<section id="dage">
+  <div class="sec-head">
+    <h2>Dag for dag</h2>
+    <span class="sec-note">Mandag 17. → fredag 28. august</span>
+  </div>
+  <p class="lead">Køretider er ren kørsel uden pauser, ladning eller kø.
+  Læg 15–25 % til for en realistisk dagslængde. Stjernemarkerede stop er dem jeg ikke ville springe over.</p>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<section id="faerger">
+  <div class="sec-head">
+    <h2>Færgerne</h2>
+    <span class="sec-note">Alle fire skal bookes</span>
+  </div>
+  <div class="cards" id="ferries"></div>
+</section>
+
+<section id="praktisk">
+  <div class="sec-head">
+    <h2>Praktisk</h2>
+    <span class="sec-note">Bompenge · entré · valuta · ladning</span>
+  </div>
+  <div class="prak" id="praktisk-liste"></div>
+</section>
+
+<footer>
+  <p id="foot-sum"></p>
+  <p>Afstande og køretider beregnet med OSRM · sol op/ned beregnet for hver lokation · priser og åbningstider skal tjekkes før afrejse</p>
+</footer>
+
+</div>
+
+<script src="geom.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNm1EZk5iNg_rfk88JTp29igJp5i-pEYc&callback=initMap&loading=async"></script>
+</body>
+</html>
