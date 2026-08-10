@@ -79,3 +79,34 @@ Og fandt én risiko, der ikke er løst, men beskrevet på siden:
 **dag 10 er 875 km / 12,1 t mod en færge, der lukker check-in ca. kl. 19.**
 Alternativet — at sove i Kemi i stedet for Rovaniemi — står i `data.js`
 under `BESLUTNINGER`.
+
+## Kortet: hover, filtre og Directions
+
+Ruten tegnes i to trin. Først straks fra `geom.js`, så kortet aldrig står
+tomt — derefter henter siden **Googles egen rute** med DirectionsService og
+overskriver linjerne. Waypoints til Directions samples fra OSRM-geometrien
+(3 punkter per segment), så Google følger den samme korridor.
+
+Directions-svarene caches i `localStorage` under `nordkapp.ruter.v1`.
+Første besøg i en browser koster **12 Directions-kald** (ét per segment);
+derefter nul. Ryd nøglen i browserens devtools for at tvinge en genhentning.
+
+Ændrer du ruten i `geom.js`, så **hæv versionsnummeret i `CACHE_KEY`** i
+`app.js` — ellers bliver gamle ruter hængende hos dem der har set siden før.
+
+Hover-tekster ligger i `t`-feltet på hvert punkt i `window.POI` (hold dem
+korte) og genereres for ruter og færger ud fra `DAYS` og `FERRIES`.
+Filterknapperne over kortet bygges automatisk ud fra `KAT` i `app.js`.
+
+## Hvad der er målt, og hvad der er skøn
+
+Alt på siden er målt med OSRM undtagen to ting, der er markeret som skøn
+på siden selv:
+
+- **Kystriksveien Fv17.** OSRM straffer færger så hårdt, at den kører
+  udenom i stedet for at tage dem — den gav 1.048 km for en strækning der
+  reelt er ~650 km med seks færger. Tallene er derfor overslag.
+- **Knivskjellodden**, der er en vandring og ikke en køretur.
+
+Sovesteder er **kandidater**, ikke verificerede. Skiltning og regler skifter
+fra sæson til sæson, især på Lofoten.

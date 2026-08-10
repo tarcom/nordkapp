@@ -145,6 +145,84 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .navlink:hover{color:var(--ice);border-color:var(--ice)}
 .navlink.ferry{color:var(--sun);border-color:rgba(232,163,61,.35)}
 
+/* ---------- kortfilter og hover-tekst ---------- */
+.mapfilter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.fbtn{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  color:var(--glacial);background:transparent;
+  border:1px solid var(--line);border-radius:20px;padding:7px 14px;
+  transition:border-color .15s,color .15s,opacity .15s;
+}
+.fbtn:hover{border-color:var(--glacial);color:var(--ice)}
+.fbtn .fdot{width:9px;height:9px;border-radius:50%;flex:none;opacity:.35;transition:opacity .15s}
+.fbtn.on{color:var(--ice);border-color:rgba(189,214,223,.4)}
+.fbtn.on .fdot{opacity:1}
+.fbtn:not(.on){opacity:.5;text-decoration:line-through}
+.fbtn em{font-style:normal;opacity:.5;font-size:10px}
+
+.map-shell{position:relative}
+.maptip{
+  position:absolute;z-index:5;pointer-events:none;max-width:270px;
+  background:rgba(8,22,31,.97);border:1px solid rgba(189,214,223,.28);
+  border-radius:9px;padding:10px 13px;
+  box-shadow:0 8px 26px rgba(0,0,0,.5);
+}
+.maptip b{display:block;font-family:var(--display);font-size:.98rem;font-weight:600;color:var(--ice);letter-spacing:-.01em;line-height:1.3}
+.maptip .tl{display:block;font-family:var(--mono);font-size:10.5px;color:var(--glacial);margin-top:5px;line-height:1.5}
+.maptip .tl.g{color:var(--aurora);opacity:.85}
+
+/* ---------- omveje ---------- */
+.omvej{border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:var(--panel);margin:0 0 14px}
+.o-hd{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 5px}
+.o-hd h3{font-family:var(--display);font-size:1.18rem;font-weight:600;letter-spacing:-.02em;margin:0}
+.o-pris{
+  font-family:var(--mono);font-size:12px;font-weight:600;color:var(--sun);
+  background:rgba(232,163,61,.1);border-radius:6px;padding:4px 10px;white-space:nowrap;
+}
+.o-pris.skoen{color:var(--glacial);background:rgba(189,214,223,.08)}
+.o-pris em{font-style:normal;font-size:9.5px;opacity:.7;letter-spacing:.1em;text-transform:uppercase}
+.o-hvor{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.75;margin:0 0 14px !important;
+}
+.o-karat{display:inline-flex;gap:3px}
+.o-karat span{width:6px;height:6px;border-radius:50%;background:rgba(189,214,223,.2)}
+.o-karat span.on{background:var(--sun)}
+.omvej p{margin:0 0 12px;font-size:.94rem;color:var(--glacial)}
+.o-koster{
+  margin:0 !important;padding:11px 14px;border-radius:8px;font-size:.89rem;
+  background:rgba(95,217,166,.07);border-left:2px solid var(--aurora);
+}
+.o-koster b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--aurora);margin-bottom:3px}
+.o-note{
+  margin:10px 0 0 !important;font-size:.85rem;font-style:italic;
+  color:var(--glacial);opacity:.8;padding-left:14px;border-left:2px solid var(--line);
+}
+
+/* ---------- sove i bilen ---------- */
+.sregler{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:0 0 18px}
+.sregel{border:1px solid var(--line);border-radius:11px;padding:18px 20px;background:var(--panel)}
+.sregel h3{font-family:var(--display);font-size:1.02rem;margin:0 0 8px;letter-spacing:-.015em;color:var(--sun)}
+.sregel p{margin:0;font-size:.89rem;color:var(--glacial);line-height:1.6}
+.sregel b{color:var(--ice);font-weight:600}
+.spraktisk{margin:0 0 18px}
+.sadvarsel{
+  margin:0;padding:16px 20px;border-radius:10px;font-size:.92rem;color:var(--ice);
+  background:rgba(240,112,91,.09);border-left:3px solid var(--alarm);
+}
+.sadvarsel b{font-weight:600}
+
+/* ---------- færge-mærkat ---------- */
+.card{position:relative}
+.bookmaerke{
+  position:absolute;top:-9px;right:16px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--glacial);background:var(--fjord);border:1px solid var(--line);
+  border-radius:5px;padding:3px 9px;
+}
+.bookmaerke.nu{color:var(--night);background:var(--sun);border-color:var(--sun);font-weight:600}
+
 /* ---------- alternativer ---------- */
 .altblok{border:1px solid var(--line);border-radius:12px;padding:26px;background:var(--panel);margin:0 0 18px}
 .altblok h3{font-family:var(--display);font-size:1.25rem;font-weight:600;letter-spacing:-.02em;margin:0 0 10px}

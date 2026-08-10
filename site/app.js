@@ -11,12 +11,13 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   };
+  var komma = function (n) { return String(n).replace(".", ","); };
 
   /* ---------- nøgletal ---------- */
   var T = window.TRIP;
   document.getElementById("stats").innerHTML = [
     ["Kørsel", DK(T.km), " km"],
-    ["Bag rattet", String(T.hours).replace(".", ","), " timer"],
+    ["Bag rattet", komma(T.hours), " timer"],
     ["Om bord", "~" + T.ferryHours, " timer"],
     ["Nordligst", "71,17", "°N"]
   ].map(function (s) {
@@ -64,7 +65,7 @@
 
     var drive = d.rest ? "hviledag"
       : d.km < 5 ? (d.faerge || "kun færge")
-      : DK(d.km) + " km · " + String(d.t).replace(".", ",") + " t";
+      : DK(d.km) + " km · " + komma(d.t) + " t";
     if (d.faerge && d.km >= 5) drive += " + " + d.faerge;
 
     var se = (d.se || []).map(function (a) {
@@ -90,14 +91,18 @@
 
   /* ---------- færger ---------- */
   var BROEK = { 0: "", 15: "¼", 30: "½", 45: "¾" };
+  function varighed(min) {
+    var t = Math.floor(min / 60), m = min % 60, br = BROEK[m];
+    return br === undefined ? t + " t " + m + " min"
+                            : t + br + " time" + (t > 1 || br ? "r" : "");
+  }
   document.getElementById("ferries").innerHTML = window.FERRIES.map(function (f) {
-    var t = Math.floor(f.min / 60), m = f.min % 60;
-    var br = BROEK[m];
-    var varighed = br === undefined
-      ? t + " t " + m + " min"
-      : t + br + " time" + (t > 1 || br ? "r" : "");
-    return '<article class="card"><h3>' + esc(f.navn) + "</h3>" +
-      '<p class="meta">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed + "</p>" +
+    var maerke = { "nu": "Book hjemmefra", "fra Norge": "Book fra Norge",
+                   "undervejs": "Book undervejs" }[f.book];
+    return '<article class="card' + (f.book === "nu" ? " nu" : "") + '">' +
+      (maerke ? '<span class="bookmaerke' + (f.book === "nu" ? " nu" : "") + '">' + maerke + "</span>" : "") +
+      "<h3>" + esc(f.navn) + "</h3>" +
+      '<p class="meta">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) + "</p>" +
       "<p>" + esc(f.note) + "</p>" +
       '<p><a class="navlink" href="' + f.link + '" target="_blank" rel="noopener">Book hos ' +
       esc(f.selskab.split(" /")[0]) + "</a></p></article>";
@@ -113,8 +118,7 @@
         '<div class="vnavn">' + esc(r.navn) +
           (r.valgt ? '<span class="vmaerke">valgt</span>' : "") + "</div>" +
         '<div class="vbar"><span style="width:' + (r.km / maxKm * 100).toFixed(1) + '%"></span></div>' +
-        '<div class="vtal">' + DK(r.km) + " km<br><em>" +
-          String(r.t).replace(".", ",") + " t</em></div>" +
+        '<div class="vtal">' + DK(r.km) + " km<br><em>" + komma(r.t) + " t</em></div>" +
         '<p class="vnote">' + esc(r.note) + "</p></div>";
     }).join("");
     return '<article class="altblok"><h3>' + esc(b.titel) + "</h3>" +
@@ -151,6 +155,40 @@
     valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
     '<p class="altbund">' + esc(A.bund) + "</p>";
 
+  /* ---------- omveje ---------- */
+  var O = window.OMVEJE;
+  document.getElementById("omveje-liste").innerHTML =
+    '<p class="lead">' + esc(O.intro) + "</p>" +
+    O.liste.map(function (o) {
+      var karat = "";
+      for (var i = 0; i < 5; i++) karat += '<span class="' + (i < o.karat ? "on" : "") + '"></span>';
+      var pris = o.km ? "+" + DK(o.km) + " km · +" + komma(o.t) + " t"
+                      : "+" + komma(o.t) + " t til fods";
+      return '<article class="omvej"><div class="o-hd">' +
+        "<h3>" + esc(o.navn) + "</h3>" +
+        '<span class="o-pris' + (o.maalt ? "" : " skoen") + '">' + pris +
+          (o.maalt ? "" : " <em>skøn</em>") + "</span></div>" +
+        '<p class="o-hvor">' + esc(o.hvor) + '<span class="o-karat">' + karat + "</span></p>" +
+        "<p>" + esc(o.d) + "</p>" +
+        '<p class="o-koster"><b>Hvad det koster</b>' + esc(o.pris) + "</p>" +
+        (o.note ? '<p class="o-note">' + esc(o.note) + "</p>" : "") +
+        "</article>";
+    }).join("") +
+    '<p class="altbund">' + esc(O.bund) + "</p>";
+
+  /* ---------- sove i bilen ---------- */
+  var S = window.SOVE;
+  document.getElementById("sove-indhold").innerHTML =
+    '<p class="lead">' + esc(S.intro) + "</p>" +
+    '<div class="sregler">' + S.regler.map(function (r) {
+      return '<div class="sregel"><h3>' + esc(r.land) + "</h3><p>" + r.d + "</p></div>";
+    }).join("") + "</div>" +
+    '<div class="pgroup spraktisk"><h3>Praktisk</h3><ul>' +
+      S.praktisk.map(function (p) {
+        return "<li><b>" + esc(p[0]) + "</b>" + esc(p[1]) + "</li>";
+      }).join("") + "</ul></div>" +
+    '<p class="sadvarsel">' + S.advarsel + "</p>";
+
   /* ---------- praktisk ---------- */
   document.getElementById("praktisk-liste").innerHTML = window.PRAKTISK.map(function (g) {
     return '<section class="pgroup"><h3>' + esc(g.gruppe) + "</h3><ul>" +
@@ -159,10 +197,28 @@
       }).join("") + "</ul></section>";
   }).join("");
 
-  /* ---------- kort ---------- */
-  var G = window.GEOM;
-  var driveGeoms = Object.keys(G).map(function (k) { return G[k]; });
-  var AURORA = "#5FD9A6", SUN = "#E8A33D", ICE = "#E4EFF3", NIGHT = "#08161F";
+  /* ======================= KORT ======================= */
+  var AURORA = "#5FD9A6", SUN = "#E8A33D", ICE = "#E4EFF3",
+      NIGHT = "#08161F", VIOLET = "#B69CE8", ROSE = "#F0705B";
+
+  var KAT = {
+    stop:     { navn: "Overnatning",   farve: ICE,    r: 6.5 },
+    sove:     { navn: "Sov i bilen",   farve: VIOLET, r: 6 },
+    vandring: { navn: "Vandreture",    farve: AURORA, r: 6 },
+    udsigt:   { navn: "Seværdigheder", farve: SUN,    r: 5 },
+    omvej:    { navn: "Omveje",        farve: ROSE,   r: 6 }
+  };
+
+  /* Ét segment = ét stykke vejgeometri, knyttet til sin dag. */
+  var SEGMENTER = [];
+  window.DAYS.forEach(function (d) {
+    (d.geom || []).forEach(function (key) {
+      if (window.GEOM[key]) {
+        SEGMENTER.push({ key: key, dag: d.n, titel: d.titel, km: d.km, t: d.t,
+                         alene: d.geom.length === 1 });
+      }
+    });
+  });
 
   var DARK = [
     { elementType: "geometry", stylers: [{ color: "#0d2530" }] },
@@ -182,6 +238,36 @@
   ];
 
   var mapDone = false;
+  var shell = document.querySelector(".map-shell");
+  var tip = document.getElementById("maptip");
+
+  function visTip(html, x, y) {
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var box = shell.getBoundingClientRect();
+    var left = Math.min(Math.max(x + 16, 8), box.width - tip.offsetWidth - 8);
+    var top = y - tip.offsetHeight - 14;
+    if (top < 8) top = y + 22;
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+  function skjulTip() { tip.hidden = true; }
+
+  function tipPos(e) {
+    var box = shell.getBoundingClientRect();
+    return [e.domEvent.clientX - box.left, e.domEvent.clientY - box.top];
+  }
+
+  /* Directions-svar caches, så kun første besøg koster API-kald. */
+  var CACHE_KEY = "nordkapp.ruter.v1";
+  function laesCache() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function skrivCache(c) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(c)); }
+    catch (e) { /* privat tilstand eller fuldt lager - ikke kritisk */ }
+  }
 
   window.initMap = function () {
     if (mapDone) return;
@@ -192,65 +278,201 @@
       styles: DARK, mapTypeControl: true, streetViewControl: false,
       fullscreenControl: true, zoomControl: true,
       // cooperative: Ctrl+hjul zoomer på PC, to fingre på mobil.
-      // Siden scroller normalt når man bare ruller forbi kortet.
       gestureHandling: "cooperative",
       mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU }
     });
 
     var bounds = new google.maps.LatLngBounds();
+    var linjer = {};
 
-    driveGeoms.forEach(function (g) {
-      var path = g.map(function (p) { return { lat: p[0], lng: p[1] }; });
+    function tegnLinje(seg, path, gkm, gt) {
       path.forEach(function (p) { bounds.extend(p); });
-      new google.maps.Polyline({
-        path: path, map: map, strokeColor: AURORA, strokeOpacity: 0.9, strokeWeight: 3
+
+      var synlig = new google.maps.Polyline({
+        path: path, map: map, strokeColor: AURORA, strokeOpacity: 0.9,
+        strokeWeight: 3, zIndex: 2
       });
+      // Usynlig, tyk linje ovenpå gør ruten nem at ramme med musen.
+      var ramme = new google.maps.Polyline({
+        path: path, map: map, strokeOpacity: 0, strokeWeight: 16,
+        zIndex: 3, clickable: true
+      });
+      linjer[seg.key] = synlig;
+
+      var txt = "<b>Dag " + seg.dag + " · " + esc(seg.titel) + "</b>" +
+        '<span class="tl">' + DK(seg.km) + " km · " + komma(seg.t) + " t planlagt</span>" +
+        (seg.alene && gkm ? '<span class="tl g">Google: ' + DK(gkm) + " km · " +
+                            komma(gt) + " t</span>" : "");
+
+      ramme.addListener("mouseover", function () {
+        synlig.setOptions({ strokeWeight: 6, strokeColor: ICE });
+      });
+      ramme.addListener("mouseout", function () {
+        synlig.setOptions({ strokeWeight: 3, strokeColor: AURORA });
+        skjulTip();
+      });
+      ramme.addListener("mousemove", function (e) {
+        var p = tipPos(e);
+        visTip(txt, p[0], p[1]);
+      });
+    }
+
+    /* Tegn straks fra forudberegnet geometri, så kortet aldrig står tomt.
+       Directions overskriver linjerne, efterhånden som svarene kommer. */
+    SEGMENTER.forEach(function (seg) {
+      tegnLinje(seg, window.GEOM[seg.key].map(function (p) {
+        return { lat: p[0], lng: p[1] };
+      }));
     });
 
+    hentRuter(tegnLinje, linjer);
+
+    /* ---- færger ---- */
     window.FERRIES.forEach(function (f) {
       var path = [{ lat: f.fra[0], lng: f.fra[1] }, { lat: f.til[0], lng: f.til[1] }];
       path.forEach(function (p) { bounds.extend(p); });
       new google.maps.Polyline({
-        path: path, map: map, geodesic: true, strokeOpacity: 0, strokeColor: SUN,
-        icons: [{
-          icon: { path: "M 0,-1 0,1", strokeOpacity: 0.85, strokeColor: SUN, strokeWeight: 3, scale: 3 },
-          offset: "0", repeat: "14px"
-        }]
+        path: path, map: map, geodesic: true, strokeOpacity: 0, zIndex: 1,
+        icons: [{ icon: { path: "M 0,-1 0,1", strokeOpacity: 0.85, strokeColor: SUN,
+                          strokeWeight: 3, scale: 3 }, offset: "0", repeat: "14px" }]
+      });
+      var ramme = new google.maps.Polyline({
+        path: path, map: map, geodesic: true, strokeOpacity: 0,
+        strokeWeight: 16, zIndex: 3, clickable: true
+      });
+      var b = { "nu": "Book hjemmefra", "fra Norge": "Book fra Norge",
+                "undervejs": "Book undervejs" }[f.book];
+      var txt = "<b>⛴ " + esc(f.navn) + "</b>" +
+        '<span class="tl">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) + "</span>" +
+        (b ? '<span class="tl g">' + b + "</span>" : "");
+      ramme.addListener("mousemove", function (e) {
+        var p = tipPos(e);
+        visTip(txt, p[0], p[1]);
+      });
+      ramme.addListener("mouseout", skjulTip);
+    });
+
+    /* ---- markører ---- */
+    var grupper = {};
+    Object.keys(KAT).forEach(function (k) { grupper[k] = []; });
+
+    function tilfoej(kat, lat, lon, txt, z, stor, farve) {
+      var k = KAT[kat];
+      var m = new google.maps.Marker({
+        position: { lat: lat, lng: lon }, map: map, zIndex: z || 5,
+        icon: { path: google.maps.SymbolPath.CIRCLE,
+                scale: stor ? k.r + 2.5 : k.r,
+                fillColor: farve || k.farve, fillOpacity: 1,
+                strokeColor: NIGHT, strokeWeight: 2 }
+      });
+      m.addListener("mouseover", function (e) {
+        var p = tipPos(e);
+        visTip(txt, p[0], p[1]);
+      });
+      m.addListener("mouseout", skjulTip);
+      grupper[kat].push(m);
+      bounds.extend({ lat: lat, lng: lon });
+      return m;
+    }
+
+    window.STOPS.forEach(function (s) {
+      var txt = "<b>" + esc(s.navn) + "</b>" +
+        '<span class="tl">' + s.lat.toFixed(2) + "°N · " + esc(s.dag) +
+        (s.natter ? " · " + s.natter + (s.natter > 1 ? " nætter" : " nat") : "") + "</span>" +
+        '<span class="tl g">Klik for Google Maps</span>';
+      var m = tilfoej("stop", s.lat, s.lon, txt, s.top ? 20 : 10,
+                      s.top || s.hjem, s.top ? SUN : null);
+      m.addListener("click", function () {
+        window.open("https://www.google.com/maps/search/?api=1&query=" +
+                    s.lat + "," + s.lon, "_blank", "noopener");
       });
     });
 
-    var info = new google.maps.InfoWindow();
-    window.STOPS.forEach(function (s) {
-      var big = s.top || s.hjem;
-      var m = new google.maps.Marker({
-        position: { lat: s.lat, lng: s.lon }, map: map, title: s.navn,
-        zIndex: big ? 10 : 1,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: big ? 8 : 6,
-          fillColor: s.top ? SUN : s.hoej ? AURORA : ICE,
-          fillOpacity: 1, strokeColor: NIGHT, strokeWeight: 2
-        }
-      });
-      m.addListener("click", function () {
-        info.setContent(
-          '<div class="iw"><b>' + esc(s.navn) + "</b>" +
-          "<span>" + s.lat.toFixed(2) + "°N · " + esc(s.dag) +
-          (s.natter ? " · " + s.natter + (s.natter > 1 ? " nætter" : " nat") : "") + "</span>" +
-          '<a href="https://www.google.com/maps/search/?api=1&query=' + s.lat + "," + s.lon +
-          '" target="_blank" rel="noopener">Åbn i Google Maps →</a></div>'
-        );
-        info.open(map, m);
-      });
-      bounds.extend({ lat: s.lat, lng: s.lon });
+    window.POI.forEach(function (p) {
+      var txt = "<b>" + (p.stjerne ? "★ " : "") + esc(p.navn) + "</b>" +
+        '<span class="tl">' + esc(p.t) + "</span>" +
+        '<span class="tl g">Dag ' + p.dag + (p.tid ? " · " + esc(p.tid) : "") + "</span>";
+      tilfoej(p.kat, p.lat, p.lon, txt, p.stjerne ? 8 : 6, p.stjerne);
     });
 
     map.fitBounds(bounds, { top: 40, right: 40, bottom: 40, left: 40 });
+
+    /* ---- filterknapper ---- */
+    var vist = {};
+    var filter = document.getElementById("mapfilter");
+    filter.innerHTML = Object.keys(KAT).map(function (k) {
+      vist[k] = true;
+      return '<button type="button" class="fbtn on" data-kat="' + k + '">' +
+        '<span class="fdot" style="background:' + KAT[k].farve + '"></span>' +
+        esc(KAT[k].navn) + " <em>" + grupper[k].length + "</em></button>";
+    }).join("");
+    filter.addEventListener("click", function (e) {
+      var b = e.target.closest(".fbtn");
+      if (!b) return;
+      var k = b.getAttribute("data-kat");
+      vist[k] = !vist[k];
+      b.classList.toggle("on", vist[k]);
+      grupper[k].forEach(function (m) { m.setMap(vist[k] ? map : null); });
+      skjulTip();
+    });
   };
 
-  /* Google afviser nøglen (forkert domæne, kvote opbrugt) → Leaflet i stedet. */
-  window.gm_authFailure = function () { mapDone = true; leaflet("Google Maps afviste nøglen på dette domæne"); };
+  /* Googles egen rute per segment. Waypoints tages fra den forudberegnede
+     geometri, så Google følger samme korridor som den planlagte rute. */
+  function hentRuter(tegnLinje, linjer) {
+    var cache = laesCache();
+    var svc = new google.maps.DirectionsService();
+    var koe = SEGMENTER.slice();
 
+    function brug(seg, c) {
+      if (linjer[seg.key]) linjer[seg.key].setMap(null);
+      tegnLinje(seg, c.p.map(function (p) { return { lat: p[0], lng: p[1] }; }), c.km, c.t);
+    }
+
+    function naeste() {
+      if (!koe.length) { skrivCache(cache); return; }
+      var seg = koe.shift();
+      var g = window.GEOM[seg.key];
+
+      if (cache[seg.key]) { brug(seg, cache[seg.key]); return naeste(); }
+
+      var via = [];
+      for (var i = 1; i <= 3; i++) {
+        var p = g[Math.round(g.length * i / 4)];
+        if (p) via.push({ location: { lat: p[0], lng: p[1] }, stopover: false });
+      }
+
+      svc.route({
+        origin: { lat: g[0][0], lng: g[0][1] },
+        destination: { lat: g[g.length - 1][0], lng: g[g.length - 1][1] },
+        waypoints: via,
+        travelMode: google.maps.TravelMode.DRIVING
+      }, function (res, status) {
+        if (status === "OK" && res.routes[0]) {
+          var r = res.routes[0], km = 0, sek = 0;
+          r.legs.forEach(function (l) { km += l.distance.value / 1000; sek += l.duration.value; });
+          cache[seg.key] = {
+            p: r.overview_path.map(function (pt) {
+              return [Math.round(pt.lat() * 1e4) / 1e4, Math.round(pt.lng() * 1e4) / 1e4];
+            }),
+            km: Math.round(km),
+            t: Math.round(sek / 360) / 10
+          };
+          brug(seg, cache[seg.key]);
+        }
+        // Ved fejl bliver den forudberegnede linje bare stående.
+        setTimeout(naeste, status === "OVER_QUERY_LIMIT" ? 1200 : 120);
+      });
+    }
+
+    naeste();
+  }
+
+  /* Google afviser nøglen (forkert domæne, kvote opbrugt) → Leaflet i stedet. */
+  window.gm_authFailure = function () {
+    mapDone = true;
+    leaflet("Google Maps afviste nøglen på dette domæne");
+  };
   /* Scriptet nåede aldrig frem (offline, blokeret) → Leaflet i stedet. */
   setTimeout(function () {
     if (!mapDone) { mapDone = true; leaflet("Google Maps kunne ikke indlæses"); }
@@ -259,6 +481,8 @@
   function leaflet(grund) {
     var el = document.getElementById("map");
     el.innerHTML = "";
+    document.getElementById("mapfilter").hidden = true;
+
     var css = document.createElement("link");
     css.rel = "stylesheet";
     css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
@@ -273,34 +497,42 @@
         if (e.ctrlKey) { e.preventDefault(); map.scrollWheelZoom.enable(); }
         else { map.scrollWheelZoom.disable(); }
       }, { passive: false });
+
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         attribution: "© OpenStreetMap, © CARTO", maxZoom: 18
       }).addTo(map);
 
       var all = [];
-      driveGeoms.forEach(function (g) {
-        L.polyline(g, { color: AURORA, weight: 3, opacity: 0.9 }).addTo(map);
+      SEGMENTER.forEach(function (seg) {
+        var g = window.GEOM[seg.key];
+        L.polyline(g, { color: AURORA, weight: 3, opacity: 0.9 }).addTo(map)
+          .bindTooltip("<b>Dag " + seg.dag + " · " + esc(seg.titel) + "</b><br>" +
+                       DK(seg.km) + " km · " + komma(seg.t) + " t", { sticky: true });
         all = all.concat(g);
       });
       window.FERRIES.forEach(function (f) {
-        L.polyline([f.fra, f.til], { color: SUN, weight: 3, opacity: 0.75, dashArray: "6 8" }).addTo(map);
+        L.polyline([f.fra, f.til], { color: SUN, weight: 3, opacity: 0.75, dashArray: "6 8" })
+          .addTo(map).bindTooltip("⛴ " + esc(f.navn), { sticky: true });
         all.push(f.fra, f.til);
       });
       window.STOPS.forEach(function (s) {
-        L.circleMarker([s.lat, s.lon], {
-          radius: s.top || s.hjem ? 8 : 6, weight: 2, color: NIGHT,
-          fillColor: s.top ? SUN : s.hoej ? AURORA : ICE, fillOpacity: 1
-        }).addTo(map).bindPopup(
-          "<b>" + esc(s.navn) + "</b><br>" + s.lat.toFixed(2) + "°N · " + esc(s.dag)
-        );
+        L.circleMarker([s.lat, s.lon], { radius: s.top ? 8 : 6, weight: 2, color: NIGHT,
+          fillColor: s.top ? SUN : ICE, fillOpacity: 1 }).addTo(map)
+          .bindTooltip("<b>" + esc(s.navn) + "</b><br>" + esc(s.dag), { sticky: true });
         all.push([s.lat, s.lon]);
+      });
+      window.POI.forEach(function (p) {
+        L.circleMarker([p.lat, p.lon], { radius: KAT[p.kat].r - 1, weight: 2, color: NIGHT,
+          fillColor: KAT[p.kat].farve, fillOpacity: 1 }).addTo(map)
+          .bindTooltip("<b>" + esc(p.navn) + "</b><br>" + esc(p.t), { sticky: true });
+        all.push([p.lat, p.lon]);
       });
       map.fitBounds(L.latLngBounds(all), { padding: [40, 40] });
 
       var note = document.createElement("div");
       note.className = "map-fallback";
       note.textContent = grund + " — viser OpenStreetMap i stedet.";
-      el.parentNode.appendChild(note);
+      shell.appendChild(note);
     };
     document.head.appendChild(js);
   }

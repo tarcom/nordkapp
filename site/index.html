@@ -39,15 +39,17 @@
     <h2>Ruten</h2>
     <span class="sec-note">Klik på et stop</span>
   </div>
-  <p class="lead">Den grønne streg er den faktiske vejgeometri, ikke en streg mellem byer —
-  hentet fra rutemotoren, så afstandene på siden er dem bilen rent faktisk kører.</p>
+  <p class="lead">Ruten er Googles egen, og hvert punkt har en tekst når du holder musen over.
+  Klik kategorierne fra og til for at rydde op i kortet.</p>
+  <div id="mapfilter" class="mapfilter"></div>
   <div class="map-shell">
     <div id="map"></div>
+    <div id="maptip" class="maptip" hidden></div>
   </div>
   <div class="map-legend">
     <span><i></i>Kørsel · 4.944 km</span>
     <span class="f"><i></i>Færge · 4 overfarter</span>
-    <span class="hint">Zoom: Ctrl + musehjul på PC · to fingre på mobil</span>
+    <span class="hint">Hold musen over ruten eller et punkt · zoom med Ctrl + musehjul</span>
   </div>
 </section>
 
@@ -69,6 +71,22 @@
   <p class="lead">Køretider er ren kørsel uden pauser, ladning eller kø.
   Læg 15–25 % til for en realistisk dagslængde. Stjernemarkerede stop er dem jeg ikke ville springe over.</p>
   <div class="timeline" id="timeline"></div>
+</section>
+
+<section id="omveje">
+  <div class="sec-head">
+    <h2>Opleve mere</h2>
+    <span class="sec-note">Hvad omvejene koster i km og timer</span>
+  </div>
+  <div id="omveje-liste"></div>
+</section>
+
+<section id="sove">
+  <div class="sec-head">
+    <h2>Sove i bilen</h2>
+    <span class="sec-note">Regler · og elleve kandidater på kortet</span>
+  </div>
+  <div id="sove-indhold"></div>
 </section>
 
 <section id="alternativer">

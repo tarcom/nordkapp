@@ -15,22 +15,22 @@ window.TRIP = {
 /* Færger. min = varighed i minutter. */
 window.FERRIES = [
   { id:"stena_ud", navn:"Frederikshavn → Göteborg", selskab:"Stena Line", min:195,
-    dag:1, fra:[57.4370,10.5443], til:[57.6975,11.9285],
+    dag:1, fra:[57.4370,10.5443], til:[57.6975,11.9285], book:"nu",
     note:"Book morgenafgangen. Sparer ~600 km mod at køre ned over Øresund.",
     link:"https://www.stenaline.dk/ruter/frederikshavn-goteborg" },
 
   { id:"moskenes", navn:"Bodø → Moskenes", selskab:"Torghatten Nord", min:195,
-    dag:4, fra:[67.2804,14.3805], til:[67.9330,12.9950],
-    note:"Bilfærgen til Lofoten. Skal bookes i august — den fyldes af autocampere.",
+    dag:4, fra:[67.2804,14.3805], til:[67.9330,12.9950], book:"fra Norge",
+    note:"Bilfærgen til Lofoten. Book den et par dage før, når du er i Norge og kender dit tempo. Bliver den fuld: kør E6 til Bognes og ind i Lofoten nordfra.",
     link:"https://www.torghatten-nord.no" },
 
   { id:"turku", navn:"Turku → Stockholm", selskab:"Viking Line / Tallink Silja", min:660,
-    dag:10, fra:[60.4350,22.2280], til:[59.3480,18.1060],
-    note:"Natfærgen. Afgang ca. 20.00, i land 07.00. Sparer både en køredag og en hotelnat.",
+    dag:10, fra:[60.4350,22.2280], til:[59.3480,18.1060], book:"undervejs",
+    note:"Både dag- og natafgang. Book den ikke hjemmefra — tag den 2-3 dage før fra vejen. Kan du ikke komme med, kører du rundt om Bottenvigen for 294 km.",
     link:"https://www.vikingline.fi" },
 
   { id:"stena_hjem", navn:"Göteborg → Frederikshavn", selskab:"Stena Line", min:195,
-    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443],
+    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443], book:"nu",
     note:"Hjemturen. Tjek om en returbillet sammen med udturen er billigere.",
     link:"https://www.stenaline.dk/ruter/frederikshavn-goteborg" }
 ];
@@ -238,18 +238,179 @@ window.BESLUTNINGER = [
     tekst:"Du sejler alligevel Stena på udturen, så returbilletten er ofte billigere end de to broer tilsammen. Ruten sparer 479 km og næsten fem timers kørsel, og du slipper for både Storebælt og Øresund. Bonus: tager du aftenfærgen torsdag, er du hjemme et helt døgn før deadline.",
     valg:"Undtagelsen er hvis I vil bruge en dag i København eller Malmö på vejen hjem — så er Øresund-ruten sin merpris værd." },
 
-  { id:"dag10", titel:"Dag 10 er turens eneste rigtige risiko",
-    status:"advarsel",
-    foer:"Sov i Rovaniemi · dag 10 bliver 875 km / 12,1 t mod en færge der lukker kl. 19",
-    efter:"Sov i Kemi · dag 9 bliver 827 km, dag 10 kun 757 km / 10,2 t",
-    tekst:"Det her er det eneste sted i planen, hvor ét uheld vælter resten. 12 timers ren kørsel plus tre ladestop er 13½-14 timer — det kræver afgang kl. 06.00 præcis, og så er der stadig ingen buffer. Misser du færgen, mister du en hel dag og en hotelnat, og du skal stadig nå hjem fredag.",
-    valg:"Kører du de sidste 118 km til Kemi allerede tirsdag aften, bliver onsdagen 757 km med to timers luft. Prisen er Arktikum, som du så må nøjes med at køre forbi. Vil du beholde Rovaniemi: sæt vækkeuret til 05.30, lad fuldt op aftenen før, og tjek om Tallink har en senere afgang som plan B." },
+  { id:"booking", titel:"Book Göteborg og Bodø — men lad Turku stå åben",
+    status:"aendret",
+    foer:"Book alle fire færger hjemmefra og lås planen",
+    efter:"Book Stena nu · book Bodø fra Norge · tag Turku som den kommer",
+    tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Stena Frederikshavn → Göteborg skal bookes nu: det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
+    valg:"Sikkerhedsnettet er, at Turku-færgen ikke er nødvendig. Kan du ikke komme med, kører du rundt om Bottenvigen over Tornio og Haparanda — det koster 294 km og en halv køredag, ikke turen. Derfor er det billigt at lade den stå åben. Book den 2-3 dage før fra vejen, når du kan se dit eget tempo." },
+
+  { id:"dag10", titel:"Uden booket færge forsvinder dag 10-risikoen",
+    status:"beholdt",
+    foer:"Med booket færge: 875 km mod en check-in der lukker kl. 19",
+    efter:"Uden booket færge: bare en lang dag, og du tager næste afgang",
+    tekst:"Det her var turens eneste rigtige risiko, så længe færgen var booket. 12 timers ren kørsel plus ladestop er 13½-14 timer, og det krævede afgang kl. 06.00 præcis uden buffer. Men beslutter du dig for ikke at booke, holder problemet op med at eksistere: kommer du for sent, sejler du med den næste. Der er både dag- og natafgang.",
+    valg:"Vil du alligevel have kortere dage, så sov i Kemi i stedet for Rovaniemi tirsdag aften. Dag 9 bliver 827 km, dag 10 kun 757 km. Prisen er Arktikum, som du så må køre forbi." },
 
   { id:"lofoten", titel:"To nætter på Lofoten er ikke luksus",
     status:"beholdt",
     foer:"", efter:"Dag 4 og 5 i Reine",
     tekst:"Fristelsen er at klippe hviledagen for at få luft i Finland. Lad være. Dag 5 er den eneste buffer i hele planen — og med fire etaper på 700+ km er sandsynligheden for, at noget skrider, ikke lille. Går alt godt, får du Reinebringen. Går det skævt, får du din tidsplan tilbage.",
     valg:"" }
+];
+
+/* ---------------------------------------------------------------------------
+   Punkter på kortet. kat: vandring | udsigt | sove | omvej
+   t = hover-tekst (kort!). d = længere beskrivelse til listerne.
+   Koordinater er gode nok til at finde stedet - ikke til at navigere efter.
+   --------------------------------------------------------------------------- */
+window.POI = [
+  /* ---- vandreture ---- */
+  { kat:"vandring", navn:"Snøhetta-pavillonen", lat:62.2960, lon:9.5220, dag:2,
+    t:"1,5 km hver vej · let · moskusokser", tid:"1 time",
+    d:"Arkitekttegnet udsigtspavillon på Dovrefjell med glasvæg mod Snøhetta. Kort, flad sti fra parkeringen ved Hjerkinn. Der går moskusokser på vidden — hold god afstand, de er hurtigere end de ser ud." },
+  { kat:"vandring", navn:"Keiservarden", lat:67.2880, lon:14.4650, dag:3,
+    t:"1-1,5 time · let · Lofotveggen i horisonten", tid:"1-1,5 time",
+    d:"Bodøs husbjerg. Bred grusvej hele vejen op, og på en klar dag ser du hele Lofotveggen ligge som en tandet mur ude i havet. Perfekt til at strække benene efter den lange E6-dag." },
+  { kat:"vandring", navn:"Reinebringen", lat:67.9295, lon:13.0995, dag:5,
+    t:"1.566 sherpatrin · 2-3 timer · turens bedste udsigt", tid:"2-3 timer", stjerne:true,
+    d:"Nepalesiske sherpaer har bygget en trappe hele vejen op ad fjeldsiden. 448 meter lige op, og så ligger Reine, Hamnøy og hele Kirkefjorden under dig. Det er det billede, du har set af Lofoten. Stien lukkes i regn og blæst — tjek før du går." },
+  { kat:"vandring", navn:"Ryten & Kvalvika", lat:68.0930, lon:13.2340, dag:5,
+    t:"4-5 timer · strand uden vej", tid:"4-5 timer", stjerne:true,
+    d:"Vandring over fjeldet til en strand, der ikke har nogen vej. Fortsætter du op på Ryten, står du på en klippekant 543 meter direkte over sandet. Færre folk end Reinebringen og mindst lige så godt." },
+  { kat:"vandring", navn:"Mannen ved Haukland", lat:68.1435, lon:13.6480, dag:5,
+    t:"1,5-2 timer · let · to strande på én gang", tid:"1,5-2 timer",
+    d:"Kort, stejl tur op fra Haukland-stranden. Fra toppen ser du både Haukland og Uttakleiv samtidig — de to hvide strande, der får Lofoten til at ligne Caribien indtil man mærker vandet." },
+  { kat:"vandring", navn:"Segla, Senja", lat:69.4830, lon:17.5610, dag:6,
+    t:"3-4 timer · 639 m · Norges mest dramatiske", tid:"3-4 timer", stjerne:true,
+    d:"Sejlet: en klippehale, der rejser sig lodret af fjorden ved Fjordgård. Turen op er stejl men ikke teknisk, og udsigten fra kanten er svær at overgå nogen steder i Norge. Kræver omvejen over Senja." },
+  { kat:"vandring", navn:"Husfjellet, Senja", lat:69.3820, lon:17.4260, dag:6,
+    t:"3 timer · 635 m · 360° over Senja", tid:"3 timer",
+    d:"Mindre kendt end Segla og med udsigt til den. Fra toppen ser du hele Senjas vestside, Bergsfjorden og ud i Atlanterhavet." },
+  { kat:"vandring", navn:"Sherpatrappa til Fløya", lat:69.6470, lon:19.0000, dag:7,
+    t:"1.200 trin · 1-2 timer · Tromsø under dig", tid:"1-2 timer",
+    d:"Stentrappen op ad Fløya fra Tromsdalen. Ender lige over svævebanens topstation, så du kan gå op og køre ned — eller omvendt, hvis knæene foretrækker det." },
+  { kat:"vandring", navn:"Sautso, Altaelva canyon", lat:69.6500, lon:23.6000, dag:7,
+    t:"Nordeuropas største kløft", tid:"2-4 timer",
+    d:"400 meter dyb og 15 km lang. Kræver en afstikker fra Alta ad grusvej, og den bedste udsigt kommer man kun til fods. Vælg den, hvis vejret er for godt til at sidde i bilen." },
+  { kat:"vandring", navn:"Kirkeporten, Skarsvåg", lat:71.1080, lon:25.8020, dag:8,
+    t:"30-45 min · let · Nordkapp set gennem et klippehul", tid:"30-45 min", stjerne:true,
+    d:"Kort sti fra verdens nordligste fiskerleje op til en naturlig klippeport. Stiller du dig rigtigt, rammer Nordkapp-klippen præcis ind i hullet. Det bedste Nordkapp-billede tages herfra, ikke fra platået." },
+  { kat:"vandring", navn:"Knivskjellodden", lat:71.1180, lon:25.6750, dag:8,
+    t:"9 km hver vej · 5-6 timer · det RIGTIGE nordligste punkt", tid:"5-6 timer",
+    d:"Nordkapp er ikke Europas nordligste punkt — Knivskjellodden ligger 1.457 meter længere nordpå, og der er ingen entré, ingen bus og næsten ingen mennesker. Til gengæld 18 km våd vandring. Skriv dig i bogen i kassen ved pynten." },
+  { kat:"vandring", navn:"Otsamo ved Inari", lat:68.9400, lon:27.0050, dag:9,
+    t:"3-4 timer · udsigt over Inarisøen", tid:"3-4 timer",
+    d:"Fjeldet nord for Inari med udsigt ud over søen og dens 3.000 øer. Godt sted at forstå, hvor stort Lapland faktisk er." },
+
+  /* ---- udsigt og seværdigheder ---- */
+  { kat:"udsigt", navn:"Dovrefjell", lat:62.2170, lon:9.5450, dag:2,
+    t:"Højfjeld, moskusokser, Norges tag" },
+  { kat:"udsigt", navn:"Mosjøen · Sjøgata", lat:65.8370, lon:13.1900, dag:3,
+    t:"Hel gade af træhuse fra 1800-tallet · bedste frokoststop på E6" },
+  { kat:"udsigt", navn:"Polarsirkelsenteret", lat:66.5470, lon:15.1170, dag:3,
+    t:"66°33'N · det obligatoriske foto", stjerne:true },
+  { kat:"udsigt", navn:"Saltstraumen", lat:67.2351, lon:14.6235, dag:3,
+    t:"Verdens stærkeste tidevandsstrøm · TJEK TIDEVANDSTABELLEN", stjerne:true },
+  { kat:"udsigt", navn:"Å i Lofoten", lat:67.8800, lon:12.9760, dag:4,
+    t:"Vejens ende · tørfiskemuseum · stednavn på ét bogstav" },
+  { kat:"udsigt", navn:"Hamnøy", lat:67.9450, lon:13.1400, dag:4,
+    t:"Den røde rorbu-klynge fra hvert eneste Lofoten-billede", stjerne:true },
+  { kat:"udsigt", navn:"Nusfjord", lat:68.0330, lon:13.3540, dag:5,
+    t:"Et af Norges bedst bevarede fiskevær" },
+  { kat:"udsigt", navn:"Haukland & Uttakleiv", lat:68.1450, lon:13.6200, dag:5,
+    t:"Hvide sandstrande · ser tropiske ud til du mærker vandet" },
+  { kat:"udsigt", navn:"Henningsvær", lat:68.1560, lon:14.2030, dag:5,
+    t:"Galleribyen på skær · fodboldbanen mellem klipperne" },
+  { kat:"udsigt", navn:"Lofotr Vikingmuseum", lat:68.2400, lon:13.7900, dag:6,
+    t:"83 m langt høvdingehus · det største fundet i Norden", stjerne:true },
+  { kat:"udsigt", navn:"Tungeneset, Senja", lat:69.5700, lon:17.3400, dag:6,
+    t:"Træbro ud over klipperne mod Okshornan-tinderne" },
+  { kat:"udsigt", navn:"Bergsbotn-platformen", lat:69.4600, lon:17.4000, dag:6,
+    t:"44 m udsigtsplatform 160 m over fjorden" },
+  { kat:"udsigt", navn:"Narvik · Narvikfjellet", lat:68.4385, lon:17.4272, dag:6,
+    t:"Svævebane til 656 m · krigsmuseet nede i byen" },
+  { kat:"udsigt", navn:"Polar Park, Bardu", lat:68.7350, lon:18.0500, dag:6,
+    t:"Verdens nordligste dyrepark · ulve, bjørne, los" },
+  { kat:"udsigt", navn:"Fjellheisen, Tromsø", lat:69.6490, lon:18.9900, dag:7,
+    t:"Svævebane til Storsteinen · hele øens panorama", stjerne:true },
+  { kat:"udsigt", navn:"Sommarøy", lat:69.6300, lon:18.0100, dag:7,
+    t:"Hvide strande på 69°N · 58 km omvej fra Tromsø" },
+  { kat:"udsigt", navn:"Lyngsalpene", lat:69.5800, lon:20.2000, dag:7,
+    t:"Takkede tinder direkte op af fjorden" },
+  { kat:"udsigt", navn:"Gildetun, Kvænangsfjellet", lat:69.8300, lon:22.0500, dag:7,
+    t:"Fjeldpas med fjordudsigt · ofte samisk sommerlejr og rensdyr" },
+  { kat:"udsigt", navn:"Alta Museum", lat:69.9450, lon:23.1850, dag:7,
+    t:"UNESCO-helleristninger · 5.000 år gamle", stjerne:true },
+  { kat:"udsigt", navn:"E69 langs Porsangerfjorden", lat:70.6000, lon:25.2000, dag:8,
+    t:"De sidste 130 km · blandt Norges smukkeste vejstykker", stjerne:true },
+  { kat:"udsigt", navn:"Nordkapptunnelen", lat:70.9600, lon:25.8800, dag:8,
+    t:"6,8 km under havet · 212 m under overfladen" },
+  { kat:"udsigt", navn:"Globusmonumentet", lat:71.1709, lon:25.7833, dag:8,
+    t:"71°10'21\"N · vendepunktet · vær der ved solnedgang 20.56", stjerne:true },
+  { kat:"udsigt", navn:"Gjesvær", lat:71.0950, lon:25.3800, dag:8,
+    t:"Fugleøerne · lunder og havsuler · bådtur fra landsbyen" },
+  { kat:"udsigt", navn:"Sápmi, Karasjok", lat:69.4720, lon:25.5120, dag:9,
+    t:"Samisk parlament og kulturpark", stjerne:true },
+  { kat:"udsigt", navn:"Siida, Inari", lat:68.9060, lon:27.0280, dag:9,
+    t:"Samisk museum ved Inarisøen · nyrenoveret", stjerne:true },
+  { kat:"udsigt", navn:"Sodankylä gamle trækirke", lat:67.4180, lon:26.5900, dag:9,
+    t:"Fra 1689 · står stadig ved åen" },
+  { kat:"udsigt", navn:"Arktikum, Rovaniemi", lat:66.5100, lon:25.7250, dag:10,
+    t:"Det bedste museum om Lapland · åbner kl. 9", stjerne:true },
+  { kat:"udsigt", navn:"Rauma gamle by", lat:61.1290, lon:21.5110, dag:10,
+    t:"UNESCO-træby · 600 bevarede huse · bedste finske stop", stjerne:true },
+  { kat:"udsigt", navn:"Gränna & Visingsö", lat:58.0270, lon:14.4650, dag:11,
+    t:"Polkagris ved Vättern · 25 min færge til øen" },
+
+  /* ---- kandidater til at sove i bilen ---- */
+  { kat:"sove", navn:"Hjerkinn, Dovrefjell", lat:62.2170, lon:9.5450, dag:2,
+    t:"1.000 m højt · vidde til alle sider · meget mørkt",
+    d:"Rasteplads på vidden ved Snøhetta-afkørslen. Højt, åbent og køligt selv i august — men til gengæld er der ingen lysforurening overhovedet." },
+  { kat:"sove", navn:"Polarsirkelsenteret", lat:66.5470, lon:15.1170, dag:3,
+    t:"Vågn op på polarcirklen · stor P-plads · toiletter", stjerne:true,
+    d:"Den store parkering ved 66°33'N på E6. Nøgent fjeld, ofte blæsende, og en af de få steder hvor selve adressen er værd at vågne op til. Tjek skiltningen — centeret har egne regler uden for åbningstid." },
+  { kat:"sove", navn:"Saltstraumen", lat:67.2380, lon:14.6280, dag:3,
+    t:"Sov ved strømmen · vær klar til kulminationen ved daggry",
+    d:"Parkeringen ved broen. Fidusen er, at strømmen kulminerer få gange i døgnet — sover du her, kan du ramme den tidlige uden at skulle køre." },
+  { kat:"sove", navn:"Ramberg strand", lat:68.0900, lon:13.2300, dag:4,
+    t:"Lofoten · hvid strand direkte ud til vejen",
+    d:"En af de få Lofoten-strande med parkering lige ved. Åben mod nordvest, så du ser både solnedgang og eventuelt nordlys fra soveposen." },
+  { kat:"sove", navn:"Haukland strand", lat:68.1400, lon:13.6300, dag:5,
+    t:"Betalt P med toiletter · Lofotens pæneste strand", stjerne:true,
+    d:"Lofoten har strammet reglerne kraftigt, og Haukland er nu betalt parkering med toiletter og fast pris for overnatning. Det koster lidt, men det er lovligt og roligt — og du står 30 meter fra vandet." },
+  { kat:"sove", navn:"Ersfjord strand, Senja", lat:69.5200, lon:17.3000, dag:6,
+    t:"Turistveg-rasteplads · arkitekttegnet toilet · strand", stjerne:true,
+    d:"Kræver Senja-omvejen. Nasjonal turistveg har bygget en rasteplads med det mest fotograferede toilet i Norge, og stranden ligger lige nedenfor." },
+  { kat:"sove", navn:"Gildetun, Kvænangsfjellet", lat:69.8300, lon:22.0500, dag:7,
+    t:"Fjeldpas med fjordudsigt · rensdyr på parkeringen",
+    d:"Højt oppe i passet mellem Nordreisa og Kvænangen. Udsigt ned over fjorden, og der går ofte rensdyr rundt mellem bilerne." },
+  { kat:"sove", navn:"Skarsvåg", lat:71.1080, lon:25.8020, dag:8,
+    t:"Verdens nordligste fiskerleje · 14 km fra Nordkapp",
+    d:"Alternativet til at betale for at sove på selve platået. Ligger tæt nok på, at du kan køre ud til solnedgang og tilbage igen — og Kirkeporten starter her." },
+  { kat:"sove", navn:"Nordkapp-platået", lat:71.1709, lon:25.7833, dag:8,
+    t:"Lovligt med billet · vågn op på 71°N", stjerne:true,
+    d:"Billetten til Nordkapphallen gælder 24 timer, og man må overnatte på parkeringen. Det er dyrt, men det er også den eneste måde at have klippen for sig selv ved midnat og igen ved daggry. Tjek de aktuelle regler på nordkapp.no." },
+  { kat:"sove", navn:"Inari, ved søen", lat:68.9060, lon:27.0280, dag:9,
+    t:"Finlands stilleste sø · laavu-shelters i nærheden",
+    d:"Finland har allemannsret på linje med Norge, og der står gratis laavu-shelters med bålplads rundt om Inarisøen. Godt sted at holde en tidlig aften." },
+  { kat:"sove", navn:"Vättern ved Gränna", lat:58.0270, lon:14.4650, dag:11,
+    t:"Sidste nat · søudsigt · to timer fra færgen",
+    d:"Rasteplads ved E4 med udsigt over Vättern. Praktisk sidste overnatning, hvis du tager morgenfærgen fra Göteborg." },
+
+  /* ---- omveje man kan vælge undervejs ---- */
+  { kat:"omvej", navn:"Atlanterhavsveien", lat:63.0130, lon:7.3500, dag:2,
+    t:"+245 km / +4,9 t · vejen der hopper mellem skær", stjerne:true },
+  { kat:"omvej", navn:"Kystriksveien Fv17", lat:65.8000, lon:12.5000, dag:3,
+    t:"~+450 km og 6 færger · regn med to dage i stedet for én", stjerne:true },
+  { kat:"omvej", navn:"Torghatten", lat:65.4000, lon:12.0950, dag:3,
+    t:"Bjerget med hul igennem · 1 times vandring · på Kystriksveien" },
+  { kat:"omvej", navn:"Svartisen / Engabreen", lat:66.6600, lon:13.7300, dag:3,
+    t:"Norges næststørste gletsjer · båd + vandring" },
+  { kat:"omvej", navn:"Senja", lat:69.4830, lon:17.5610, dag:6,
+    t:"+159 km / +3 t · «Norge i miniature» · Segla ligger her", stjerne:true },
+  { kat:"omvej", navn:"Andenes hvalsafari", lat:69.3170, lon:16.1330, dag:6,
+    t:"+178 km / +5,4 t via færgen til Senja · kaskelothvaler" }
 ];
 
 /* Alternativer - målte svar på "kan den gøres kortere?" */
@@ -306,14 +467,75 @@ window.ALTERNATIVER = {
   bund: "Der er ingen stor besparelse at finde. Aalborg-Nordkapp er 2.500 km hver vej, og alt under omkring 4.800 km betyder, at noget væsentligt skæres væk. Vil du under det, er det ikke ruten der skal ændres — så skal Nordkapp eller Lofoten ud af planen."
 };
 
+/* Omveje: hvad koster det at opleve mere? maalt = tal fra rutemotoren. */
+window.OMVEJE = {
+  intro: "Kilometer er ikke problemet, siger du. Så er her det, der reelt er værd at lægge vej til — sorteret efter hvor meget du får for timen. Alle tal er merpris i forhold til den planlagte rute, målt med rutemotoren undtagen hvor andet står.",
+  liste: [
+    { navn:"Senja", km:159, t:3.0, maalt:true, dag:6, karat:5,
+      hvor:"I stedet for E10/E6 direkte fra Lofoten til Tromsø",
+      d:"Hvis du kun tilføjer én ting, så tag denne. Senja kaldes «Norge i miniature» og har Lofotens landskab uden Lofotens busser. Segla-vandringen er blandt de mest dramatiske i landet, Tungeneset og Bergsbotn er arkitekttegnede udsigtsstop, og Ersfjord er et af turens bedste steder at sove i bilen.",
+      pris:"Tre timer. Det er den billigste store oplevelse på hele turen." },
+
+    { navn:"Atlanterhavsveien + Åndalsnes", km:245, t:4.9, maalt:true, dag:2, karat:4,
+      hvor:"Fra Dombås mod Trondheim i stedet for E6 over Dovrefjell",
+      d:"Vejen der hopper fra skær til skær på otte broer, med Storseisundbroen der ser ud til at ende i luften. Undervejs ligger Trollstigen og Trollveggen ved Åndalsnes. To korte færger indgår i tallene.",
+      pris:"Knap fem timer, og du bytter Dovrefjell væk. Tjek om Trollstigen er åben — den har været lukket flere sæsoner på grund af stenskred." },
+
+    { navn:"Kystriksveien Fv17", km:450, t:9, maalt:false, dag:3, karat:5,
+      hvor:"I stedet for E6 fra Trondheim til Bodø",
+      d:"Norges smukkeste vejstrækning, siger mange — 650 km langs kysten med seks færger, Torghatten med hullet igennem, og Svartisen-gletsjeren der går næsten ned til vejen. Færgerne er en del af oplevelsen, ikke en forhindring.",
+      pris:"Regn med to dage i stedet for én. Det er den dyreste omvej på listen og kræver, at du finder en dag et andet sted.",
+      note:"Tallene her er skøn — rutemotoren nægter at køre Kystriksveien, fordi den straffer færger så hårdt, at den kører udenom hver gang. Alt andet på siden er målt." },
+
+    { navn:"Andenes hvalsafari", km:178, t:5.4, maalt:true, dag:6, karat:3,
+      hvor:"Via Vesterålen og færgen Andenes → Gryllefjord til Senja",
+      d:"Kaskelothvaler året rundt ud for Andenes, hvor kontinentalsoklen falder brat. Tager du den vej, får du både Vesterålen og Senja med i én bevægelse.",
+      pris:"Fem en halv time inklusive færge, og selve safarien tager en halv dag.",
+      note:"Færgen Andenes → Gryllefjord sejler kun om sommeren. Tjek at den kører sidst i august, før du planlægger efter den." },
+
+    { navn:"Sommarøy", km:116, t:2.4, maalt:true, dag:7, karat:3,
+      hvor:"Tur/retur fra Tromsø",
+      d:"Hvide sandstrande og turkist vand på 69°N. Ser ud som om nogen har flyttet Caribien 3.000 km for langt mod nord og glemt at skrue op for varmen.",
+      pris:"To en halv time. Nem at klemme ind på formiddagen inden Alta." },
+
+    { navn:"Knivskjellodden", km:0, t:6, maalt:false, dag:8, karat:4,
+      hvor:"Fra E69 lige før Nordkapp",
+      d:"Europas faktisk nordligste punkt, 1.457 meter længere nordpå end Nordkapp. Ingen entré, ingen bus, næsten ingen mennesker — kun 9 km vandring hver vej og en bog i en kasse, du kan skrive dig i.",
+      pris:"Ingen ekstra kørsel, men en hel dag til fods. Til gengæld er det den eneste måde reelt at stå nordligst." }
+  ],
+  bund: "Tager du Senja og Sommarøy, koster det 275 km og 5,4 timer — og det er den bedste handel på listen. Vil du også have Kystriksveien, skal der findes en hel dag, og så er hviledagen på Lofoten det eneste sted den kan komme fra."
+};
+
+/* At sove i bilen: regler og virkelighed i de fire lande. */
+window.SOVE = {
+  intro: "Du har madras i bilen og vil sove bagi cirka halvdelen af nætterne. Det er der god plads til på denne rute — men reglerne er ikke helt dem, folk tror.",
+  regler: [
+    { land:"Norge", d:"Allemannsretten giver dig ret til at overnatte i <b>telt</b> på udyrket mark, mindst 150 m fra beboet hus, i op til to nætter. <b>Den gælder ikke biler.</b> At sove i en parkeret bil er i stedet et spørgsmål om parkeringsreglerne: hvor du må holde, må du som regel også sove. Men du må ikke «campere» — stole, bord og fortelt ud — på rastepladser hvor det er forbudt. Kig efter skilte med «Camping forbudt» eller «Ingen overnatting»." },
+    { land:"Lofoten", d:"Har strammet reglerne kraftigt efter mange års overturisme. Vild parkering er forbudt mange steder nu, og de gode strande har fået <b>betalt parkering med toiletter</b> og en fast pris for at stå natten over. Det er billigt sammenlignet med hotel, og det er den lovlige måde. Regn med at betale ved Haukland, Uttakleiv og Kvalvika." },
+    { land:"Finland", d:"Jokamiehenoikeus svarer til den norske allemannsret, og finnerne er afslappede med det. Oveni står der gratis <b>laavu</b> — åbne shelters med bålplads — i alle nationalparker og langs mange søer. Metsähallitus har kort over dem alle." },
+    { land:"Sverige", d:"Allemansrätten, samme princip. Rastepladser langs E4 og E20 tillader som regel én overnatning. Det er den mindst spændende del af turen at sove på, men også den nemmeste." }
+  ],
+  praktisk: [
+    ["Nætterne bliver kolde","Sidst i august kan det være 3-5 grader på vidden. Tesla'ens Camp Mode holder varmen, men den koster typisk 10-15 % batteri per nat — regn med det, når du planlægger ladning."],
+    ["Myg i Lapland","August er bedre end juli, men Finnmarksvidda og finsk Lapland har stadig myg. Myggenet til vinduerne er den bedste 100-kroners investering på turen."],
+    ["Lys om natten","Fra dag 3 og nordpå er det aldrig helt mørkt før sent i august — men det bliver mørkt nok. Tag en solskærm eller gardiner, ellers vågner du kl. 4."],
+    ["Toiletter og bad","Rastepladserne i Norge har som regel toilet. Til bad: svømmehaller i byerne koster småpenge, og campingpladser sælger ofte adgang til bad uden at man overnatter."],
+    ["Skift mellem seng og bil","Halvdelen i bilen er en god plan. Læg de rigtige senge på de dage, hvor du har kørt langt — dag 3, dag 6 og dag 10 — og sov i bilen på de korte dage, hvor du kommer tidligt frem."]
+  ],
+  advarsel: "Jeg har markeret sovesteder på kortet som <b>kandidater</b>, ikke som garantier. Jeg kan ikke se skiltningen fra Aalborg, og reglerne ændrer sig fra sæson til sæson — særligt på Lofoten. Tjek altid skiltet på stedet."
+};
+
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
-  { gruppe:"Book nu", ikon:"kalender", punkter:[
-    ["Stena Frederikshavn → Göteborg","Morgenafgang mandag 17. Book også returen Göteborg → Frederikshavn fredag 28 (eller torsdag aften) — returbillet er typisk billigere."],
-    ["Bodø → Moskenes","Torghatten Nord. August er højsæson og færgen fyldes af autocampere. Bliver du afvist, koster det en hel dag. Alternativ: E6 til Bognes."],
-    ["Turku → Stockholm","Viking Line eller Tallink Silja, natafgang ca. 20.00 onsdag 26. Bil + kahyt, typisk 100-200 €."],
-    ["Rorbu på Lofoten","To nætter i Reine-området. De gode bookes måneder i forvejen til august."],
-    ["Overnatning ved Nordkapp","Honningsvåg har begrænset kapacitet. Book før du kører nordpå."]
+  { gruppe:"Book hjemmefra", ikon:"kalender", punkter:[
+    ["Stena Frederikshavn → Göteborg","Det eneste der skal bookes nu. Morgenafgang mandag 17. Tag returen Göteborg → Frederikshavn med det samme — returbillet er typisk billigere end to enkelte, og den er den billigste vej hjem."],
+    ["Én seng ved Nordkapp","Honningsvåg har begrænset kapacitet, og det er den ene nat hvor du ikke vil stå uden noget. Resten kan tages undervejs."]
+  ]},
+
+  { gruppe:"Book undervejs", ikon:"kalender", punkter:[
+    ["Bodø → Moskenes","Book fra Norge et par dage før. Bliver den fuld: E6 til Bognes-færgen og ind i Lofoten nordfra i stedet."],
+    ["Turku → Stockholm","Book 2-3 dage før fra vejen. Både dag- og natafgang. Kommer du ikke med, kører du rundt om Bottenvigen for 294 km — derfor er den ufarlig at lade stå åben."],
+    ["Rorbu på Lofoten","Vil du have én rigtig seng på Lofoten, så book den tidligt — de gode går måneder i forvejen. Ellers: sov i bilen ved Haukland eller Ramberg."]
   ]},
 
   { gruppe:"Bompenge og afgifter", ikon:"vej", punkter:[
