@@ -112,3 +112,27 @@ på siden selv:
 
 Sovesteder er **kandidater**, ikke verificerede. Skiltning og regler skifter
 fra sæson til sæson, især på Lofoten.
+
+## Koordinater
+
+Punkternes koordinater blev oprindeligt skrevet i hånden og var flere steder
+kilometervis forkerte — Tungeneset lå ude i havet, Tankavaara 27 km galt.
+De er nu slået op i OpenStreetMap:
+
+```powershell
+python verificer_koordinater.py          # rapport, retter ingenting
+python verificer_koordinater.py --ret    # skriver OSM's koordinater ind
+```
+
+71 af 83 punkter blev flyttet; 19 af dem mere end 5 km. Tre er bevidst
+beholdt, fordi OSM's svar er dårligere — de står i `BEHOLD` i scriptet med
+begrundelse.
+
+**Googles Geocoding API kan ikke bruges til det her.** Nøglen i `index.html`
+er referrer-låst til aogj.com, og serverside-kald afvises med *"API keys with
+referer restrictions cannot be used with this API"*. Nominatim kræver ingen
+nøgle, men højst ét kald i sekundet og en rigtig User-Agent.
+
+`SOEG`-tabellen i scriptet oversætter de danske navne til stedernes navne i
+OSM (`Sodankylä gamle trækirke` → `Sodankylän vanha kirkko`). Tilføjer du et
+punkt med et dansk navn, skal det som regel også have en linje der.
