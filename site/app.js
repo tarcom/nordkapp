@@ -155,20 +155,49 @@
     valgblok(A.retur) + valgblok(A.norge) + jaevnblok(A.jaevn) +
     '<p class="altbund">' + esc(A.bund) + "</p>";
 
+  /* ---------- karakterer og rangering ---------- */
+  function stjerner(n, klasse) {
+    var s = "";
+    for (var i = 1; i <= 5; i++) s += '<span class="' + (i <= n ? "on" : "") + '"></span>';
+    return '<span class="stj ' + (klasse || "") + '" title="' + n + ' af 5">' + s + "</span>";
+  }
+
+  var SK = window.SKALA;
+  var KATNAVN = { vandring: "Vandring", udsigt: "Seværdighed", sove: "Sovested", omvej: "Omvej" };
+
+  /* Alt med karakter, samlet og sorteret: højeste først, så efter dag. */
+  var rangliste = window.POI.map(function (p) {
+    return { navn: p.navn, kat: p.kat, stj: p.stj, dag: p.dag, t: p.t };
+  }).sort(function (a, b) { return b.stj - a.stj || a.dag - b.dag; });
+
+  document.getElementById("skala").innerHTML =
+    '<p class="lead">' + esc(SK.intro) + "</p>" +
+    '<div class="skala">' + SK.trin.map(function (t) {
+      return '<div class="strin">' + stjerner(t[0]) +
+        "<div><b>" + esc(t[1]) + "</b><span>" + esc(t[2]) + "</span></div></div>";
+    }).join("") + "</div>" +
+    '<p class="sforbehold">' + SK.forbehold + "</p>" +
+    '<div class="rang">' + rangliste.map(function (r, i) {
+      var nyGruppe = i === 0 || rangliste[i - 1].stj !== r.stj;
+      return (nyGruppe ? '<h3 class="rhd">' + stjerner(r.stj) + "</h3>" : "") +
+        '<div class="rrow"><span class="rkat ' + r.kat + '">' + KATNAVN[r.kat] + "</span>" +
+        '<span class="rnavn">' + esc(r.navn) + "</span>" +
+        '<span class="rdag">dag ' + r.dag + "</span>" +
+        '<span class="rt">' + esc(r.t) + "</span></div>";
+    }).join("") + "</div>";
+
   /* ---------- omveje ---------- */
   var O = window.OMVEJE;
   document.getElementById("omveje-liste").innerHTML =
     '<p class="lead">' + esc(O.intro) + "</p>" +
     O.liste.map(function (o) {
-      var karat = "";
-      for (var i = 0; i < 5; i++) karat += '<span class="' + (i < o.karat ? "on" : "") + '"></span>';
       var pris = o.km ? "+" + DK(o.km) + " km · +" + komma(o.t) + " t"
                       : "+" + komma(o.t) + " t til fods";
       return '<article class="omvej"><div class="o-hd">' +
         "<h3>" + esc(o.navn) + "</h3>" +
         '<span class="o-pris' + (o.maalt ? "" : " skoen") + '">' + pris +
           (o.maalt ? "" : " <em>skøn</em>") + "</span></div>" +
-        '<p class="o-hvor">' + esc(o.hvor) + '<span class="o-karat">' + karat + "</span></p>" +
+        '<p class="o-hvor">' + esc(o.hvor) + stjerner(o.stj, "lille") + "</p>" +
         "<p>" + esc(o.d) + "</p>" +
         '<p class="o-koster"><b>Hvad det koster</b>' + esc(o.pris) + "</p>" +
         (o.note ? '<p class="o-note">' + esc(o.note) + "</p>" : "") +
@@ -386,7 +415,7 @@
         // fælles canvas-optimering er hover på symbol-ikoner upålidelig.
         optimized: false,
         icon: { path: google.maps.SymbolPath.CIRCLE,
-                scale: stor ? k.r + 2.5 : k.r,
+                scale: stor ? k.r + 2 : k.r - 1,
                 fillColor: farve || k.farve, fillOpacity: 1,
                 strokeColor: NIGHT, strokeWeight: 2 }
       });
@@ -414,10 +443,11 @@
     });
 
     window.POI.forEach(function (p) {
-      var txt = "<b>" + (p.stjerne ? "★ " : "") + esc(p.navn) + "</b>" +
+      var txt = "<b>" + esc(p.navn) + " " + "★".repeat(p.stj) + "</b>" +
         '<span class="tl">' + esc(p.t) + "</span>" +
         '<span class="tl g">Dag ' + p.dag + (p.tid ? " · " + esc(p.tid) : "") + "</span>";
-      tilfoej(p.kat, p.lat, p.lon, txt, p.stjerne ? 8 : 6, p.stjerne,
+      // Højere karakter = større og højere prioriteret prik.
+      tilfoej(p.kat, p.lat, p.lon, txt, 4 + p.stj, p.stj >= 4,
               null, gmLink(p.lat, p.lon));
     });
 
