@@ -466,6 +466,8 @@ window.ALTERNATIVER = {
     rows: [
       { navn:"Finland + natfærge Turku → Stockholm", km:2055, t:28.3, valgt:true,
         note:"Nuværende rute. Og de 11 timer på Østersøen sover du igennem — de tæller reelt ikke." },
+      { navn:"Finnlines Helsinki → Travemünde", km:2013, t:26.7,
+        note:"Kortest af alle på kørsel — men prisen er 29 timer på havet mod 11. Se noten nedenfor." },
       { navn:"Sverige indland ad E45, «Inlandsvägen»", km:2305, t:34.0,
         note:"250 km og knap 6 timer længere. Smuk vej gennem Lapland, men ingen genvej." },
       { navn:"Sverige østkyst ad E4", km:2349, t:31.8,
@@ -473,7 +475,8 @@ window.ALTERNATIVER = {
       { navn:"Samme vej tilbage ad E6 gennem Norge", km:2653, t:42.0,
         note:"598 km og næsten 14 timer længere. Og du ser det samme igen." }
     ],
-    konklusion: "Finland vinder af to grunde: Bottenvigen skæres over i stedet for rundt, og natfærgen laver 11 timers transport om til en nats søvn. Ingen svensk rute har noget tilsvarende."
+    konklusion: "Finland vinder af to grunde: Bottenvigen skæres over i stedet for rundt, og natfærgen laver 11 timers transport om til en nats søvn. Ingen svensk rute har noget tilsvarende.",
+    travemunde: "<b>Om Travemünde-ruten,</b> som det oprindelige udkast regnede med, før Turku-færgen erstattede den: den sparer kun 42 km kørsel — men den koster 29 timer på havet mod Turku-færgens 11. Netto bruger den altså cirka 15 timer <i>mere</i> af din tid, ikke mindre. Til gengæld er det den eneste variant, hvor torsdagen bliver en ren hviledag: du gør intet i et helt døgn, og det er ikke ingenting efter 4.800 km alene bag rattet. To ting taler imod den ud over prisen. Den sejler få gange om ugen og skal bookes, hvilket sætter netop den deadline tilbage i planen, som du fik fjernet ved at lade Turku stå åben. Og bufferen forsvinder: misser du afgangen, er du hjemme lørdag."
   },
 
   norge: {

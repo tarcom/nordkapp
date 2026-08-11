@@ -198,6 +198,7 @@
       '<p class="lead">' + esc(b.intro) + "</p>" +
       '<div class="vtabel">' + rows + "</div>" +
       '<p class="vkonk">' + esc(b.konklusion) + "</p>" +
+      (b.travemunde ? '<p class="o-note">' + b.travemunde + "</p>" : "") +
       (b.afgoerende ? '<p class="vafg">' + b.afgoerende + "</p>" : "") +
       "</article>";
   }
