@@ -483,6 +483,14 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
   border-radius:5px;padding:3px 9px;
 }
 .bookmaerke.nu{color:var(--night);background:var(--sun);border-color:var(--sun);font-weight:600}
+.bookmaerke.booket{color:var(--night);background:var(--aurora);border-color:var(--aurora);font-weight:600}
+.card.booket{border-color:rgba(95,217,166,.35);background:rgba(95,217,166,.05)}
+.ftider{
+  font-family:var(--mono);font-size:11px;color:var(--ice);margin:0 0 8px !important;
+  padding:8px 11px;border-radius:7px;background:rgba(95,217,166,.09);
+}
+.fref{font-family:var(--mono);font-size:10.5px;color:var(--glacial);margin:0 0 10px !important;letter-spacing:.04em}
+.fref b{color:var(--sun);letter-spacing:.12em}
 
 /* ---------- alternativer ---------- */
 .altblok{border:1px solid var(--line);border-radius:12px;padding:26px;background:var(--panel);margin:0 0 18px}

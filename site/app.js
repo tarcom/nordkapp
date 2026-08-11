@@ -166,13 +166,16 @@
                             : t + br + " time" + (t > 1 || br ? "r" : "");
   }
   document.getElementById("ferries").innerHTML = window.FERRIES.map(function (f) {
-    var maerke = { "nu": "Book hjemmefra", "fra Norge": "Book fra Norge",
+    var maerke = { "booket": "✓ Købt", "nu": "Book hjemmefra", "fra Norge": "Book fra Norge",
                    "undervejs": "Book undervejs" }[f.book];
-    return '<article class="card' + (f.book === "nu" ? " nu" : "") + '">' +
-      (maerke ? '<span class="bookmaerke' + (f.book === "nu" ? " nu" : "") + '">' + maerke + "</span>" : "") +
+    var klasse = f.book === "booket" ? " booket" : f.book === "nu" ? " nu" : "";
+    return '<article class="card' + klasse + '">' +
+      (maerke ? '<span class="bookmaerke' + klasse + '">' + maerke + "</span>" : "") +
       "<h3>" + esc(f.navn) + "</h3>" +
       '<p class="meta">Dag ' + f.dag + " · " + esc(f.selskab) + " · " + varighed(f.min) +
         (f.pris ? " · " + esc(f.pris) : "") + "</p>" +
+      (f.tider ? '<p class="ftider">' + esc(f.tider) + "</p>" : "") +
+      (f.ref ? '<p class="fref">Bookingnr. <b>' + esc(f.ref) + "</b></p>" : "") +
       "<p>" + esc(f.note) + "</p>" +
       '<p><a class="navlink" href="' + f.link + '" target="_blank" rel="noopener">Book hos ' +
       esc(f.selskab.split(" /")[0]) + "</a></p></article>";

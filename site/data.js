@@ -14,10 +14,11 @@ window.TRIP = {
 
 /* Færger. min = varighed i minutter. */
 window.FERRIES = [
-  { id:"colorline_ud", navn:"Hirtshals → Larvik", selskab:"Color Line", min:225,
-    dag:1, fra:[57.5880,9.9600], til:[59.0530,10.0290], book:"nu", pris:"~1.000 kr",
-    note:"Den eneste færge der skal bookes hjemmefra. 300 kr billigere end Göteborg, i land 16.45, og den sætter dig af 163 km tættere på Trondheim.",
-    link:"https://www.colorline.dk/hirtshals-larvik" },
+  { id:"colorline_ud", navn:"Hirtshals → Larvik", selskab:"Color Line · SuperSpeed 2", min:240,
+    dag:1, fra:[57.5880,9.9600], til:[59.0530,10.0290], book:"booket", pris:"1.390 NOK",
+    ref:"XEA2995", tider:"Afgang 12.45 · i land 16.45 · check-in senest 11.45",
+    note:"Booket. Økonomi-billet, 1 voksen og lille bil. Mødetid er senest 60 minutter før afgang, så vær i Hirtshals 11.45 — kør hjemmefra ved 10-tiden.",
+    link:"https://www.colorline.no" },
 
   { id:"moskenes", navn:"Bodø → Moskenes", selskab:"Torghatten Nord", min:195,
     dag:4, fra:[67.2804,14.3805], til:[67.9330,12.9950], book:"fra Norge",
@@ -41,8 +42,9 @@ window.DAYS = [
     km:385, t:4.9, faerge:"Color Line 3¾ t", sea:true,
     geom:["d1_aalborg_hirtshals","d1_larvik_lillehammer"],
     nav:{ fra:"Aalborg", til:"Lillehammer, Norge", via:["Hirtshals","Larvik"] },
-    tekst:"Kun 68 km til Hirtshals, og så sætter færgen dig af midt i Norge kl. 16.45. Op ad E18 forbi Oslo og videre ad E6 langs Mjøsa. Fremme ved 21-tiden — første nat i bilen.",
-    sol:"Sol ned 21.03 ved Mjøsa",
+    tekst:"Rolig morgen: 68 km til Hirtshals, check-in 11.45, afgang 12.45. Færgen sætter dig af midt i Norge kl. 16.45, og så er der fire timer op ad E18 forbi Oslo og videre ad E6 langs Mjøsa. Fremme ved 21.30 — første nat i bilen.",
+    advarsel:"Solen går ned 21.03 ved Mjøsa, så den sidste times kørsel bliver i skumring. Det er motorvej hele vejen, men vil du hellere ankomme i lys, så stop ved Hamar i stedet — det koster kun en time ekstra på dag 2.",
+    sol:"Sol ned 21.03 ved Mjøsa · afgang Hirtshals 12.45, i land Larvik 16.45",
     se:[
       ["Vestfold-kysten","E18 nordpå fra Larvik gennem det gamle hvalfangerland. Sandefjord og Tønsberg ligger lige ved vejen"],
       ["Oslo passeres","du har været her før, så kør forbi — tunnelringen er hurtig uden for myldretiden",1],
@@ -250,8 +252,8 @@ window.BESLUTNINGER = [
   { id:"booking", titel:"Book Göteborg og Bodø — men lad Turku stå åben",
     status:"aendret",
     foer:"Book alle fire færger hjemmefra og lås planen",
-    efter:"Book Color Line nu · book Bodø fra Norge · tag Turku som den kommer",
-    tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Hirtshals → Larvik skal bookes nu: det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
+    efter:"Color Line er købt · book Bodø fra Norge · tag Turku som den kommer",
+    tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Hirtshals → Larvik er nu købt (XEA2995, afgang 12.45): det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
     valg:"Sikkerhedsnettet er, at Turku-færgen ikke er nødvendig. Kan du ikke komme med, kører du rundt om Bottenvigen over Tornio og Haparanda — det koster 294 km og en halv køredag, ikke turen. Derfor er det billigt at lade den stå åben. Book den 2-3 dage før fra vejen, når du kan se dit eget tempo." },
 
   { id:"dag10", titel:"Uden booket færge forsvinder dag 10-risikoen",
@@ -398,6 +400,9 @@ window.POI = [
     t:"Polkagris ved Vättern · 25 min færge til øen" },
 
   /* ---- kandidater til at sove i bilen ---- */
+  { kat:"sove", navn:"Lillehammer", lat:61.1015, lon:10.4629, dag:1, stj:3,
+    t:"Første nat · camping med strøm ved Mjøsa · Camp Mode gratis",
+    d:"Lillehammer Camping ligger nede ved Mjøsa tæt på centrum. Fordelen den første nat er ikke udsigten, men strømmen: står du på en plads med CEE-stik, kører Camp Mode uden at røre køreforbruget, og du starter dag 2 med fuldt batteri." },
   { kat:"sove", navn:"Hjerkinn, Dovrefjell", lat:62.2231, lon:9.5500, dag:2, stj:4,
     t:"1.000 m højt · vidde til alle sider · meget mørkt",
     d:"Rasteplads på vidden ved Snøhetta-afkørslen. Højt, åbent og køligt selv i august — men til gengæld er der ingen lysforurening overhovedet." },
@@ -698,7 +703,7 @@ window.PAKKELISTE = {
       { t:"Forsikringspolice", d:"Grønt kort kræves ikke inden for EØS, men policenummeret er rart at have ved et uheld." },
       { t:"Det blå EU-sygesikringskort", kritisk:true, d:"Gælder også i Norge, som er med i EØS. Dækker nødvendig behandling." },
       { t:"Rejseforsikring", d:"Det blå kort dækker ikke hjemtransport. Tjek om dit kreditkort allerede har det." },
-      { t:"Color Line-billetten til Larvik", kritisk:true, d:"Den eneste færge du booker hjemmefra. Gem den offline — ikke kun i en mail du skal have net for at åbne." },
+      { t:"Color Line-billetten (XEA2995)", kritisk:true, d:"Gem den offline — ikke kun i en mail du skal have net for at åbne. Mødetid i Hirtshals senest 11.45 mandag den 17." },
       { t:"AutoPASS-aftale oprettet", kritisk:true, d:"Skal gøres FØR afrejse på autopass.no, ellers kommer bompengene med posten plus gebyr. Giver også rabat på de norske færger." },
       { t:"Betalingskort med lavt valutagebyr", d:"Fire valutaer på tolv dage. Gebyret løber op." },
       { t:"Lidt kontanter i nødsfald", d:"Norge er nærmest kontantløst, så det er kun til hvis kortet dør." }
@@ -794,7 +799,7 @@ window.PAKKELISTE = {
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
   { gruppe:"Book hjemmefra", ikon:"kalender", punkter:[
-    ["Color Line Hirtshals → Larvik","Det eneste der skal bookes nu. Mandag 17., så du er i land 16.45. ~1.000 kr — 300 kr under Stena til Göteborg."],
+    ["Color Line Hirtshals → Larvik","<b>Købt.</b> Bookingnummer XEA2995. Mandag 17. august, afgang 12.45, i land Larvik 16.45. 1.390 NOK for voksen og lille bil. Mødetid senest 11.45."],
     ["Stena Göteborg → Frederikshavn","Hjemturen fredag 28. eller torsdag aften. Dyrere (~1.300 kr), men fra Stockholm er Göteborg langt den korteste vej hjem. Bemærk at du ikke får returrabat, når udturen går med et andet rederi — tjek om det ændrer regnestykket."],
     ["Én seng ved Nordkapp","Honningsvåg har begrænset kapacitet, og det er den ene nat hvor du ikke vil stå uden noget. Resten kan tages undervejs."]
   ]},
