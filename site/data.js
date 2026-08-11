@@ -679,7 +679,7 @@ window.SOVE = {
   ],
   praktisk: [
     ["Camp Mode løser tre ting på én gang","Varme, når det er 3-5 grader på vidden. Fugt, så ruderne ikke dugger til. Og strøm til 12 V-udtaget hele natten, så køletasken kører. Til gengæld koster den et par kWh per nat — mere når det er koldt — så den skal med i ladeplanen."],
-    ["Sov hvor du kan lade, så er Camp Mode gratis","Det er her CEE-adapteren tjener sig ind. Står du på en campingplads med strøm, kan du køre Camp Mode hele natten uden at røre køreforbruget. Det gør de betalte pladser på Lofoten til en bedre handel, end prisen antyder."],
+    ["Sov hvor du kan lade, så er Camp Mode gratis","Det er her CEE-adapteren tjener sig ind. Står du på en campingplads med strøm, kan du køre Camp Mode hele natten uden at røre køreforbruget — og lade bilen op oveni. Det gør de betalte pladser på Lofoten til en bedre handel, end prisen antyder. Spørg altid om lov først; se afsnittet om ladning."],
     ["Myg i Lapland","August er bedre end juli, men Finnmarksvidda og finsk Lapland har stadig myg. Med Camp Mode er ruderne lukkede, så du skal ikke bruge net — myggene kommer ind ad døren. Det generende er udenfor: madlavning, fotostop, og ikke mindst når du står stille i mørket og venter på nordlys."],
     ["Toiletter og bad","Rastepladserne i Norge har som regel toilet. Til bad: svømmehaller i byerne koster småpenge, og campingpladser sælger ofte adgang til bad uden at man overnatter."],
     ["Skift mellem seng og bil","Halvdelen i bilen er en god plan. Læg de rigtige senge på de dage, hvor du har kørt langt — dag 3, dag 6 og dag 10 — og sov i bilen på de korte dage, hvor du kommer tidligt frem."]
@@ -833,6 +833,11 @@ window.PRAKTISK = [
   ]},
 
   { gruppe:"Ladning", ikon:"lyn", punkter:[
+    ["Spørg altid — men de siger næsten altid ja","Det korte svar på om man må sætte mormor-laderen i på en campingplads eller i en hytte: <b>spørg ved indtjekning, og lad være med at gøre det uden at spørge.</b> Nordmændene er fuldstændig vant til elbiler — landet har verdens højeste elbilandel — og de allerfleste siger ja, ofte mod et tillæg på nogle få tikroner. Men det er præcis de gæster, der bare har sat stikket i, der har fået enkelte pladser til at forbyde det helt. Bed om lov, så får du det."],
+    ["Skru ned til 10 A af hensyn til stikket","Campingpladsers stik er 16 A og deler ofte gruppe med naboerne. Trækker du 16 A i ti timer i træk, er det dér HFI'en springer — typisk midt om natten, og så for hele rækken. Sæt ampere ned i bilen; Tesla husker indstillingen per sted. 10 A i ti timer er stadig cirka 23 kWh, og det er rigeligt til at starte dagen fuld."],
+    ["Regnestykket er stadig klart i din favør","Ti timer på 16 A giver op mod 35 kWh. Selv hvis pladsen tager 100-150 kr for strømmen, er det langt under, hvad de samme kWh koster på en lynlader. <b>Men den største gevinst er tid, ikke penge:</b> du starter dagen på 100 % uden at bruge en formiddag på at holde stille. På dag 3 og 10 er det en halv time, du får forærende."],
+    ["Strøm er billigst i nord","Norge er delt i prisområder, og Nordnorge har historisk været markant billigere end syd. De fleste af dine norske nætter ligger nordpå, så det er også dér, en plads er mest tilbøjelig til at sige ja uden tillæg."],
+    ["Motorvarmerstik er ikke selvbetjening","Finland og Sverige har 230 V-stik på næsten alle parkeringspladser til motorvarmere. De ligner en invitation, men strømmen er nogens. Samme regel: spørg, eller lad være."],
     ["Norge er tæt dækket","Superchargere hele vejen op ad E6. Det er ikke her problemet er."],
     ["Alta → Nordkapp → Rovaniemi","Turens tynde stykke. Planlæg Olderfjord, Honningsvåg, Lakselv, Karasjok, Inari, Ivalo og Sodankylä som faste stop, og lad før du behøver."],
     ["Kør med ABRP","Bilens egen planlægger er god i Norge, mindre god i finsk Lapland. A Better Routeplanner som backup, og hav et RFID-kort til de norske Recharge/Kople-ladere."],
