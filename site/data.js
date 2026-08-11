@@ -729,6 +729,7 @@ window.PAKKELISTE = {
     { navn:"At sove i bilen", ting:[
       { t:"Sovepose - en let én er nok", d:"Med Camp Mode er der 18-20 grader i bilen, så en 0-graders pose er overflødig. Tag alligevel noget der kan klare 5-10 grader plus et lag uld: den nat du står med for lidt strøm til at køre Camp Mode, vil du gerne have marginen." },
       { t:"Pude og lagen", d:"Madras uden lagen bliver klam efter to nætter." },
+      { t:"Sovemaske", kritisk:true, d:"Den lette løsning på det lys, der ellers ville kræve mørklægning af hele kabinen. Nordpå bliver det lyst igen omkring kl. 4, og glastaget lukker det hele ind." },
       { t:"Myggene kommer ind ad døren, ikke ad ruden", d:"Med Camp Mode er ruderne lukkede, så du skal ikke bruge net. Til gengæld følger der myg med hver gang du åbner døren om aftenen i Lapland — luk hurtigt, og slå dem ihjel før du lægger dig." },
       { t:"Pandelampe", kritisk:true },
       { t:"Ørepropper", d:"Rastepladser ligger ved vejen, og lastbiler kører hele natten." },
