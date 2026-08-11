@@ -14,6 +14,7 @@
   --mono:"JetBrains Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
+body{overflow-wrap:break-word}
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--night);color:var(--ice);
@@ -69,44 +70,74 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
   position:sticky;top:10px;z-index:30;
   display:flex;align-items:center;gap:8px;
   margin:38px 0 0;padding:6px;
-  background:rgba(8,22,31,.86);
+  background:rgba(8,22,31,.88);
   -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
   border:1px solid var(--line);border-radius:15px;
   box-shadow:0 6px 24px rgba(0,0,0,.35);
 }
 .menu-top{
   flex:none;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
-  color:var(--sun);text-decoration:none;padding:8px 11px;border-radius:10px;
+  color:var(--sun);text-decoration:none;padding:9px 11px;border-radius:10px;
   background:rgba(232,163,61,.1);
 }
 .menu-top:hover{background:rgba(232,163,61,.2)}
-.menu-links{
-  display:flex;gap:2px;overflow-x:auto;scroll-behavior:smooth;
-  scrollbar-width:none;-ms-overflow-style:none;
-}
+
+/* Knappen bruges kun på smalle skærme */
+.menu-knap{display:none}
+
+.menu-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
 .menu-links::-webkit-scrollbar{display:none}
 .menu-links a{
-  flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.03em;
+  flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.02em;
   color:var(--glacial);text-decoration:none;white-space:nowrap;
-  padding:8px 12px;border-radius:10px;transition:color .15s,background .15s;
+  padding:9px 11px;border-radius:10px;transition:color .15s,background .15s;
 }
 .menu-links a:hover{color:var(--ice);background:rgba(189,214,223,.07)}
 .menu-links a.her{color:var(--night);background:var(--aurora);font-weight:600}
 
-/* Overgangen fra hero: giv menuen luft uden at den hopper */
 .menu + section{padding-top:60px}
 
-@media(max-width:680px){
-  .menu{top:8px;margin-top:30px;border-radius:13px}
-  .menu-links a{padding:8px 11px}
-  /* fade i højre kant som antyder at der er mere at scrolle til */
-  .menu::after{
-    content:"";position:absolute;right:6px;top:6px;bottom:6px;width:28px;
-    background:linear-gradient(90deg,transparent,rgba(8,22,31,.92));
-    pointer-events:none;border-radius:0 12px 12px 0;
+/* ---- smal skærm: menuen foldes sammen til én knap ---- */
+@media(max-width:900px){
+  .menu{top:8px;margin-top:28px;border-radius:13px;padding:5px;gap:6px}
+
+  .menu-knap{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    flex:1;min-width:0;cursor:pointer;
+    background:transparent;border:0;border-radius:10px;
+    padding:10px 12px;color:var(--ice);font-family:inherit;text-align:left;
   }
+  .menu-knap:hover{background:rgba(189,214,223,.06)}
+  .menu-nu{
+    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.02em;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .menu-pil{
+    flex:none;width:9px;height:9px;margin-right:2px;
+    border-right:2px solid var(--glacial);border-bottom:2px solid var(--glacial);
+    transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s;
+  }
+  .menu.aaben .menu-pil{transform:rotate(-135deg) translate(-2px,-2px)}
+
+  /* Listen bliver et panel under bjælken */
+  .menu-links{
+    display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);
+    flex-direction:column;gap:1px;overflow:visible;
+    background:rgba(8,22,31,.97);
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    border:1px solid var(--line);border-radius:13px;padding:6px;
+    box-shadow:0 12px 32px rgba(0,0,0,.5);
+    max-height:min(70vh,460px);overflow-y:auto;
+  }
+  .menu.aaben .menu-links{display:flex}
+  .menu-links a{padding:11px 13px;font-size:12px;border-radius:9px}
+  .menu-links a.her::after{content:"←";float:right;opacity:.6}
 }
-@media(prefers-reduced-motion:reduce){.menu-links{scroll-behavior:auto}}
+
+@media(max-width:400px){
+  .menu-top{padding:9px 9px;font-size:10.5px}
+}
+@media(prefers-reduced-motion:reduce){.menu-pil{transition:none}}
 
 /* ---------- kort ---------- */
 .map-shell{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--fjord)}
@@ -549,3 +580,32 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
   #map{height:58vh}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* ---------- mobil-finpudsning ---------- */
+@media(max-width:680px){
+  /* 76px mellem afsnit er meget på en telefon */
+  section{padding:56px 0 0;scroll-margin-top:66px}
+  .hero{padding:44px 0 28px}
+  .sec-head{gap:10px;margin-bottom:20px}
+  .lead{margin:-6px 0 20px}
+
+  /* større trykflader */
+  .menu-links a{padding:13px 14px}
+  .paklinje label{padding:11px 10px}
+  .fbtn{padding:9px 14px}
+  .maplink,.navlink{display:inline-block;padding-top:4px;padding-bottom:4px}
+
+  /* kort og lister får luft tilbage ved at stramme polstringen */
+  .altblok,.omvej,.b-card,.pakgruppe,.pgroup,.nod,.hkort,.card{padding:18px 17px}
+  .altbund,.finland{padding:20px 18px}
+  .dom{padding:16px 18px;font-size:1rem}
+  .stat{padding:16px 14px}
+  .stat dd{font-size:1.4rem}
+}
+
+@media(max-width:400px){
+  .wrap{padding:0 14px}
+  .spine-marks{font-size:10px}
+  .rkat{font-size:8px;padding:3px 5px}
+}

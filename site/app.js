@@ -32,34 +32,61 @@
     T.days + " dage · " + DK(T.km) + " km · " + koeredage +
     " køredage · 4 færger · længste etape 875 km (dag 10)";
 
-  /* ---------- menu: marker det afsnit man læser ---------- */
+  /* ---------- menu ---------- */
   (function () {
+    var menu = document.getElementById("menu");
     var baand = document.getElementById("menu-links");
-    if (!baand) return;
+    var knap = document.getElementById("menu-knap");
+    var nuTxt = document.getElementById("menu-nu");
+    if (!menu || !baand) return;
+
     var led = [].slice.call(baand.querySelectorAll("a"));
     var afsnit = led.map(function (a) {
       return document.getElementById(a.getAttribute("href").slice(1));
     });
-    var aktiv = null;
+    var aktiv = -1;
+
+    function luk() {
+      menu.classList.remove("aaben");
+      if (knap) knap.setAttribute("aria-expanded", "false");
+    }
+
+    if (knap) {
+      knap.addEventListener("click", function () {
+        var aaben = menu.classList.toggle("aaben");
+        knap.setAttribute("aria-expanded", aaben ? "true" : "false");
+      });
+      // Luk når man har valgt, klikker udenfor, eller trykker Esc
+      baand.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") luk();
+      });
+      document.addEventListener("click", function (e) {
+        if (!menu.contains(e.target)) luk();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") luk();
+      });
+    }
 
     function saet(i) {
       if (i === aktiv || i < 0) return;
       aktiv = i;
       led.forEach(function (a, j) { a.classList.toggle("her", j === i); });
-      // Hold det aktive punkt synligt i den vandrette liste på mobil,
+      if (nuTxt) nuTxt.textContent = led[i].textContent;
+      // Hold det aktive punkt synligt i den vandrette liste på brede skærme,
       // uden at flytte selve siden (derfor ikke scrollIntoView).
+      if (menu.classList.contains("aaben")) return;
       var b = baand.getBoundingClientRect(), a = led[i].getBoundingClientRect();
-      if (a.left < b.left + 4) { baand.scrollLeft += a.left - b.left - 12; }
-      else if (a.right > b.right - 4) { baand.scrollLeft += a.right - b.right + 12; }
+      if (baand.scrollWidth > baand.clientWidth + 4) {
+        if (a.left < b.left + 4) { baand.scrollLeft += a.left - b.left - 12; }
+        else if (a.right > b.right - 4) { baand.scrollLeft += a.right - b.right + 12; }
+      }
     }
 
     if (!("IntersectionObserver" in window)) return;
     var synlige = {};
     var obs = new IntersectionObserver(function (poster) {
-      poster.forEach(function (p) {
-        synlige[p.target.id] = p.isIntersecting;
-      });
-      // Første afsnit i dokumentrækkefølge som stadig er i læsefeltet.
+      poster.forEach(function (p) { synlige[p.target.id] = p.isIntersecting; });
       for (var i = 0; i < afsnit.length; i++) {
         if (afsnit[i] && synlige[afsnit[i].id]) { saet(i); return; }
       }
@@ -448,7 +475,12 @@
     mus.y = e.clientY - box.top;
   }, { passive: true });
 
+  // Touch-enheder har ingen hover. Uden det her kunne en synthetic mouseover
+  // efterlade en tooltip hængende midt på kortet efter et tryk.
+  var kanHover = !window.matchMedia || window.matchMedia("(hover: hover)").matches;
+
   function visTip(html) {
+    if (!kanHover) return;
     tip.innerHTML = html;
     tip.classList.add("vis");
     var box = shell.getBoundingClientRect();
