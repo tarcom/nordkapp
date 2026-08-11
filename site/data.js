@@ -31,8 +31,8 @@ window.FERRIES = [
     link:"https://www.vikingline.fi" },
 
   { id:"stena_hjem", navn:"Göteborg → Frederikshavn", selskab:"Stena Line", min:195,
-    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443], book:"nu", pris:"~1.300 kr",
-    note:"Hjemturen. Dyrere end Color Line, men fra Stockholm er Göteborg 173 km og næsten tre timer tættere på end Larvik — det æder prisforskellen med renter.",
+    dag:12, fra:[57.6975,11.9285], til:[57.4370,10.5443], book:"undervejs", pris:"~1.300 kr",
+    note:"Book den 1-2 dage før fra vejen, og vælg en eftermiddags- eller aftenafgang fredag. Den sejler mange gange dagligt, så den kan endda bookes fra telefonen samme formiddag. Kommer du ikke med, kører du over Øresund i stedet — 479 km mere, men omtrent samme billetpris når bro og Storebælt lægges sammen.",
     link:"https://www.stenaline.dk/ruter/frederikshavn-goteborg" }
 ];
 
@@ -252,9 +252,9 @@ window.BESLUTNINGER = [
   { id:"booking", titel:"Book Göteborg og Bodø — men lad Turku stå åben",
     status:"aendret",
     foer:"Book alle fire færger hjemmefra og lås planen",
-    efter:"Color Line er købt · book Bodø fra Norge · tag Turku som den kommer",
+    efter:"Kun Color Line er købt · alt andet bookes 1-3 dage før fra vejen",
     tekst:"Din egen plan er den rigtige, og den er bedre end min oprindelige. Hirtshals → Larvik er nu købt (XEA2995, afgang 12.45): det er en fast startdato, og den er billigst i forkøb. Bodø → Moskenes kan du roligt booke undervejs — et par dages varsel er rigeligt selv i august, og du ved først, når du er i Norge, hvornår du reelt står der. Turku → Stockholm behøver du slet ikke at binde dig til.",
-    valg:"Sikkerhedsnettet er, at Turku-færgen ikke er nødvendig. Kan du ikke komme med, kører du rundt om Bottenvigen over Tornio og Haparanda — det koster 294 km og en halv køredag, ikke turen. Derfor er det billigt at lade den stå åben. Book den 2-3 dage før fra vejen, når du kan se dit eget tempo." },
+    valg:"Princippet holder hele vejen rundt, også hjem: hver eneste færge har et alternativ, der altid er åbent. Turku kan omgås over Tornio for 294 km. Bodø kan omgås ad E6 til Bognes. Og Stena hjem kan omgås over Øresund — det koster 479 km og cirka fem timer mere, men koster omtrent det samme i billetter, når bro og Storebælt lægges sammen. Derfor er der ingen grund til at binde sig til noget som helst efter Larvik." },
 
   { id:"dag10", titel:"Uden booket færge forsvinder dag 10-risikoen",
     status:"beholdt",
@@ -552,7 +552,7 @@ window.FRIPLAN = {
       { sted:"Ombord i Turku", normal:"ons 26. aug", sidste:"tor 27. aug",
         hvorfor:"Natfærgen sejler ca. kl. 20 og lander i Stockholm kl. 7." },
       { sted:"I Göteborg", normal:"tor 27. aften", sidste:"fre 28. middag",
-        hvorfor:"Fra Stockholm er der 477 km. Kører du kl. 7, er du fremme ved 13-tiden." }
+        hvorfor:"Fra Stockholm er der 477 km. Kører du kl. 7, er du fremme ved 13-tiden. Den her frist er den blødeste: kan du ikke nå en Stena-afgang, kører du over Øresund i stedet." }
     ],
     luft: "Der er præcis <b>én dags luft</b> i hele planen, og det er hviledagen på Lofoten. Bruger du den på at komme videre, er du tilbage på skemaet. Bruger du den på at ligge i solen, har du ingen tilbage. Begge dele er fine — du skal bare vide hvilken af dem du gør."
   },
@@ -561,7 +561,8 @@ window.FRIPLAN = {
     ["Book altid mens du har dækning","Det er ikke sengen der er problemet, det er signalet. Der er huller på E69, Finnmarksvidda og strækningen Karasjok-Inari. Find stedet ved 15-tiden mens du holder et sted med net — ikke kl. 21 på vidden."],
     ["Bodø-færgen er den eneste der skal planlægges","Den sejler få gange i døgnet og fyldes i august. Book den 2-3 dage før, når du kan se dit eget tempo. Bliver den fuld, koster det ikke turen: kør E6 til Bognes-færgen, som sejler ofte og ikke skal bookes, og kom ind i Lofoten nordfra i stedet."],
     ["Vælg steder med nøgleboks","Små gæstgiverier i Norge lukker receptionen kl. 18-20. Kommer du kl. 22, står du udenfor. Filtrér efter selvbetjent indtjekning, eller sov i bilen den nat."],
-    ["Book hjemturen sent på dagen","Stena-billetten fredag bør være en eftermiddags- eller aftenafgang, ikke morgen. Det er dét, der gør din ene dags luft brugbar helt til sidst — ellers forsvinder den i en færge du ikke kan nå."],
+    ["Heller ikke hjemturen skal bookes hjemmefra","Stena Göteborg → Frederikshavn sejler mange gange dagligt og kan bookes fra telefonen 1-2 dage før — eller samme formiddag. Vælg en eftermiddags- eller aftenafgang fredag, så din ene dags luft holder helt til sidst."],
+    ["Vejen over Øresund er altid åben","Den fallback binder dig ikke til noget: fra Stockholm kan du køre ned gennem Skåne og hjem over Øresundsbroen eller Helsingør-færgen, som begge går hele tiden. Det koster 479 km og cirka fem timer mere end Stena — men bro plus Storebælt lander omtrent på samme billetpris. Derfor er der ingen risiko ved at lade Stena stå åben."],
     ["Beslut om aftenen, ikke om morgenen","Ad hoc fungerer bedst, når du vælger næste dags mål aftenen før, ud fra vejrudsigten. yr.no er præcis i Norge, og på Lofoten og Senja afgør vejret alligevel, om vandreturene overhovedet giver mening."]
   ],
 
@@ -801,16 +802,17 @@ window.PAKKELISTE = {
 
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
-  { gruppe:"Book hjemmefra", ikon:"kalender", punkter:[
+  { gruppe:"På plads", ikon:"kalender", punkter:[
     ["Color Line Hirtshals → Larvik","<b>Købt.</b> Bookingnummer XEA2995. Mandag 17. august, afgang 12.45, i land Larvik 16.45. 1.390 NOK for voksen og lille bil. Mødetid senest 11.45."],
-    ["Stena Göteborg → Frederikshavn","Hjemturen fredag 28. eller torsdag aften. Dyrere (~1.300 kr), men fra Stockholm er Göteborg langt den korteste vej hjem. Bemærk at du ikke får returrabat, når udturen går med et andet rederi — tjek om det ændrer regnestykket."],
-    ["Én seng ved Nordkapp","Honningsvåg har begrænset kapacitet, og det er den ene nat hvor du ikke vil stå uden noget. Resten kan tages undervejs."]
+    ["AutoPASS-aftale","Skal oprettes før afrejse på autopass.no. Det er det eneste andet, der ikke kan ordnes undervejs."]
   ]},
 
-  { gruppe:"Book undervejs", ikon:"kalender", punkter:[
+  { gruppe:"Book undervejs — intet af det binder dig", ikon:"kalender", punkter:[
     ["Bodø → Moskenes","Book fra Norge et par dage før. Bliver den fuld: E6 til Bognes-færgen og ind i Lofoten nordfra i stedet."],
-    ["Turku → Stockholm","Book 2-3 dage før fra vejen. Både dag- og natafgang. Kommer du ikke med, kører du rundt om Bottenvigen for 294 km — derfor er den ufarlig at lade stå åben."],
-    ["Rorbu på Lofoten","Vil du have én rigtig seng på Lofoten, så book den tidligt — de gode går måneder i forvejen. Ellers: sov i bilen ved Haukland eller Ramberg."]
+    ["Turku → Stockholm","Book 2-3 dage før fra vejen. Både dag- og natafgang. Kommer du ikke med, kører du rundt om Bottenvigen for 294 km."],
+    ["Stena Göteborg → Frederikshavn","Book 1-2 dage før, gerne en eftermiddags- eller aftenafgang fredag. Den sejler mange gange dagligt, så den kan bookes fra telefonen samme formiddag."],
+    ["Seng ved Nordkapp","Honningsvåg har begrænset kapacitet, så tjek et par dage før. Kan du ikke finde noget, sover du på platået — billetten gælder 24 timer."],
+    ["Rorbu på Lofoten","Kun hvis du vil have en rigtig seng der. De gode går måneder i forvejen; ellers sover du i bilen ved Haukland eller Ramberg."]
   ]},
 
   { gruppe:"Bompenge og afgifter", ikon:"vej", punkter:[
