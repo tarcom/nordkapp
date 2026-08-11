@@ -708,7 +708,8 @@ window.PAKKELISTE = {
       { t:"Det blå EU-sygesikringskort", kritisk:true, d:"Gælder også i Norge, som er med i EØS. Dækker nødvendig behandling." },
       { t:"Rejseforsikring", d:"Det blå kort dækker ikke hjemtransport. Tjek om dit kreditkort allerede har det." },
       { t:"Color Line-billetten (XEA2995)", kritisk:true, d:"Gem den offline — ikke kun i en mail du skal have net for at åbne. Mødetid i Hirtshals senest 11.45 mandag den 17." },
-      { t:"AutoPASS-aftale oprettet", kritisk:true, d:"Skal gøres FØR afrejse på autopass.no, ellers kommer bompengene med posten plus gebyr. Giver også rabat på de norske færger." },
+      { t:"BroBizz tjekket for Norge", kritisk:true, d:"Du behøver formentlig ikke oprette AutoPASS: BroBizz og AutoPASS er i samme samarbejde, EasyGo, så din eksisterende brik virker i de norske bomringe. Log ind på BroBizz' selvbetjening og bekræft, at Norge er slået til på aftalen — det er ikke altid standard." },
+      { t:"Virker brikken overhovedet?", kritisk:true, d:"Den lille dims er en DSRC-transponder med batteri, der holder nogle år. Har den ligget længe, kan den være død. Kør en tur over Storebælt eller Øresund inden afrejse og tjek at den kvitterer — og få den skiftet hvis ikke." },
       { t:"Betalingskort med lavt valutagebyr", d:"Fire valutaer på tolv dage. Gebyret løber op." },
       { t:"Lidt kontanter i nødsfald", d:"Norge er nærmest kontantløst, så det er kun til hvis kortet dør." }
     ]},
@@ -797,14 +798,14 @@ window.PAKKELISTE = {
     ]}
   ],
 
-  bund: "Det du helst ikke vil opdage klokken 23 på en rasteplads ved Saltstraumen: sovepose, pandelampe og hue. Og det du helst ikke vil opdage på grænsen: at AutoPASS ikke er oprettet."
+  bund: "Det du helst ikke vil opdage klokken 23 på en rasteplads ved Saltstraumen: sovepose, pandelampe og hue. Og det du helst ikke vil opdage ved Svinesund: at brikken ikke er slået til for Norge."
 };
 
 /* Praktisk: hvad der skal bookes, hvad det koster, hvad man skal huske. */
 window.PRAKTISK = [
   { gruppe:"På plads", ikon:"kalender", punkter:[
     ["Color Line Hirtshals → Larvik","<b>Købt.</b> Bookingnummer XEA2995. Mandag 17. august, afgang 12.45, i land Larvik 16.45. 1.390 NOK for voksen og lille bil. Mødetid senest 11.45."],
-    ["AutoPASS-aftale","Skal oprettes før afrejse på autopass.no. Det er det eneste andet, der ikke kan ordnes undervejs."]
+    ["Bompengebrik til Norge","Tjek din BroBizz før afrejse — se afsnittet om bompenge. Det er det eneste andet, der ikke kan ordnes undervejs."]
   ]},
 
   { gruppe:"Book undervejs — intet af det binder dig", ikon:"kalender", punkter:[
@@ -816,9 +817,12 @@ window.PRAKTISK = [
   ]},
 
   { gruppe:"Bompenge og afgifter", ikon:"vej", punkter:[
-    ["AutoPASS i Norge","Opret aftale på autopass.no <b>før</b> afrejse, eller brug din BroBizz. Uden brik bliver nummerpladen fotograferet og regningen sendt med posten plus gebyr."],
-    ["AutoPASS for ferje","Samme brik giver rabat på de norske bilfærger — også Bodø → Moskenes. Den betaler sig hjem på én overfart."],
-    ["Trængselsskat i Sverige","Både Stockholm og Göteborg opkræver af udenlandske biler. Faktureres via Epass24 med posten. Kører du gennem Göteborg midt på dagen, er det småpenge — men den kommer."],
+    ["Din BroBizz dækker sandsynligvis Norge","BroBizz og norske AutoPASS er med i det samme samarbejde, <b>EasyGo</b>, som dækker Danmark, Norge og Sverige. Det betyder, at din eksisterende brik virker i de norske bomringe, og at du formentlig <b>ikke</b> behøver oprette noget hos autopass.no. Tre ting skal dog bekræftes, før du regner med det."],
+    ["1. Er Norge slået til på din aftale?","Log ind på BroBizz' selvbetjening og se efter, om EasyGo eller Norge er aktivt. Nogle aftaler er sat op til Danmark alene, og så virker brikken ikke nord for Svinesund. Det tager to minutter at tjekke og kan ikke ordnes fra vejen."],
+    ["2. Virker selve brikken?","Den lille dims er en DSRC-transponder med sit eget batteri, der holder nogle år. Har den ligget ubrugt længe, kan den være løbet tør uden at du opdager det. Kør over Storebælt eller Øresund inden afrejse og se, at den kvitterer."],
+    ["3. Færgerne er et særskilt spørgsmål","De norske bilfærger kører på ordningen «AutoPASS for ferje», som ikke nødvendigvis følger med bomringene automatisk. Tjek hos BroBizz om norske færger er dækket af netop din aftale — rabatten er værd at have, og Bodø → Moskenes er en dyr overfart at betale fuld pris for."],
+    ["Sker der noget hvis brikken svigter?","Ikke andet end at det bliver dyrere. Norske bomstationer læser nummerpladen uanset hvad, så du kommer altid igennem — regningen bliver bare sendt hjem uden brikrabat og med et administrationsgebyr oveni."],
+    ["Trængselsskat i Sverige er ikke dækket","Både Stockholm og Göteborg opkræver af udenlandske biler, og det ligger <b>uden for</b> BroBizz og EasyGo — det opkræves på nummerplade og faktureres via Epass24 med posten. Du kan ikke gøre noget ved det, og det er småpenge; det skal bare ikke komme bag på dig."],
     ["Oslo bomring","Passeres på vej nordpå dag 1. Dækket af AutoPASS-aftalen."],
     ["Finland","Ingen vejafgifter overhovedet. Eneste land på turen uden."]
   ]},
