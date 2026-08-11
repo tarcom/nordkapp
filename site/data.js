@@ -675,8 +675,12 @@ window.SOVE = {
   praktisk: [
     ["Camp Mode løser tre ting på én gang","Varme, når det er 3-5 grader på vidden. Fugt, så ruderne ikke dugger til. Og strøm til 12 V-udtaget hele natten, så køletasken kører. Til gengæld koster den et par kWh per nat — mere når det er koldt — så den skal med i ladeplanen."],
     ["Sov hvor du kan lade, så er Camp Mode gratis","Det er her CEE-adapteren tjener sig ind. Står du på en campingplads med strøm, kan du køre Camp Mode hele natten uden at røre køreforbruget. Det gør de betalte pladser på Lofoten til en bedre handel, end prisen antyder."],
+    ["Glastaget er hele problemet","Model 3 har panoramaglas over hele kabinen, og det er langt den største lysflade — større end alle ruderne tilsammen. Mørklægger du sideruderne men ikke taget, har du intet opnået. Køb derfor et sæt der er lavet til Model 3 og dækker taget i to dele, for- og bagglas."],
+    ["Pas på fælden: solskærm er ikke mørklægning","Rigtig mange af de sæt der sælges som «sunshade» er net eller mesh. De holder varmen ude og er fine om sommeren i Spanien — men de lukker lys igennem, og det er lys du skal af med. Læs efter ordene <b>blackout</b> eller <b>opaque</b>, ikke «UV-protection»."],
+    ["Kanterne er det der vækker dig","Det er ikke fladen, det er sprækkerne. Vælg noget der holder sig selv på plads hele vejen rundt — magnetkant eller spændingsmonteret ramme — frem for løse plader der glider. Tjek anmeldelser for netop lysgennemgang i kanten."],
+    ["Gør-det-selv virker og er billigst","Reflectix eller tilsvarende boblefolie med alufolie, skåret efter en papskabelon af hver rude. Koster nogle få hundrede kroner mod op mod 1.500 for et færdigt sæt, er helt uigennemsigtigt, og <b>isolerer oveni</b> — hvilket sænker Camp Modes forbrug. Ulempen er, at det fylder om dagen og ser hjemmelavet ud. Frunken er det rigtige sted at have det liggende."],
+    ["Mørklægning er også privatliv","På en rasteplads er det lige så meget værd at folk ikke kan se ind, som at du ikke kan se ud. Det taler for uigennemsigtigt frem for mørkt-tonet."],
     ["Myg i Lapland","August er bedre end juli, men Finnmarksvidda og finsk Lapland har stadig myg. Med Camp Mode er ruderne lukkede, så du skal ikke bruge net — myggene kommer ind ad døren. Det generende er udenfor: madlavning, fotostop, og ikke mindst når du står stille i mørket og venter på nordlys."],
-    ["Lys om natten","Fra dag 3 og nordpå er det aldrig helt mørkt før sent i august — men det bliver mørkt nok. Tag en solskærm eller gardiner, ellers vågner du kl. 4."],
     ["Toiletter og bad","Rastepladserne i Norge har som regel toilet. Til bad: svømmehaller i byerne koster småpenge, og campingpladser sælger ofte adgang til bad uden at man overnatter."],
     ["Skift mellem seng og bil","Halvdelen i bilen er en god plan. Læg de rigtige senge på de dage, hvor du har kørt langt — dag 3, dag 6 og dag 10 — og sov i bilen på de korte dage, hvor du kommer tidligt frem."]
   ],
@@ -721,7 +725,8 @@ window.PAKKELISTE = {
     { navn:"At sove i bilen", ting:[
       { t:"Sovepose - en let én er nok", d:"Med Camp Mode er der 18-20 grader i bilen, så en 0-graders pose er overflødig. Tag alligevel noget der kan klare 5-10 grader plus et lag uld: den nat du står med for lidt strøm til at køre Camp Mode, vil du gerne have marginen." },
       { t:"Pude og lagen", d:"Madras uden lagen bliver klam efter to nætter." },
-      { t:"Solskærme eller gardiner til alle ruder", kritisk:true, d:"Det bliver lyst igen omkring kl. 4 nordpå. Uden mørklægning sover du ikke. De skal også give privatliv på en rasteplads." },
+      { t:"Mørklægning — inklusive taget", kritisk:true, d:"Det bliver lyst igen omkring kl. 4 nordpå, og Model 3'ens panoramaglas er den største lysflade i bilen. Et sæt der kun dækker ruderne løser ingenting. Køb et Model 3-specifikt sæt, og se efter «blackout», ikke «sunshade» — mesh lukker lys igennem. Alternativt boblefolie skåret efter papskabelon, som isolerer oveni." },
+      { t:"Papskabelon til hver rude", d:"Kun hvis du selv laver mørklægningen. Lav den hjemme i god ro og orden — ikke på en parkeringsplads i Bodø." },
       { t:"Myggene kommer ind ad døren, ikke ad ruden", d:"Med Camp Mode er ruderne lukkede, så du skal ikke bruge net. Til gengæld følger der myg med hver gang du åbner døren om aftenen i Lapland — luk hurtigt, og slå dem ihjel før du lægger dig." },
       { t:"Pandelampe", kritisk:true },
       { t:"Ørepropper", d:"Rastepladser ligger ved vejen, og lastbiler kører hele natten." },
