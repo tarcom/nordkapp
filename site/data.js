@@ -466,8 +466,8 @@ window.ALTERNATIVER = {
     rows: [
       { navn:"Finland + natfærge Turku → Stockholm", km:2055, t:28.3, valgt:true,
         note:"Nuværende rute. Og de 11 timer på Østersøen sover du igennem — de tæller reelt ikke." },
-      { navn:"Finnlines Helsinki → Travemünde", km:2013, t:26.7,
-        note:"Kortest af alle på kørsel — men prisen er 29 timer på havet mod 11. Se noten nedenfor." },
+      { navn:"Finnlines Helsinki → Travemünde", km:2013, t:26.7, fravalgt:true,
+        note:"Undersøgt og fravalgt: 455 € mod Turku-færgens ~70 €, og afgangen onsdag kl. 15 kan ikke nås fra Nordkapp." },
       { navn:"Sverige indland ad E45, «Inlandsvägen»", km:2305, t:34.0,
         note:"250 km og knap 6 timer længere. Smuk vej gennem Lapland, men ingen genvej." },
       { navn:"Sverige østkyst ad E4", km:2349, t:31.8,
@@ -476,7 +476,7 @@ window.ALTERNATIVER = {
         note:"598 km og næsten 14 timer længere. Og du ser det samme igen." }
     ],
     konklusion: "Finland vinder af to grunde: Bottenvigen skæres over i stedet for rundt, og natfærgen laver 11 timers transport om til en nats søvn. Ingen svensk rute har noget tilsvarende.",
-    travemunde: "<b>Om Travemünde-ruten,</b> som det oprindelige udkast regnede med, før Turku-færgen erstattede den: den sparer kun 42 km kørsel — men den koster 29 timer på havet mod Turku-færgens 11. Netto bruger den altså cirka 15 timer <i>mere</i> af din tid, ikke mindre. Til gengæld er det den eneste variant, hvor torsdagen bliver en ren hviledag: du gør intet i et helt døgn, og det er ikke ingenting efter 4.800 km alene bag rattet. To ting taler imod den ud over prisen. Den sejler få gange om ugen og skal bookes, hvilket sætter netop den deadline tilbage i planen, som du fik fjernet ved at lade Turku stå åben. Og bufferen forsvinder: misser du afgangen, er du hjemme lørdag."
+    travemunde: "<b>Travemünde-ruten er undersøgt og fravalgt.</b> Det var den, det oprindelige udkast regnede med, før Turku-færgen erstattede den, og den er faktisk den korteste af alle fem på kørsel — men kun med 42 km. Prisen afgjorde det ikke alene: <b>455 €</b> for voksen, bil og indvendig kahyt mod Turku-færgens 800 SEK, altså cirka 385 € dyrere. Udkastets gæt på ~450 € holdt næsten. <br><br>Det, der gjorde det endeligt, var afgangstidspunktet. <b>Finnlady sejler onsdag kl. 15.00, og den afgang kan ikke nås.</b> Fra Nordkapp er der 1.540 km til Helsinki. Står du på klippen mandag aften, når du selv med en meget lang tirsdag kun cirka 900 km — og så skal de sidste 640 km køres onsdag med afgang kl. 05.00 for at være ved check-in kl. 13. Turku-færgen sejler kl. 20 og kan nås med afgang fra Rovaniemi kl. 06. Helsinki ligger endda 42 km <i>tættere</i> på Rovaniemi end Turku; det er ikke afstanden der fælder ruten, det er de fem timer. Oveni er billetten en «Special Price», som normalt hverken kan ombyttes eller refunderes — det modsatte af den frihed, du har bygget planen op om."
   },
 
   norge: {

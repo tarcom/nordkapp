@@ -503,6 +503,9 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
   gap:8px 14px;align-items:center;padding:12px 14px;border-radius:9px;
 }
 .vrow.valgt{background:rgba(95,217,166,.08);box-shadow:inset 0 0 0 1px rgba(95,217,166,.22)}
+.vrow.fravalgt .vnavn,.vrow.fravalgt .vtal{opacity:.55}
+.vrow.fravalgt .vbar span{background:var(--steel);opacity:.5}
+.vmaerke.fra{color:var(--glacial);background:transparent;border:1px solid var(--line);font-weight:400}
 .vnavn{font-size:.93rem;color:var(--ice)}
 .vmaerke{
   font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;

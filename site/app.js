@@ -187,9 +187,10 @@
   function valgblok(b) {
     var maxKm = Math.max.apply(null, b.rows.map(function (r) { return r.km; }));
     var rows = b.rows.map(function (r) {
-      return '<div class="vrow' + (r.valgt ? " valgt" : "") + '">' +
+      return '<div class="vrow' + (r.valgt ? " valgt" : r.fravalgt ? " fravalgt" : "") + '">' +
         '<div class="vnavn">' + esc(r.navn) +
-          (r.valgt ? '<span class="vmaerke">valgt</span>' : "") + "</div>" +
+          (r.valgt ? '<span class="vmaerke">valgt</span>' : "") +
+          (r.fravalgt ? '<span class="vmaerke fra">fravalgt</span>' : "") + "</div>" +
         '<div class="vbar"><span style="width:' + (r.km / maxKm * 100).toFixed(1) + '%"></span></div>' +
         '<div class="vtal">' + DK(r.km) + " km<br><em>" + komma(r.t) + " t</em></div>" +
         '<p class="vnote">' + esc(r.note) + "</p></div>";
