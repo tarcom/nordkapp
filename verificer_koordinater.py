@@ -70,6 +70,7 @@ SOEG = {
     "Gränna & Visingsö": "Gränna, Jönköping, Sverige",
     "Vättern ved Gränna": "Gränna, Jönköping, Sverige",
     "Hjerkinn, Dovrefjell": "Hjerkinn, Dovre, Norge",
+    "Hamar · Koigen": "Koigen, Hamar, Norge",
     "Ramberg strand": "Rambergstranda, Flakstad, Norge",
     "Haukland strand": "Hauklandstranda, Vestvågøy, Norge",
     "Ersfjord strand, Senja": "Ersfjordstranda, Senja, Norge",

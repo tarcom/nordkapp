@@ -43,7 +43,7 @@ window.DAYS = [
     geom:["d1_aalborg_hirtshals","d1_larvik_lillehammer"],
     nav:{ fra:"Aalborg", til:"Lillehammer, Norge", via:["Hirtshals","Larvik"] },
     tekst:"Rolig morgen: 68 km til Hirtshals, check-in 11.45, afgang 12.45. Færgen sætter dig af midt i Norge kl. 16.45, og så er der fire timer op ad E18 forbi Oslo og videre ad E6 langs Mjøsa. Fremme ved 21.30 — første nat i bilen.",
-    advarsel:"Solen går ned 21.03 ved Mjøsa, så den sidste times kørsel bliver i skumring. Det er motorvej hele vejen, men vil du hellere ankomme i lys, så stop ved Hamar i stedet — det koster kun en time ekstra på dag 2.",
+    advarsel:"Solen går ned 21.03 ved Mjøsa, så den sidste times kørsel bliver i skumring. Det er motorvej hele vejen, men vil du hellere ankomme i lys, så stop ved Koigen i Hamar i stedet — det ligger på kortet som sovested, og det koster kun en time ekstra på dag 2.",
     sol:"Sol ned 21.03 ved Mjøsa · afgang Hirtshals 12.45, i land Larvik 16.45",
     se:[
       ["Vestfold-kysten","E18 nordpå fra Larvik gennem det gamle hvalfangerland. Sandefjord og Tønsberg ligger lige ved vejen"],
@@ -400,6 +400,9 @@ window.POI = [
     t:"Polkagris ved Vättern · 25 min færge til øen" },
 
   /* ---- kandidater til at sove i bilen ---- */
+  { kat:"sove", navn:"Hamar · Koigen", lat:60.7975, lon:11.0620, dag:1, stj:3,
+    t:"Stop en time før Lillehammer · fremme i lys · Mjøsa mod vest",
+    d:"Strandpromenaden ved Hamar centrum: badestrand, P-plads og offentligt toilet, og udsigten går vestover ud over Mjøsa. Pointen er tidspunktet, ikke stedet. Planen har dig i Lillehammer 21.30, og solen går ned 21.03 — stopper du her, står du ved vandet cirka 20.30 og ser rent faktisk noget den første aften. Det koster godt en time oveni dag 2, som med 353 km er turens letteste køredag. Til gengæld er der ingen strøm, så Camp Mode æder af rækkevidden i stedet for af stikkontakten. Det er en bypark — tjek skiltningen, og forvent naboer." },
   { kat:"sove", navn:"Lillehammer", lat:61.1015, lon:10.4629, dag:1, stj:3,
     t:"Første nat · camping med strøm ved Mjøsa · Camp Mode gratis",
     d:"Lillehammer Camping ligger nede ved Mjøsa tæt på centrum. Fordelen den første nat er ikke udsigten, men strømmen: står du på en plads med CEE-stik, kører Camp Mode uden at røre køreforbruget, og du starter dag 2 med fuldt batteri." },
@@ -594,7 +597,7 @@ window.SKALA = {
   trin: [
     [5, "Det er derfor du kørte herop", "Ville være tåbeligt at springe over. 13 steder."],
     [4, "Kør en omvej for det", "Værd at lægge kilometer eller en halv dag til. 22 steder."],
-    [3, "Planlæg efter det", "Læg ruten så du kommer forbi, men brænd ikke tid på det. 22 steder."],
+    [3, "Planlæg efter det", "Læg ruten så du kommer forbi, men brænd ikke tid på det. 24 steder."],
     [2, "Stop hvis du har tid", "Fint nok, men vælg det fra når dagen er lang. 13 steder."],
     [1, "Kun hvis du alligevel står der", "Interessant at vide, ikke at opleve. 1 sted."]
   ],
