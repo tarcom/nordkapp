@@ -8,6 +8,15 @@ Rediger i `site/` og kør `deploy.py`.
 
 ## Deploy
 
+**Push til `main` deployer automatisk** (`.github/workflows/deploy.yml`) — det er
+den normale vej, og den virker også når siden rettes fra mobilen. Workflowet
+kører samme `deploy.py`, blot med `FTP_HOST`/`FTP_USER`/`FTP_PASS` som
+repository-secrets i stedet for filen nedenfor. Den udløses kun ved ændringer i
+`site/`, `deploy.py` eller workflowet selv, og kan også startes i hånden under
+Actions → *Deploy til aogj.com/nordkapp* → Run workflow.
+
+Manuelt fra rtx4070 (fx for at teste før commit):
+
 ```powershell
 python deploy.py          # uploader site/ -> aogj.com/nordkapp via FTP
 ```
