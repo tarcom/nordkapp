@@ -5,6 +5,10 @@
 
 index.html får stemplet ?v=<hash> på css/js, fordi one.com ligger bag en
 Varnish der ellers kan servere forældet CSS/JS i timevis.
+
+Oplysningerne læses fra `.ftp-credentials` (ikke i git). Findes filen ikke,
+bruges miljøvariablerne FTP_HOST/FTP_USER/FTP_PASS i stedet — det er sådan
+GitHub Actions deployer ved push til main.
 """
 import ftplib
 import hashlib
@@ -17,11 +21,22 @@ LOCAL = os.path.join(HERE, "site")
 REMOTE = "nordkapp"                  # relativt til FTP-login (= web-roden)
 BUST = ("style.css", "app.js", "data.js", "geom.js")
 
+CREDS_FILE = os.path.join(HERE, ".ftp-credentials")
+
 creds = {}
-for line in open(os.path.join(HERE, ".ftp-credentials")):
-    line = line.strip()
-    if "=" in line and not line.startswith("#"):
-        k, v = line.split("=", 1)
+if os.path.exists(CREDS_FILE):
+    for line in open(CREDS_FILE):
+        line = line.strip()
+        if "=" in line and not line.startswith("#"):
+            k, v = line.split("=", 1)
+            creds[k] = v
+else:
+    for k in ("FTP_HOST", "FTP_USER", "FTP_PASS"):
+        v = os.environ.get(k)
+        if not v:
+            raise SystemExit(
+                f"Mangler {k}: hverken .ftp-credentials eller miljøvariabler er sat."
+            )
         creds[k] = v
 
 
