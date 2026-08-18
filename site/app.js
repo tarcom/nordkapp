@@ -158,6 +158,128 @@
       "</div></article>";
   }).join("");
 
+  /* ---------- Trondheim ---------- */
+  (function () {
+    var TH = window.TRONDHEIM, vaert = document.getElementById("trondheim-indhold");
+    if (!TH || !vaert) return;
+
+    var K = Math.cos(63.43 * Math.PI / 180);   // en længdegrad er kortere heroppe
+
+    function punktUrl(lat, lon) {
+      return "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon;
+    }
+
+    /* Hele sløjfen som gårute i Google Maps: Torvet er både start og mål, og
+       resten af stoppene bliver waypoints. URL-API'et tager op til 9. */
+    function sloejfeUrl() {
+      var s = TH.tur.stop;
+      return "https://www.google.com/maps/dir/?api=1&travelmode=walking" +
+        "&origin=" + s[0].lat + "," + s[0].lon +
+        "&destination=" + s[0].lat + "," + s[0].lon +
+        "&waypoints=" + s.slice(1).map(function (p) {
+          return p.lat + "," + p.lon;
+        }).join("%7C");
+    }
+
+    /* Minikortet er ren SVG tegnet af den målte gangrute. Ingen fliser og
+       ingen API-nøgle, så det virker også lokalt, hvor Google-kortet ikke gør. */
+    function minikort() {
+      var alle = TH.tur.linje.slice();
+      TH.tur.stop.forEach(function (p) { alle.push([p.lat, p.lon]); });
+      TH.mad.steder.forEach(function (m) { alle.push([m.lat, m.lon]); });
+
+      var minLat = 90, maxLat = -90, minLon = 180, maxLon = -180;
+      alle.forEach(function (p) {
+        if (p[0] < minLat) minLat = p[0];
+        if (p[0] > maxLat) maxLat = p[0];
+        if (p[1] < minLon) minLon = p[1];
+        if (p[1] > maxLon) maxLon = p[1];
+      });
+
+      var S = 100000, PAD = 70;
+      var x = function (lon) { return ((lon - minLon) * K * S + PAD).toFixed(1); };
+      var y = function (lat) { return ((maxLat - lat) * S + PAD).toFixed(1); };
+      var w = (maxLon - minLon) * K * S + PAD * 2,
+          h = (maxLat - minLat) * S + PAD * 2;
+
+      var d = TH.tur.linje.map(function (p, i) {
+        return (i ? "L" : "M") + x(p[1]) + " " + y(p[0]);
+      }).join(" ");
+
+      var stop = TH.tur.stop.map(function (p) {
+        return '<g class="mk-stop"><circle cx="' + x(p.lon) + '" cy="' + y(p.lat) + '" r="20"></circle>' +
+          '<text x="' + x(p.lon) + '" y="' + y(p.lat) + '" dy="9">' + p.n + "</text></g>";
+      }).join("");
+
+      var mad = TH.mad.steder.map(function (m) {
+        // Navnet skal ind på kortet, ikke ud over kanten: kun det punkt der
+        // ligger yderst mod øst får sin tekst til venstre.
+        var mx = +x(m.lon), my = +y(m.lat), hoejre = mx < w * 0.75;
+        return '<g class="mk-mad' + (m.valg ? " valg" : "") + '">' +
+          '<rect x="' + (mx - 13) + '" y="' + (my - 13) + '" width="26" height="26" rx="5"></rect>' +
+          '<text x="' + (mx + (hoejre ? 22 : -22)) + '" y="' + my + '" dy="9" text-anchor="' +
+          (hoejre ? "start" : "end") + '">' + esc(m.kort || m.navn) + "</text></g>";
+      }).join("");
+
+      return '<figure class="minikort">' +
+        '<svg viewBox="0 0 ' + w.toFixed(0) + " " + h.toFixed(0) + '" role="img" ' +
+          'aria-label="Kort over byvandringen i Trondheim">' +
+          '<path class="mk-rute" d="' + d + '"></path>' + stop + mad +
+        "</svg>" +
+        '<figcaption>Den målte gangrute · numrene følger listen nedenfor · ' +
+        'firkanterne er spisestederne</figcaption></figure>';
+    }
+
+    var t = TH.tur;
+    vaert.innerHTML =
+      '<p class="lead">' + esc(TH.intro) + "</p>" +
+
+      '<div class="tur-tal">' +
+        '<div class="stat"><dt>Rundtur</dt><dd>' + komma(t.km) + "<span> km</span></dd></div>" +
+        '<div class="stat"><dt>Ren gang</dt><dd>' + t.min + "<span> min</span></dd></div>" +
+        '<div class="stat"><dt>Med stop</dt><dd>' + komma(t.timer) + "<span> time</span></dd></div>" +
+        '<div class="stat"><dt>Stigning</dt><dd>' + t.stigning + "<span> m</span></dd></div>" +
+      "</div>" +
+
+      minikort() +
+
+      '<ol class="turstop">' + t.stop.map(function (p) {
+        return '<li class="turstop-punkt' + (p.stj ? " stjerne" : "") + '">' +
+          '<span class="tsnr">' + p.n + "</span>" +
+          '<div class="tstekst"><h4>' + esc(p.navn) +
+            (p.stj ? stjerner(p.stj, "lille") : "") + "</h4>" +
+            "<p>" + esc(p.d) + "</p>" +
+            '<a class="tskort" href="' + punktUrl(p.lat, p.lon) +
+              '" target="_blank" rel="noopener">Vis på kortet</a>' +
+          "</div></li>";
+      }).join("") + "</ol>" +
+
+      '<p class="tur-note">' + esc(t.note) + "</p>" +
+      '<p class="tur-note p"><b>Parkering</b>' + esc(t.parkering) + "</p>" +
+      '<p class="tur-links"><a class="navlink" href="' + sloejfeUrl() +
+        '" target="_blank" rel="noopener">Åbn hele sløjfen som gårute</a></p>' +
+
+      '<h3 class="madhd">Aftensmad</h3>' +
+      '<p class="lead">' + esc(TH.mad.intro) + "</p>" +
+      '<div class="mad">' + TH.mad.steder.map(function (m) {
+        return '<article class="madkort' + (m.valg ? " valgt" : "") + '">' +
+          (m.valg ? '<span class="madmaerke">Valget</span>' : "") +
+          "<h4>" + esc(m.navn) + "</h4>" +
+          '<p class="madart">' + esc(m.art) + "</p>" +
+          '<p class="madmeta">' + esc(m.adresse) + " · " + esc(m.pris) + "</p>" +
+          "<p>" + esc(m.d) + "</p>" +
+          (m.hvorfor ? '<p class="madhvorfor"><b>Derfor den</b>' + esc(m.hvorfor) + "</p>" : "") +
+          (m.advarsel ? '<p class="madadvarsel">' + esc(m.advarsel) + "</p>" : "") +
+          (m.note ? '<p class="madnote">' + esc(m.note) + "</p>" : "") +
+          (m.aabent ? '<p class="madaabent">' + esc(m.aabent) + "</p>" : "") +
+          '<p class="madlinks">' +
+            (m.tlfnr ? '<a href="tel:' + m.tlfnr + '">' + esc(m.tlf) + "</a>" : "") +
+            '<a href="' + punktUrl(m.lat, m.lon) + '" target="_blank" rel="noopener">Vis på kortet</a>' +
+          "</p></article>";
+      }).join("") + "</div>" +
+      '<p class="altbund">' + esc(TH.mad.bund) + "</p>";
+  })();
+
   /* ---------- færger ---------- */
   var BROEK = { 0: "", 15: "¼", 30: "½", 45: "¾" };
   function varighed(min) {
@@ -233,6 +355,9 @@
     '<p class="altbund">' + esc(A.bund) + "</p>";
 
   /* ---------- fri plan ---------- */
+  /* Tælles ud af POI i stedet for at stå som et tal i teksten — ellers bliver
+     det forældet, hver gang der kommer et punkt til. */
+  var FEMSTJERNEDE = window.POI.filter(function (p) { return p.stj === 5; }).length;
   var F = window.FRIPLAN;
   document.getElementById("friplan").innerHTML =
     '<p class="dom">' + esc(F.dom) + "</p>" +
@@ -270,7 +395,8 @@
           (n.bedst ? '<em>den rigtige</em>' : "") + "</h4>" +
           '<span class="n-spar">sparer ' + esc(n.sparer) + "</span></div>" +
         '<p class="n-rute">' + esc(n.rute) + "</p>" +
-        '<p class="n-mister">Mister <b>' + n.mister + "</b> af turens 13 femstjernede</p>" +
+        '<p class="n-mister">Mister <b>' + n.mister + "</b> af turens " +
+          FEMSTJERNEDE + " femstjernede</p>" +
         "<p>" + esc(n.d) + "</p></div>";
     }).join("") + "</div>" +
     '<p class="fluft">' + F.nod.pointe + "</p>" +
@@ -290,6 +416,9 @@
   var rangliste = window.POI.map(function (p) {
     return { navn: p.navn, kat: p.kat, stj: p.stj, dag: p.dag, t: p.t };
   }).sort(function (a, b) { return b.stj - a.stj || a.dag - b.dag; });
+
+  document.getElementById("rang-note").textContent =
+    window.POI.length + " steder · 1 til 5 stjerner";
 
   document.getElementById("skala").innerHTML =
     '<p class="lead">' + esc(SK.intro) + "</p>" +

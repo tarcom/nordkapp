@@ -63,7 +63,9 @@ window.DAYS = [
       ["Dovrefjell","højfjeld med moskusokser. Udsigtspavillonen Snøhetta ved Hjerkinn er arkitektur værd at stoppe for",1],
       ["Oppdal","sidste stop før nedkørslen mod Trondheimsfjorden"],
       ["Nidarosdomen","Nordens største middelalderkatedral, bygget over Olav den Helliges grav. Du har eftermiddagen til den",1],
-      ["Bakklandet og Gamle Bybro","de skæve trævillaer langs elven. Bedst til fods sidst på dagen"]
+      ["Bakklandet og Gamle Bybro","de skæve træhuse langs elven, bedst til fods sidst på dagen — og de ligger på byvandringen"],
+      ["Kristiansten festning","op ad bakken bag Bakklandet: hele byen, elven og fjorden fra volden, og gratis at komme ind",1],
+      ["Aftensmad i byen","Brasilia ved Bakke bru er valget — brasiliansk churrasco, spis alt hvad du kan. Se afsnittet om Trondheim"]
     ] },
 
   { n:3, dato:"2026-08-19", ugedag:"Onsdag", titel:"Trondheim → Bodø",
@@ -226,6 +228,89 @@ window.STOPS = [
   { navn:"Aalborg",    lat:57.0465, lon:9.9218, dag:"Start / slut", natter:0, hjem:true }
 ];
 
+/* ---------------------------------------------------------------------------
+   Trondheim — turens eneste rigtige by, og det eneste sted hvor der er en hel
+   eftermiddag til overs. Rundturen er målt med OSRM's gangprofil
+   (routing.openstreetmap.de/routed-foot), ikke skønnet: 3.712 meter og 49
+   minutters ren gang. `linje` er den samme målte geometri, forenklet fra 274
+   til 75 punkter — den bruges kun til at tegne minikortet i afsnittet.
+   Alle koordinater er slået op i OpenStreetMap som resten af sidens punkter.
+   --------------------------------------------------------------------------- */
+window.TRONDHEIM = {
+  dag: 2,
+  intro: "Du er fremme tidligt på eftermiddagen, og hele byen ligger inden for halvanden kilometer. Sløjfen her tager det med i én tur: domkirken, den gamle bybro, Bakklandet, fæstningen med udsigten, og bryggerne på vejen tilbage. Bagefter er der aftensmad, og der er ét oplagt valg.",
+
+  tur: {
+    km: 3.7, min: 49, timer: 1.5, stigning: 60,
+    parkering: "Bakklandet parkeringshus ligger under 100 meter fra Bakke bru, og Brasilia ligger i samme gade. Vil du hellere starte ved domkirken, er Leutenhaven P-hus det nærmeste ved Torvet — 300 meter derfra og med ladere. Sløjfen kan gås fra begge ender.",
+    note: "De 49 minutter er ren gang uden stop. Domkirken tager en halv time indenfor, fæstningsvolden endnu et kvarter, og gennem Bakklandet går man langsomt — derfor halvanden time. Kristiansten koster turens eneste rigtige højdemeter.",
+    stop: [
+      { n:1, navn:"Torvet", lat:63.43037, lon:10.39532,
+        d:"Byens korsvej med Olav Tryggvason på søjlen midt i det hele. Trondheim blev genopbygget efter branden i 1681 med usædvanligt brede gader, og det ser man tydeligst herfra." },
+      { n:2, navn:"Nidarosdomen", lat:63.42693, lon:10.39691, stj:5,
+        d:"Nordens største middelalderkatedral, bygget over Olav den Helliges grav og pilgrimsmål for hele Nordeuropa i 500 år. Vestfronten alene har række på række af figurer. Der er entré, og den er værd at betale — det er turens eneste bygning i den klasse." },
+      { n:3, navn:"Gamle Bybro", lat:63.42825, lon:10.40123, stj:4,
+        d:"Broen fra 1861 med de røde portaler. Stil dig i midten og kig nordpå: de gamle pakhuse på pæle ned i elven er det billede af Trondheim, alle har set." },
+      { n:4, navn:"Bakklandet", lat:63.42802, lon:10.40286, stj:4,
+        d:"Den gamle arbejderbydel øst for elven — skæve træhuse i sennepsgult og oxideret rødt, brostensstræder og cafeer i stueetagerne. Gå igennem, ikke forbi." },
+      { n:5, navn:"Kristiansten festning", lat:63.42699, lon:10.41086, stj:4,
+        d:"Op ad bakken bag Bakklandet. Fæstningen stoppede svenskerne i 1718, og fra volden ser du hele byen, domkirken, elvesløjfen og fjorden på én gang. Selve området er frit tilgængeligt — det er udsigten, man kommer for." },
+      { n:6, navn:"Kjøpmannsgata og bryggerne", lat:63.43180, lon:10.40270,
+        d:"Tilbage over broen og nordpå langs elvebredden. Bryggerne er 1700-tals pakhuse, der stadig står på pæle ude i vandet, og gaden bag dem fører dig tilbage til Torvet." }
+    ],
+    /* Målt gangrute, forenklet. Genereret — rediger ikke i hånden. */
+    linje: [
+    [63.43042,10.39522],[63.43039,10.39510],[63.43006,10.39528],[63.43005,10.39552],
+    [63.42992,10.39561],[63.42777,10.39683],[63.42766,10.39687],[63.42765,10.39661],
+    [63.42717,10.39681],[63.42747,10.39805],[63.42779,10.39862],[63.42789,10.39987],
+    [63.42832,10.40008],[63.42838,10.40025],[63.42808,10.40280],[63.42767,10.40311],
+    [63.42718,10.40317],[63.42639,10.40361],[63.42615,10.40500],[63.42599,10.40640],
+    [63.42552,10.40828],[63.42584,10.40861],[63.42599,10.40893],[63.42635,10.40905],
+    [63.42656,10.40929],[63.42686,10.40922],[63.42682,10.40932],[63.42695,10.40962],
+    [63.42690,10.40963],[63.42692,10.40988],[63.42707,10.41009],[63.42707,10.41043],
+    [63.42716,10.41063],[63.42699,10.41085],[63.42716,10.41063],[63.42707,10.41043],
+    [63.42707,10.41009],[63.42692,10.40988],[63.42690,10.40963],[63.42695,10.40962],
+    [63.42682,10.40932],[63.42686,10.40922],[63.42656,10.40929],[63.42635,10.40905],
+    [63.42599,10.40893],[63.42584,10.40861],[63.42552,10.40828],[63.42599,10.40640],
+    [63.42615,10.40500],[63.42639,10.40361],[63.42718,10.40317],[63.42767,10.40311],
+    [63.42808,10.40280],[63.42838,10.40025],[63.42867,10.40047],[63.42872,10.40017],
+    [63.42884,10.40014],[63.42887,10.40037],[63.43013,10.40121],[63.43010,10.40145],
+    [63.43293,10.40370],[63.43296,10.40392],[63.43306,10.40401],[63.43317,10.40391],
+    [63.43330,10.40402],[63.43296,10.40392],[63.43293,10.40370],[63.43176,10.40274],
+    [63.43178,10.40253],[63.43039,10.40141],[63.43036,10.40116],[63.43059,10.39592],
+    [63.43047,10.39590],[63.43050,10.39528],[63.43042,10.39522]
+    ]
+  },
+
+  mad: {
+    intro: "Norge er dyrt, og Trondheim er ingen undtagelse. Til gengæld er det den sidste rigtige by før Bodø, så det er her man spiser ordentligt. Alle tre ligger i eller lige ved sløjfen ovenfor.",
+    steder: [
+      { navn:"Brasilia", kort:"Brasilia", valg:true, lat:63.43262, lon:10.40746,
+        adresse:"Ferjemannsveien 10", tlf:"+47 483 05 555", tlfnr:"+4748305555",
+        art:"Brasiliansk churrasco — spis alt hvad du kan",
+        pris:"~500-600 kr",
+        d:"Gauchoer går rundt med spyd og skærer kød direkte om på tallerkenen, indtil du beder dem stoppe — op til fjorten slags — og tilbehøret tager du selv fra buffeten. Det er turens ene måltid, hvor prisen er den samme, uanset hvor sulten du er efter en dag over Dovrefjell.",
+        hvorfor:"Den ligger 80 meter fra Bakklandet parkeringshus, altså lige der hvor sløjfen slutter, hvis du parkerer ved Bakke bru. Du kan gå fra fæstningen til bordet uden at flytte bilen.",
+        aabent:"Man-tor 16-23 — tjek selv før du går, åbningstider skifter" },
+
+      { navn:"Big Horn Steak House", kort:"Big Horn", lat:63.43372, lon:10.39368,
+        adresse:"Munkegata 41", tlf:"73 50 94 90", tlfnr:"+4773509490",
+        art:"Uformelt steakhouse",
+        pris:"400-600 kr for en hovedret",
+        d:"Kædesteakhouse uden ambitioner om at være andet: bøf, pommes frites og en stor øl. 400 meter nord for Torvet på vej mod Ravnkloa, altså lige ved starten af sløjfen.",
+        advarsel:"Ring først. Stedet lukkede i august 2021 efter 26 år for at renovere, og Big Horns egen hjemmeside lister i dag ti restauranter uden Trondheim iblandt. Adresse og telefonnummer står stadig i katalogerne, men jeg kunne ikke bekræfte, at den har åbnet igen." },
+
+      { navn:"Graffi Grill og Bar", kort:"Graffi", lat:63.43433, lon:10.41279,
+        adresse:"TMV-kaia, Solsiden",
+        art:"Grill og bar ved vandet",
+        pris:"middel til høj",
+        d:"Solsiden er det gamle skibsværft lavet om til kaj, udeservering og barer, og Graffi ligger yderst mod vandet. Mere liv og højere lyd end de to andre — det oplagte valg, hvis du hellere vil sidde blandt folk end spise stort.",
+        note:"Der er to Graffi i Trondheim. Denne ligger på Solsiden ved TMV-kaia; den anden ligger inde i Midtbyen på Carl Johans gate." }
+    ],
+    bund:"Priserne er niveauer, ikke tilbud. Regn med at et hovedmåltid i Norge koster halvanden gang dansk niveau, og at øl trækker regningen op hurtigere end maden."
+  }
+};
+
 /* Beslutninger hvor jeg har ændret eller udfordret det oprindelige udkast. */
 window.BESLUTNINGER = [
   { id:"faerge", titel:"Færgen nordpå: Larvik, ikke Göteborg",
@@ -280,6 +365,9 @@ window.POI = [
   { kat:"vandring", navn:"Snøhetta-pavillonen", lat:62.2239, lon:9.4902, dag:2, stj:3,
     t:"1,5 km hver vej · let · moskusokser", tid:"1 time",
     d:"Arkitekttegnet udsigtspavillon på Dovrefjell med glasvæg mod Snøhetta. Kort, flad sti fra parkeringen ved Hjerkinn. Der går moskusokser på vidden — hold god afstand, de er hurtigere end de ser ud." },
+  { kat:"vandring", navn:"Byvandring i Trondheim", lat:63.4283, lon:10.4012, dag:2, stj:4,
+    t:"3,7 km · domkirke, Bakklandet og fæstning · hele byen i én sløjfe", tid:"1,5 time",
+    d:"Trondheim ligger samlet: en rundtur på 3,7 km tager Nidarosdomen, Gamle Bybro, Bakklandets skæve træhuse og Kristiansten festning med, og ender ved bryggerne langs Kjøpmannsgata. Målt til 49 minutters ren gang — med stop bliver det halvanden time. Se afsnittet om Trondheim for turen stop for stop." },
   { kat:"vandring", navn:"Keiservarden", lat:67.3150, lon:14.4783, dag:3, stj:3,
     t:"1-1,5 time · let · Lofotveggen i horisonten", tid:"1-1,5 time",
     d:"Bodøs husbjerg. Bred grusvej hele vejen op, og på en klar dag ser du hele Lofotveggen ligge som en tandet mur ude i havet. Perfekt til at strække benene efter den lange E6-dag." },
@@ -332,6 +420,10 @@ window.POI = [
   /* ---- udsigt og seværdigheder ---- */
   { kat:"udsigt", navn:"Dovrefjell", lat:62.2231, lon:9.5500, dag:2, stj:4,
     t:"Højfjeld, moskusokser, Norges tag" },
+  { kat:"udsigt", navn:"Nidarosdomen", lat:63.4269, lon:10.3969, dag:2, stj:5,
+    t:"Nordens største middelalderkatedral · Olav den Helliges grav" },
+  { kat:"udsigt", navn:"Kristiansten festning", lat:63.4270, lon:10.4109, dag:2, stj:4,
+    t:"Hele Trondheim, elven og fjorden fra volden · gratis" },
   { kat:"udsigt", navn:"Mosjøen · Sjøgata", lat:65.8370, lon:13.1900, dag:3, stj:3,
     t:"Hel gade af træhuse fra 1800-tallet · bedste frokoststop på E6" },
   { kat:"udsigt", navn:"Polarsirkelsenteret", lat:66.5524, lon:15.3228, dag:3, stj:4,

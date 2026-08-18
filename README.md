@@ -38,7 +38,7 @@ ellers serverer forældet CSS/JS i timevis.
 | Fil | Hvad |
 |---|---|
 | `site/index.html` | Sidens skelet. Alt indhold indsættes af `app.js`. |
-| `site/data.js` | **Alt indhold** — dage, seværdigheder, færger, praktik, beslutninger. Det er her du retter tekst. |
+| `site/data.js` | **Alt indhold** — dage, seværdigheder, færger, praktik, beslutninger og Trondheim-afsnittet. Det er her du retter tekst. |
 | `site/geom.js` | Vejgeometri (483 punkter) fra OSRM. Genereret — rediger ikke i hånden. |
 | `site/app.js` | Rendering + kort. |
 | `site/style.css` | Alt design. |
@@ -70,6 +70,30 @@ To ting at vide, hvis tallene skal genberegnes:
   ruten ad E6/E10, og `steps=true` bruges til at verificere, at ingen etape
   smutter over en færge.
 - Sol op/ned er beregnet lokalt med NOAA-algoritmen, ikke hentet et sted fra.
+
+## Trondheim-afsnittet
+
+Dag 2 har sit eget afsnit (`#trondheim`), fordi eftermiddagen i byen ikke kan
+rummes i en punktopstilling: en rundtur til fods plus tre spisesteder. Alt
+ligger i `window.TRONDHEIM` i `data.js`.
+
+Gåruten er **ikke** målt på demoserveren, som kun kører bilprofilen. Den er
+hentet fra `routing.openstreetmap.de/routed-foot` (OSRM, gangprofil):
+**3.712 meter og 49 minutters ren gang** gennem Torvet → Nidarosdomen →
+Gamle Bybro → Bakklandet → Kristiansten → Kjøpmannsgata → Torvet. Med stop
+bliver det halvanden time, og det er det tal, siden bruger.
+
+`TRONDHEIM.tur.linje` er den samme målte geometri, forenklet med
+Douglas-Peucker (4 m) fra 274 til 75 punkter. Den bruges **kun** til at tegne
+minikortet, som er ren inline-SVG uden fliser — derfor virker det også lokalt,
+hvor Google-nøglen ikke gør. Skal ruten ændres, så hent den forfra fra
+gangprofilen i stedet for at flytte punkter i hånden.
+
+Spisestederne er slået op enkeltvis, og ét af dem har et forbehold: **Big Horn
+Steak House** (Munkegata 41) lukkede i august 2021 for at renovere, og kæden
+lister i dag ti restauranter uden Trondheim iblandt. Adressen lever videre i
+katalogerne, så den står med en advarsel på siden i stedet for at blive
+præsenteret som åben. Tjek den, før turen — eller skift den ud.
 
 ## Ændringer i forhold til det oprindelige udkast
 
@@ -117,6 +141,10 @@ på siden selv:
   udenom i stedet for at tage dem — den gav 1.048 km for en strækning der
   reelt er ~650 km med seks færger. Tallene er derfor overslag.
 - **Knivskjellodden**, der er en vandring og ikke en køretur.
+
+Byvandringen i Trondheim er også målt, men med gangprofilen — se afsnittet
+ovenfor. **Priser og åbningstider på spisestederne er derimod niveauer og
+øjebliksbilleder**, ikke målte tal; de skal tjekkes før afrejse.
 
 Sovesteder er **kandidater**, ikke verificerede. Skiltning og regler skifter
 fra sæson til sæson, især på Lofoten.

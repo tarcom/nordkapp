@@ -593,6 +593,108 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 
+/* ---------- Trondheim: byvandring og aftensmad ---------- */
+.tur-tal{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin:0 0 24px;
+}
+
+/* Minikortet er ren SVG uden fliser, så det virker også uden Google-nøglen. */
+.minikort{margin:0 0 28px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.minikort svg{display:block;width:100%;height:auto;max-height:70vh}
+.mk-rute{fill:none;stroke:var(--aurora);stroke-width:7;stroke-linejoin:round;stroke-linecap:round;opacity:.85}
+.mk-stop circle{fill:var(--night);stroke:var(--ice);stroke-width:4}
+.mk-stop text{fill:var(--ice);font-family:var(--mono);font-size:22px;font-weight:600;text-anchor:middle}
+.mk-mad rect{fill:var(--night);stroke:var(--sun);stroke-width:4}
+.mk-mad.valg rect{fill:var(--sun)}
+.mk-mad text{fill:var(--sun);font-family:var(--mono);font-size:21px;letter-spacing:.04em}
+.minikort figcaption{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--glacial);opacity:.7;margin-top:15px;text-align:center;
+}
+
+.turstop{list-style:none;padding:0;margin:0 0 20px}
+.turstop-punkt{
+  display:grid;grid-template-columns:28px 1fr;gap:16px;
+  padding:17px 0;border-top:1px solid var(--line);
+}
+.turstop-punkt:first-child{border-top:0;padding-top:0}
+.tsnr{
+  font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--night);
+  background:var(--glacial);width:28px;height:28px;border-radius:50%;
+  display:grid;place-items:center;margin-top:1px;
+}
+.turstop-punkt.stjerne .tsnr{background:var(--sun)}
+.tstekst h4{
+  font-family:var(--display);font-size:1.06rem;font-weight:600;letter-spacing:-.015em;
+  margin:0 0 7px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.tstekst p{margin:0 0 9px;font-size:.93rem;color:var(--glacial)}
+.tskort{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--glacial);text-decoration:none;border-bottom:1px solid var(--line);opacity:.85;
+}
+.tskort:hover{color:var(--ice);border-color:var(--ice);opacity:1}
+
+.tur-note{
+  margin:0 0 12px;font-size:.9rem;color:var(--glacial);
+  padding-left:14px;border-left:2px solid var(--line);
+}
+.tur-note.p{
+  padding:11px 14px;border-left:2px solid var(--aurora);
+  background:rgba(95,217,166,.07);border-radius:0 8px 8px 0;color:var(--ice);
+}
+.tur-note.p b{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--aurora);margin-bottom:3px;
+}
+.tur-links{margin:20px 0 0}
+
+.madhd{font-family:var(--display);font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin:48px 0 14px}
+.mad{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:0 0 20px}
+.madkort{
+  position:relative;display:flex;flex-direction:column;
+  border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--panel);
+}
+.madkort.valgt{border-color:rgba(232,163,61,.4);background:rgba(232,163,61,.06)}
+.madmaerke{
+  position:absolute;top:-9px;right:16px;
+  font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--night);background:var(--sun);border-radius:20px;padding:3px 10px;
+}
+.madkort h4{font-family:var(--display);font-size:1.12rem;font-weight:600;letter-spacing:-.015em;margin:0 0 5px}
+.madart{font-size:.9rem;color:var(--ice);margin:0 0 6px !important}
+.madmeta{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--sun);margin:0 0 13px !important;
+}
+.madkort>p{margin:0 0 13px;font-size:.92rem;color:var(--glacial)}
+.madhvorfor{
+  padding:11px 14px;border-radius:8px;font-size:.89rem !important;color:var(--ice) !important;
+  background:rgba(232,163,61,.09);border-left:2px solid var(--sun);
+}
+.madhvorfor b{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--sun);margin-bottom:3px;
+}
+.madadvarsel{
+  font-size:.88rem !important;color:var(--ice) !important;
+  background:rgba(240,112,91,.1);border-left:2px solid var(--alarm);
+  border-radius:0 7px 7px 0;padding:10px 14px;
+}
+.madnote{
+  font-size:.85rem !important;font-style:italic;opacity:.85;
+  padding-left:14px;border-left:2px solid var(--line);
+}
+.madaabent{font-family:var(--mono);font-size:10.5px !important;letter-spacing:.06em;opacity:.8}
+.madlinks{display:flex;gap:16px;flex-wrap:wrap;margin:auto 0 0 !important;padding-top:13px}
+.madlinks a{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--aurora);text-decoration:none;border-bottom:1px solid rgba(95,217,166,.35);padding-bottom:2px;
+}
+.madlinks a:hover{color:var(--ice);border-color:var(--ice)}
+
 /* ---------- mobil-finpudsning ---------- */
 @media(max-width:680px){
   /* 76px mellem afsnit er meget på en telefon */
@@ -610,6 +712,10 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
   /* kort og lister får luft tilbage ved at stramme polstringen */
   .altblok,.omvej,.b-card,.pakgruppe,.pgroup,.nod,.hkort,.card{padding:18px 17px}
   .altbund,.finland{padding:20px 18px}
+  .madkort{padding:18px 17px}
+  .minikort{padding:13px}
+  .turstop-punkt{grid-template-columns:26px 1fr;gap:13px}
+  .tskort,.madlinks a{display:inline-block;padding-top:4px;padding-bottom:4px}
   .dom{padding:16px 18px;font-size:1rem}
   .stat{padding:16px 14px}
   .stat dd{font-size:1.4rem}
