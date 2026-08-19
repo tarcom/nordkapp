@@ -117,6 +117,22 @@
     (TAL[window.BESLUTNINGER.length] || window.BESLUTNINGER.length) + " valg og hvorfor";
 
   /* ---------- dag for dag ---------- */
+  function punktUrl(lat, lon) {
+    return "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon;
+  }
+
+  /* Står stedet også på kortet, bliver navnet et link. Så kan man åbne det
+     direkte i Google Maps fra telefonen undervejs, uden at lede på kortet. */
+  var POI_NAVN = {};
+  window.POI.forEach(function (p) { POI_NAVN[p.navn] = p; });
+
+  function stedLink(navn) {
+    var p = POI_NAVN[navn];
+    if (!p) return "<b>" + esc(navn) + "</b>";
+    return '<b><a class="selink" href="' + punktUrl(p.lat, p.lon) +
+      '" target="_blank" rel="noopener">' + esc(navn) + "</a></b>";
+  }
+
   function navUrl(nav) {
     if (!nav) return null;
     var u = "https://www.google.com/maps/dir/?api=1&travelmode=driving" +
@@ -138,7 +154,7 @@
     if (d.faerge && d.km >= 5) drive += " + " + d.faerge;
 
     var se = (d.se || []).map(function (a) {
-      return '<li class="' + (a[2] ? "star" : "") + '"><b>' + esc(a[0]) + "</b> — " + esc(a[1]) + "</li>";
+      return '<li class="' + (a[2] ? "star" : "") + '">' + stedLink(a[0]) + " — " + esc(a[1]) + "</li>";
     }).join("");
 
     var dato = new Date(d.dato + "T12:00:00");
@@ -159,15 +175,19 @@
   }).join("");
 
   /* ---------- Trondheim ---------- */
+  /* Sættes af afsnittet nedenfor. `trondheimKort` kaldes fra initMap og bytter
+     SVG'en ud med et rigtigt Google-kort; `trondheimTilbage` fortryder byttet.
+     Begge er nødvendige, fordi initMap også kører når nøglen er forkert:
+     Google-scriptet indlæses fint, og først bagefter melder gm_authFailure. */
+  var trondheimKort = null, trondheimTilbage = null;
+  var TRHTEKST = "Den målte gangrute · numrene følger listen nedenfor · " +
+                 "firkanterne er spisestederne";
+
   (function () {
     var TH = window.TRONDHEIM, vaert = document.getElementById("trondheim-indhold");
     if (!TH || !vaert) return;
 
     var K = Math.cos(63.43 * Math.PI / 180);   // en længdegrad er kortere heroppe
-
-    function punktUrl(lat, lon) {
-      return "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon;
-    }
 
     /* Hele sløjfen som gårute i Google Maps: Torvet er både start og mål, og
        resten af stoppene bliver waypoints. URL-API'et tager op til 9. */
@@ -222,12 +242,14 @@
       }).join("");
 
       return '<figure class="minikort">' +
-        '<svg viewBox="0 0 ' + w.toFixed(0) + " " + h.toFixed(0) + '" role="img" ' +
-          'aria-label="Kort over byvandringen i Trondheim">' +
-          '<path class="mk-rute" d="' + d + '"></path>' + stop + mad +
-        "</svg>" +
-        '<figcaption>Den målte gangrute · numrene følger listen nedenfor · ' +
-        'firkanterne er spisestederne</figcaption></figure>';
+        '<div class="mk-svg">' +
+          '<svg viewBox="0 0 ' + w.toFixed(0) + " " + h.toFixed(0) + '" role="img" ' +
+            'aria-label="Kort over byvandringen i Trondheim">' +
+            '<path class="mk-rute" d="' + d + '"></path>' + stop + mad +
+          "</svg>" +
+        "</div>" +
+        '<div id="trhmap" class="trhmap" hidden></div>' +
+        '<figcaption id="trhmap-tekst">' + TRHTEKST + "</figcaption></figure>";
     }
 
     var t = TH.tur;
@@ -278,6 +300,80 @@
           "</p></article>";
       }).join("") + "</div>" +
       '<p class="altbund">' + esc(TH.mad.bund) + "</p>";
+
+    /* Rigtigt Google-kort oven på SVG'en, når nøglen bliver godtaget — altså
+       på aogj.com. Slår det fejl, sker der ingenting, og SVG'en bliver stående.
+       Farverne (AURORA, SUN, ICE, NIGHT) og DARK sættes længere nede i filen,
+       men først læst her, og den her funktion kaldes fra initMap. */
+    trondheimKort = function () {
+      var el = document.getElementById("trhmap");
+      if (!el || !window.google || !google.maps) return;
+
+      var kort = new google.maps.Map(el, {
+        styles: DARK, mapTypeControl: false, streetViewControl: false,
+        fullscreenControl: true, zoomControl: true,
+        gestureHandling: "cooperative"
+      });
+      var graenser = new google.maps.LatLngBounds();
+      var info = new google.maps.InfoWindow();
+
+      var sti = TH.tur.linje.map(function (p) { return { lat: p[0], lng: p[1] }; });
+      sti.forEach(function (p) { graenser.extend(p); });
+      new google.maps.Polyline({ path: sti, map: kort, strokeColor: AURORA,
+        strokeOpacity: 0.9, strokeWeight: 4, zIndex: 2 });
+
+      function markoer(lat, lon, farve, etiket, html) {
+        var opt = {
+          position: { lat: lat, lng: lon }, map: kort, optimized: false,
+          zIndex: etiket ? 6 : 5,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: etiket ? 11 : 8,
+                  fillColor: farve, fillOpacity: 1, strokeColor: NIGHT, strokeWeight: 2 }
+        };
+        if (etiket) {
+          opt.label = { text: etiket, color: NIGHT, fontSize: "12px", fontWeight: "700" };
+        }
+        var m = new google.maps.Marker(opt);
+        m.addListener("click", function () {
+          info.setContent('<div class="iw">' + html + "</div>");
+          info.open(kort, m);
+        });
+        graenser.extend({ lat: lat, lng: lon });
+      }
+
+      TH.tur.stop.forEach(function (p) {
+        markoer(p.lat, p.lon, ICE, String(p.n),
+          "<b>" + esc(p.navn) + "</b>" +
+          '<span class="tl">Stop ' + p.n + " af " + TH.tur.stop.length + " på byvandringen</span>" +
+          '<a href="' + punktUrl(p.lat, p.lon) + '" target="_blank" rel="noopener">Åbn i Google Maps →</a>');
+      });
+
+      TH.mad.steder.forEach(function (m) {
+        markoer(m.lat, m.lon, SUN, null,
+          "<b>" + esc(m.navn) + (m.valg ? " ★" : "") + "</b>" +
+          '<span class="tl">' + esc(m.adresse) + " · " + esc(m.pris) + "</span>" +
+          '<a href="' + punktUrl(m.lat, m.lon) + '" target="_blank" rel="noopener">Åbn i Google Maps →</a>');
+      });
+
+      kort.fitBounds(graenser, { top: 34, right: 34, bottom: 34, left: 34 });
+
+      byt(true);
+    };
+
+    /* Vis enten Google-kortet eller SVG'en — aldrig begge. */
+    function byt(google_) {
+      var svg = document.querySelector(".minikort .mk-svg");
+      var el = document.getElementById("trhmap");
+      if (svg) svg.hidden = google_;
+      if (el) el.hidden = !google_;
+      var tekst = document.getElementById("trhmap-tekst");
+      if (tekst) {
+        tekst.textContent = google_
+          ? "Byvandringen på kortet · tryk på et punkt · de gule prikker er spisestederne"
+          : TRHTEKST;
+      }
+    }
+
+    trondheimTilbage = function () { byt(false); };
   })();
 
   /* ---------- færger ---------- */
@@ -650,6 +746,11 @@
       mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU }
     });
 
+    // Byvandringen i Trondheim får sit eget kort i sit eget afsnit. Fejler det,
+    // må det ikke tage hovedkortet med sig — så bliver SVG'en bare stående.
+    try { if (trondheimKort) trondheimKort(); }
+    catch (e) { if (window.console) console.warn("Trondheim-kortet: " + e.message); }
+
     var bounds = new google.maps.LatLngBounds();
     var linjer = {};
     var info = new google.maps.InfoWindow();
@@ -858,6 +959,9 @@
   /* Google afviser nøglen (forkert domæne, kvote opbrugt) → Leaflet i stedet. */
   window.gm_authFailure = function () {
     mapDone = true;
+    // initMap kan allerede have byttet Trondheim-kortet ud — byt tilbage,
+    // så man får SVG'en og ikke et gråt, dødt Google-kort.
+    if (trondheimTilbage) trondheimTilbage();
     leaflet("Google Maps afviste nøglen på dette domæne");
   };
   /* Scriptet nåede aldrig frem (offline, blokeret) → Leaflet i stedet. */
