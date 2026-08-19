@@ -872,7 +872,7 @@ window.PAKKELISTE = {
       { t:"Kamera med manuel indstilling", d:"Telefonen kan mere end man tror, men lang lukketid kræver stadig at den står stille." },
       { t:"Ekstra batterier", kritisk:true, d:"Kulde halverer batteritiden. Hav dem i inderlommen, ikke i tasken." },
       { t:"Fjernudløser eller selvudløser", d:"Selv et let tryk ryster billedet ved 15 sekunders lukketid." },
-      { t:"Nordlysvarsel installeret", d:"Følg KP-indeks på yr.no eller Norsk Lysvarsel. Bedste chancer: Lofoten dag 4-5, Nordkapp dag 8, Lapland dag 9." }
+      { t:"Nordlysvarsel installeret", d:"Følg Kp-indeks på yr.no eller NOAA’s 30-minutters varsel. Men husk at mørket er den bindende faktor i august, ikke aktiviteten — se afsnittet om vejr og lys." }
     ]},
 
     { navn:"Krop og apotek", ting:[
@@ -950,8 +950,8 @@ window.PRAKTISK = [
   ]},
 
   { gruppe:"Vejr og lys", ikon:"sol", punkter:[
-    ["Ingen midnatssol","Den slutter ved Nordkapp 31. juli. Til gengæld er nætterne sidst i august mørke nok til nordlys igen — og du er på den rigtige breddegrad hele vejen fra dag 3."],
-    ["Nordlys","Følg KP-indeks på yr.no eller Norsk Lysvarsel. Bedste chancer: Lofoten dag 4-5, Nordkapp dag 8, Lapland dag 9."],
+    ["Ingen midnatssol","Den slutter ved Nordkapp 31. juli. Men nætterne er endnu ikke rigtigt mørke igen: solen når kun 8-10 grader under horisonten på de norske nætter, og det er nautisk tusmørke, ikke mørke."],
+    ["Nordlys","<b>Længere nordpå gør det lysere, ikke mørkere.</b> Laveste solhøjde er beregnet for hver nat: Bodø -10,2°, Lofoten -9,9°, Tromsø -8,8°, Alta -8,8° og <b>Nordkapp kun -8,0°</b> — turens dårligste nordlysnat. Kun Rovaniemi dag 9 når rigtigt mørke (-13,0°, nautisk mørkt 23.15-01.25). Nordpå står nordlyset til gengæld lige over hovedet og er kraftigt nok til at skære gennem tusmørket, så chancen er reel fra dag 3 — den kræver bare mere aktivitet end i september. Kig mellem 23 og 03, hvor solen er lavest."],
     ["Tåge på Nordkapp","Platået ligger 307 m over havet og er ofte i skyen selv i pænt vejr. Der er webcam på nordkapp.no — tjek det før du kører de sidste 30 km."],
     ["Fjeldveje","Kvænangsfjellet dag 7 og Dovrefjell dag 2 kan lukke i hårdt vejr, også i august. Tjek vegvesen.no samme morgen."],
     ["Reinebringen","Stien lukkes i regn og blæst. Har du kun én dag på Lofoten og vejret er godt, så tag den om formiddagen."]
