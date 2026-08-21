@@ -726,13 +726,22 @@
            lon.toFixed(4).replace(".", ",") + "\u00b0\u00d8";
   }
 
+  /* Telefonens egen delemenu \u2014 den samme, Tesla-app'en st\u00e5r i. Findes ikke
+     i Teslas indbyggede browser og heller ikke p\u00e5 de fleste computere, s\u00e5
+     knappen tegnes kun hvor den kan bruges. */
+  var kanDele = !!(navigator.share);
+
   function handlinger(lat, lon, navn) {
     var k = lat.toFixed(5) + "," + lon.toFixed(5);
+    var vis = "https://www.google.com/maps/search/?api=1&query=" + k;
     return '<div class="iw-akt">' +
+      (kanDele
+        ? '<button type="button" class="iw-del" data-url="' + vis +
+          '" data-navn="' + esc(navn) + '">Del \u2014 fx til Tesla</button>'
+        : "") +
       '<a href="https://www.google.com/maps/dir/?api=1&destination=' + k +
         '&travelmode=driving" target="_blank" rel="noopener">Naviger hertil \u2192</a>' +
-      '<a href="https://www.google.com/maps/search/?api=1&query=' + k +
-        '" target="_blank" rel="noopener">Vis stedet</a>' +
+      '<a href="' + vis + '" target="_blank" rel="noopener">Vis stedet</a>' +
       '<button type="button" class="iw-kopi" data-koord="' + k +
         '" data-navn="' + esc(navn) + '">Kopi\u00e9r koordinater</button>' +
       "</div>";
@@ -767,6 +776,17 @@
       metaLinje(s2.lat, s2.lon) +
       handlinger(s2.lat, s2.lon, s2.navn);
   }
+
+  /* Del-knappen skal kalde navigator.share inde i selve klikket, ellers
+     afviser browseren den. Derfor ingen mellemregning her. */
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".iw-del");
+    if (!b) return;
+    navigator.share({
+      title: b.getAttribute("data-navn"),
+      url: b.getAttribute("data-url")
+    }).catch(function () { /* brugeren fortr\u00f8d, eller ingen modtager */ });
+  });
 
   /* Kopiknappen sidder i en boks, kortmotoren selv har lavet, s\u00e5 den fanges
      p\u00e5 dokumentet i stedet for at blive bundet ved oprettelsen. */
