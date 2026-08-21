@@ -561,7 +561,8 @@
   }
 
   var SK = window.SKALA;
-  var KATNAVN = { vandring: "Vandring", udsigt: "Seværdighed", sove: "Sovested", omvej: "Omvej" };
+  var KATNAVN = { vandring: "Vandring", udsigt: "Seværdighed", sove: "Sovested",
+                  omvej: "Omvej", mulighed: "Mulighed" };
 
   /* Alt med karakter, samlet og sorteret: højeste først, så efter dag. */
   var rangliste = window.POI.map(function (p) {
@@ -708,14 +709,16 @@
 
   /* ======================= KORT ======================= */
   var AURORA = "#5FD9A6", SUN = "#E8A33D", ICE = "#E4EFF3",
-      NIGHT = "#08161F", VIOLET = "#B69CE8", ROSE = "#F0705B";
+      NIGHT = "#08161F", VIOLET = "#B69CE8", ROSE = "#F0705B",
+      SKY = "#6FB3D9";
 
   var KAT = {
     stop:     { navn: "Overnatning",   farve: ICE,    r: 6.5 },
     sove:     { navn: "Sov i bilen",   farve: VIOLET, r: 6 },
     vandring: { navn: "Vandreture",    farve: AURORA, r: 6 },
     udsigt:   { navn: "Seværdigheder", farve: SUN,    r: 5 },
-    omvej:    { navn: "Omveje",        farve: ROSE,   r: 6 }
+    omvej:    { navn: "Omveje",        farve: ROSE,   r: 6 },
+    mulighed: { navn: "Muligheder",   farve: SKY,    r: 5.5 }
   };
 
   /* Ét segment = ét stykke vejgeometri, knyttet til sin dag. */
