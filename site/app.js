@@ -707,6 +707,85 @@
       }).join("") + "</ul></section>";
   }).join("");
 
+  /* ---------- infobokse på kortet ---------- */
+  /* Boksen skal kunne bruges i bilen, ikke bare pynte: hele beskrivelsen med,
+     koordinater der kan kopieres direkte ind i Teslas navigationss\u00f8gning,
+     og afstanden herfra hvis positionen er hentet. */
+  var minPos = null;   // s\u00e6ttes n\u00e5r «vis hvor jeg er» har v\u00e6ret brugt
+
+  function afstandKm(a, b, c, d) {
+    var R = 6371, r = Math.PI / 180;
+    var dp = (c - a) * r, dl = (d - b) * r;
+    var h = Math.sin(dp / 2) * Math.sin(dp / 2) +
+            Math.cos(a * r) * Math.cos(c * r) * Math.sin(dl / 2) * Math.sin(dl / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  function koordTekst(lat, lon) {
+    return lat.toFixed(4).replace(".", ",") + "\u00b0N " +
+           lon.toFixed(4).replace(".", ",") + "\u00b0\u00d8";
+  }
+
+  function handlinger(lat, lon, navn) {
+    var k = lat.toFixed(5) + "," + lon.toFixed(5);
+    return '<div class="iw-akt">' +
+      '<a href="https://www.google.com/maps/dir/?api=1&destination=' + k +
+        '&travelmode=driving" target="_blank" rel="noopener">Naviger hertil \u2192</a>' +
+      '<a href="https://www.google.com/maps/search/?api=1&query=' + k +
+        '" target="_blank" rel="noopener">Vis stedet</a>' +
+      '<button type="button" class="iw-kopi" data-koord="' + k +
+        '" data-navn="' + esc(navn) + '">Kopi\u00e9r koordinater</button>' +
+      "</div>";
+  }
+
+  function metaLinje(lat, lon) {
+    var t = koordTekst(lat, lon);
+    if (minPos) {
+      t += " \u00b7 " + Math.round(afstandKm(minPos[0], minPos[1], lat, lon)) +
+           " km herfra i fugleflugt";
+    }
+    return '<span class="tl">' + t + "</span>";
+  }
+
+  /* Fuld infoboks for et kortpunkt. */
+  function punktInfo(p) {
+    var KN = { vandring: "Vandring", udsigt: "Sev\u00e6rdighed", sove: "Sovested",
+               omvej: "Omvej", mulighed: "Mulighed", stop: "Overnatning" };
+    return '<b>' + esc(p.navn) + "</b>" +
+      '<span class="tl g">' + (KN[p.kat] || "") + " \u00b7 dag " + p.dag +
+        (p.tid ? " \u00b7 " + esc(p.tid) : "") + " \u00b7 " + "\u2605".repeat(p.stj) + "</span>" +
+      '<p class="iw-d">' + esc(p.d || p.t) + "</p>" +
+      (p.d ? '<span class="tl">' + esc(p.t) + "</span>" : "") +
+      metaLinje(p.lat, p.lon) +
+      handlinger(p.lat, p.lon, p.navn);
+  }
+
+  function stopInfo(s2) {
+    return '<b>' + esc(s2.navn) + "</b>" +
+      '<span class="tl g">Overnatning \u00b7 ' + esc(s2.dag) +
+        (s2.natter ? " \u00b7 " + s2.natter + (s2.natter > 1 ? " n\u00e6tter" : " nat") : "") + "</span>" +
+      metaLinje(s2.lat, s2.lon) +
+      handlinger(s2.lat, s2.lon, s2.navn);
+  }
+
+  /* Kopiknappen sidder i en boks, kortmotoren selv har lavet, s\u00e5 den fanges
+     p\u00e5 dokumentet i stedet for at blive bundet ved oprettelsen. */
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".iw-kopi");
+    if (!b) return;
+    var k = b.getAttribute("data-koord");
+    function kvitter(ok) {
+      b.textContent = ok ? "Kopieret \u2014 s\u00e6t ind i navigationen" : k;
+      setTimeout(function () { b.textContent = "Kopi\u00e9r koordinater"; }, 6000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(k).then(function () { kvitter(true); },
+                                            function () { kvitter(false); });
+    } else {
+      kvitter(false);   // vis dem i stedet, s\u00e5 de kan markeres i h\u00e5nden
+    }
+  });
+
   /* ---------- min position ---------- */
   /* Google Maps' JavaScript-API har ingen indbygget «find mig»-knap som
      mobil-SDK'erne har, så den bygges her. Knappen ligger i HTML oven på
@@ -846,6 +925,7 @@
     /* Blå prik som på telefonen: markør plus en cirkel for usikkerheden. */
     var migPrik = null, migRing = null;
     saetVisMig(function (lat, lon, noej) {
+      minPos = [lat, lon];
       var pos = { lat: lat, lng: lon };
       if (!migPrik) {
         migPrik = new google.maps.Marker({
@@ -960,7 +1040,7 @@
     var grupper = {};
     Object.keys(KAT).forEach(function (k) { grupper[k] = []; });
 
-    function tilfoej(kat, lat, lon, txt, z, stor, farve, klik) {
+    function tilfoej(kat, lat, lon, txt, z, stor, farve, info2) {
       var k = KAT[kat];
       var m = new google.maps.Marker({
         position: { lat: lat, lng: lon }, map: map, zIndex: z || 5,
@@ -977,15 +1057,11 @@
       m.addListener("mouseout", skjulTip);
       m.addListener("click", function () {
         skjulTip();
-        aabnInfo(txt + (klik ? '<a href="' + klik + '" target="_blank" rel="noopener">Åbn i Google Maps →</a>' : ""), null, m);
+        aabnInfo(info2 || txt, null, m);
       });
       grupper[kat].push(m);
       bounds.extend({ lat: lat, lng: lon });
       return m;
-    }
-
-    function gmLink(lat, lon) {
-      return "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lon;
     }
 
     window.STOPS.forEach(function (s) {
@@ -993,7 +1069,7 @@
         '<span class="tl">' + s.lat.toFixed(2) + "°N · " + esc(s.dag) +
         (s.natter ? " · " + s.natter + (s.natter > 1 ? " nætter" : " nat") : "") + "</span>";
       tilfoej("stop", s.lat, s.lon, txt, s.top ? 20 : 10,
-              s.top || s.hjem, s.top ? SUN : null, gmLink(s.lat, s.lon));
+              s.top || s.hjem, s.top ? SUN : null, stopInfo(s));
     });
 
     window.POI.forEach(function (p) {
@@ -1002,7 +1078,7 @@
         '<span class="tl g">Dag ' + p.dag + (p.tid ? " · " + esc(p.tid) : "") + "</span>";
       // Højere karakter = større og højere prioriteret prik.
       tilfoej(p.kat, p.lat, p.lon, txt, 4 + p.stj, p.stj >= 4,
-              null, gmLink(p.lat, p.lon));
+              null, punktInfo(p));
     });
 
     map.fitBounds(bounds, { top: 40, right: 40, bottom: 40, left: 40 });
@@ -1117,6 +1193,7 @@
 
       var lMigPrik = null, lMigRing = null;
       saetVisMig(function (lat, lon, noej) {
+        minPos = [lat, lon];
         if (!lMigPrik) {
           lMigRing = L.circle([lat, lon], { radius: 60, color: "#4C9BE8", weight: 1,
             opacity: 0.35, fillColor: "#4C9BE8", fillOpacity: 0.12 }).addTo(map);
@@ -1150,7 +1227,9 @@
       window.POI.forEach(function (p) {
         L.circleMarker([p.lat, p.lon], { radius: KAT[p.kat].r - 1, weight: 2, color: NIGHT,
           fillColor: KAT[p.kat].farve, fillOpacity: 1 }).addTo(map)
-          .bindTooltip("<b>" + esc(p.navn) + "</b><br>" + esc(p.t), { sticky: true });
+          .bindTooltip("<b>" + esc(p.navn) + "</b><br>" + esc(p.t), { sticky: true })
+          .bindPopup(function () { return '<div class="iw">' + punktInfo(p) + "</div>"; },
+                     { maxWidth: 300 });
         all.push([p.lat, p.lon]);
       });
       map.fitBounds(L.latLngBounds(all), { padding: [40, 40] });

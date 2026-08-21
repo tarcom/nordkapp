@@ -267,7 +267,17 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .gm-style .gm-style-iw-d{overflow:visible !important}
 .gm-style .gm-style-iw-tc::after{background:var(--fjord)}
 .gm-style .gm-style-iw-c button[aria-label]{filter:invert(1) brightness(1.6)}
-.iw{font-family:var(--body);max-width:250px}
+.iw{font-family:var(--body);max-width:290px}
+.iw-d{margin:9px 0 0;font-size:.88rem;line-height:1.55;color:var(--glacial)}
+.iw-akt{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+.iw-akt a,.iw-akt button{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--aurora);background:rgba(95,217,166,.08);border:1px solid rgba(95,217,166,.3);
+  border-radius:8px;padding:7px 10px;text-decoration:none;cursor:pointer;margin:0;
+}
+.iw-akt a:first-child{color:var(--night);background:var(--aurora);border-color:var(--aurora);font-weight:600}
+.iw-akt button{color:var(--glacial);background:transparent;border-color:var(--line)}
+.iw-akt a:hover,.iw-akt button:hover{color:var(--ice);border-color:var(--ice)}
 .iw a{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.5px;color:var(--aurora);text-decoration:none;border-bottom:1px solid rgba(95,217,166,.4);padding-bottom:1px}
 
 /* ---------- fri plan ---------- */
