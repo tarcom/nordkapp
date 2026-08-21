@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>
+  /* Geolocation virker kun over https. Hosten viderestiller ikke selv. */
+  if (location.protocol === "http:" && location.hostname.indexOf("localhost") < 0) {
+    location.replace("https:" + location.href.slice(5));
+  }
+</script>
 
 <div class="wrap">
 
@@ -69,6 +75,7 @@
   <div class="map-shell">
     <div id="map"></div>
     <div id="maptip" class="maptip" hidden></div>
+    <button type="button" id="minpos" class="minpos" hidden>Vis hvor jeg er</button>
   </div>
   <div class="map-legend">
     <span><i></i>Kørsel · <b id="legend-km"></b></span>

@@ -216,6 +216,24 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .navlink:hover{color:var(--ice);border-color:var(--ice)}
 .navlink.ferry{color:var(--sun);border-color:rgba(232,163,61,.35)}
 
+/* ---------- «vis hvor jeg er» ---------- */
+.map-shell{position:relative}
+.minpos{
+  position:absolute;left:12px;bottom:12px;z-index:5;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ice);background:rgba(8,22,31,.9);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:10px;padding:10px 14px;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.minpos::before{
+  content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:#4C9BE8;box-shadow:0 0 0 3px rgba(76,155,232,.3);
+  margin-right:8px;vertical-align:1px;
+}
+.minpos:hover{border-color:#4C9BE8;color:#fff}
+.minpos:disabled{opacity:.6;cursor:default}
+
 /* ---------- kortfilter og hover-tekst ---------- */
 .mapfilter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .fbtn{

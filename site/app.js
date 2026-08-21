@@ -707,6 +707,45 @@
       }).join("") + "</ul></section>";
   }).join("");
 
+  /* ---------- min position ---------- */
+  /* Google Maps' JavaScript-API har ingen indbygget «find mig»-knap som
+     mobil-SDK'erne har, så den bygges her. Knappen ligger i HTML oven på
+     kortet frem for som et kort-kontrolelement, så den samme knap kan betjene
+     både Google-kortet og Leaflet-reserven. */
+  var visMig = null;
+  var minposKnap = document.getElementById("minpos");
+
+  function saetVisMig(fn) {
+    visMig = fn;
+    if (minposKnap && navigator.geolocation) minposKnap.hidden = false;
+  }
+
+  if (minposKnap) {
+    var minposTekst = minposKnap.textContent;
+    var minposTimer = null;
+    function minposSig(txt, ms) {
+      minposKnap.textContent = txt;
+      if (minposTimer) clearTimeout(minposTimer);
+      if (ms) minposTimer = setTimeout(function () { minposKnap.textContent = minposTekst; }, ms);
+    }
+    minposKnap.addEventListener("click", function () {
+      if (!visMig) return;
+      minposKnap.disabled = true;
+      minposSig("Finder\u2026");
+      navigator.geolocation.getCurrentPosition(function (p) {
+        minposKnap.disabled = false;
+        minposSig(minposTekst);
+        visMig(p.coords.latitude, p.coords.longitude, p.coords.accuracy);
+      }, function (fejl) {
+        minposKnap.disabled = false;
+        // 1 = afvist, 2 = ingen position, 3 = tidsudl\u00f8b
+        minposSig(fejl.code === 1 ? "Du sagde nej til adgang"
+                : fejl.code === 3 ? "Tog for lang tid \u2014 pr\u00f8v igen"
+                : "Fandt ingen position", 5000);
+      }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
+    });
+  }
+
   /* ======================= KORT ======================= */
   var AURORA = "#5FD9A6", SUN = "#E8A33D", ICE = "#E4EFF3",
       NIGHT = "#08161F", VIOLET = "#B69CE8", ROSE = "#F0705B",
@@ -802,6 +841,29 @@
       // cooperative: Ctrl+hjul zoomer på PC, to fingre på mobil.
       gestureHandling: "cooperative",
       mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU }
+    });
+
+    /* Blå prik som på telefonen: markør plus en cirkel for usikkerheden. */
+    var migPrik = null, migRing = null;
+    saetVisMig(function (lat, lon, noej) {
+      var pos = { lat: lat, lng: lon };
+      if (!migPrik) {
+        migPrik = new google.maps.Marker({
+          position: pos, map: map, zIndex: 999, optimized: false,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7,
+                  fillColor: "#4C9BE8", fillOpacity: 1,
+                  strokeColor: "#FFFFFF", strokeWeight: 3 }
+        });
+        migRing = new google.maps.Circle({
+          map: map, clickable: false, strokeColor: "#4C9BE8", strokeOpacity: 0.35,
+          strokeWeight: 1, fillColor: "#4C9BE8", fillOpacity: 0.12
+        });
+      }
+      migPrik.setPosition(pos);
+      migRing.setCenter(pos);
+      migRing.setRadius(Math.max(noej || 60, 40));
+      map.panTo(pos);
+      if (map.getZoom() < 9) map.setZoom(9);
     });
 
     // Byvandringerne får hver deres kort i deres eget afsnit. Fejler et af dem,
@@ -1052,6 +1114,19 @@
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         attribution: "© OpenStreetMap, © CARTO", maxZoom: 18
       }).addTo(map);
+
+      var lMigPrik = null, lMigRing = null;
+      saetVisMig(function (lat, lon, noej) {
+        if (!lMigPrik) {
+          lMigRing = L.circle([lat, lon], { radius: 60, color: "#4C9BE8", weight: 1,
+            opacity: 0.35, fillColor: "#4C9BE8", fillOpacity: 0.12 }).addTo(map);
+          lMigPrik = L.circleMarker([lat, lon], { radius: 7, color: "#FFFFFF", weight: 3,
+            fillColor: "#4C9BE8", fillOpacity: 1 }).addTo(map);
+        }
+        lMigRing.setLatLng([lat, lon]).setRadius(Math.max(noej || 60, 40));
+        lMigPrik.setLatLng([lat, lon]);
+        map.setView([lat, lon], Math.max(map.getZoom(), 9));
+      });
 
       var all = [];
       SEGMENTER.forEach(function (seg) {
