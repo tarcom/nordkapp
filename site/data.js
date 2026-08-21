@@ -405,6 +405,45 @@ window.TROMSO = {
   }
 };
 
+/* ---------------------------------------------------------------------------
+   Revideret tidsplan, lagt ind undervejs den 21. august.
+   Turen kom halvanden dag foran: færgen til Lofoten blev taget 04.45 den 20.,
+   og Tromsø blev nået og forladt den 21. i stedet for den 22.-23.
+   DAYS nedenfor er stadig rutens grunddata — etaperne er de samme og tallene
+   målt. Det er kun datoerne der har flyttet sig, plus det forspringet køber.
+   Alle tal her er målt med OSRM og ganget med 1,15-1,2 for pauser og ladning.
+   --------------------------------------------------------------------------- */
+window.NYPLAN = {
+  opdateret: "21. august, aften — på E8 gennem Lavangsdalen",
+  hvor: "Halvanden dag foran. Den oprindelige plan havde dig i Tromsø til og med den 23.; du forlod byen den 21. om aftenen.",
+  dom: "Forspringet er stort nok til at købe <b>både Knivskjellodden og en menneskelig Finlandsstrækning</b> — men kun hvis du står ved Nordkapp senest den 22. om aftenen. Sover du en ekstra nat i Alta, skal du vælge mellem de to.",
+  dage: [
+    { dato:"fre 21.", titel:"Tromsø → Skibotn", km:126, t:2.1, nu:true,
+      d:"E8 gennem Lavangsdalen og ned til E6 ved Skibotn. Sov der — så vågner du på hovedvejen nordpå med Lyngsalpene over fjorden." },
+    { dato:"lør 22.", titel:"Skibotn → Alta → Nordkapp", km:498, t:9.4, hard:true,
+      d:"Dagens nøgle. Af sted kl. 8, Alta Museum og helleristningerne midt på dagen, videre over Kvænangsfjellet og ud ad E69. Fremme ved 20-tiden — solen går ned 20.56, så du når platået i det sidste lys." },
+    { dato:"søn 23.", titel:"Knivskjellodden", km:0, t:0, stjerne:true,
+      d:"18 km våd vandring ud til Europas <em>rigtige</em> nordligste punkt, 1.457 meter nordligere end Nordkapp. Ingen entré, ingen bus, næsten ingen mennesker. Skriv dig i bogen i kassen ved pynten. 5-6 timer, så hele dagen går." },
+    { dato:"man 24.", titel:"Nordkapp → Inari", km:382, t:7.1,
+      d:"Ned ad E69 og E75 i Finland. Siida-museet ved Inarisøen, og laavu-shelters langs vandet hvis du vil sove ude." },
+    { dato:"tir 25.", titel:"Inari → forbi Oulu", km:548, t:9.2,
+      d:"Gennem finsk Lapland. Her er der plads til Pyhä-Luosto og Isokuru — 62 km og en time ekstra for Finlands dybeste kløft, og den bedste naturoplevelse på hele den finske strækning målt på hvad den koster." },
+    { dato:"ons 26.", titel:"→ Turku + natfærge", km:649, t:10.5,
+      d:"Sidste finske dag. Book Turku-færgen et par dage før herfra. Åbo Slot ligger fem minutter fra terminalen, hvis du er i god tid." },
+    { dato:"tor 27.", titel:"Stockholm → Göteborg", km:477, t:5.8,
+      d:"I land kl. 7. Uførandret fra den oprindelige plan." },
+    { dato:"fre 28.", titel:"Göteborg → Aalborg", km:63, t:0.8,
+      d:"Stena hjem. Book den 1-2 dage før." }
+  ],
+  vundet: [
+    ["Knivskjellodden kommer med","Den kræver en hel dag, og den fandtes ikke i den oprindelige plan. Det er turens eneste sted, hvor du står nordligere end Nordkapp — og hvor der ikke er en turistbus i sigte."],
+    ["De to hårde dage forsvinder","Dag 9 og 10 var målt til 12,6 og 14,2 timer bag rattet i træk. Delt over tre dage bliver det 7,1 · 9,2 · 10,5. Den værste dag falder med næsten fire timer."],
+    ["Der bliver råd til Pyhä-Luosto","62 km og en time for Finlands dybeste kløft, med trappe og gangbro hele vejen ned. Den lå der også før, men der var ikke tid."]
+  ],
+  pris: "Det hele hænger på lørdag den 22.: 498 km med et museumsstop midt i. Det er en lang dag, men kortere end de 583 km du kørte fra Lofoten til Tromsø. Bliver den for meget, så sov i Alta — og vælg så mellem Knivskjellodden og de rolige finske dage. Begge dele er stadig bedre end den oprindelige plan.",
+  fast: "Det eneste der ikke kan flyttes: du skal være i Turku onsdag den 26. om aftenen, og hjemme fredag den 28."
+};
+
 /* Beslutninger hvor jeg har ændret eller udfordret det oprindelige udkast. */
 window.BESLUTNINGER = [
   { id:"faerge", titel:"Færgen nordpå: Larvik, ikke Göteborg",

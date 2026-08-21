@@ -595,6 +595,33 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 
+/* ---------- revideret tidsplan ---------- */
+.nyplan{display:grid;gap:2px;margin:0 0 30px}
+.npdag{
+  display:grid;grid-template-columns:64px 1fr 90px 78px;gap:16px;align-items:center;
+  padding:15px 0;border-top:1px solid var(--line);
+}
+.npdag:first-child{border-top:0}
+.npdato{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--glacial);opacity:.8}
+.npdag.nu .npdato{color:var(--aurora);opacity:1}
+.nptekst h4{
+  font-family:var(--display);font-size:1.02rem;font-weight:600;letter-spacing:-.015em;
+  margin:0 0 4px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+}
+.npmaerke{
+  font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--night);background:var(--aurora);border-radius:20px;padding:2px 8px;font-style:normal;
+}
+.npmaerke.ny{background:var(--sun)}
+.nptekst p{margin:0;font-size:.9rem;color:var(--glacial)}
+.npbar{height:5px;border-radius:3px;background:rgba(189,214,223,.1);overflow:hidden}
+.npbar span{display:block;height:100%;background:var(--steel);border-radius:3px}
+.npdag.hard .npbar span{background:var(--alarm)}
+.npdag.stjerne .npbar span{background:var(--sun)}
+.npdag.nu .npbar span{background:var(--aurora)}
+.nptal{font-family:var(--mono);font-size:12px;text-align:right;color:var(--ice)}
+.nptal em{color:var(--glacial);font-style:normal;font-size:11px;opacity:.8}
+
 /* ---------- Trondheim: byvandring og aftensmad ---------- */
 .tur-tal{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
@@ -727,6 +754,9 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
   .altblok,.omvej,.b-card,.pakgruppe,.pgroup,.nod,.hkort,.card{padding:18px 17px}
   .altbund,.finland{padding:20px 18px}
   .madkort{padding:18px 17px}
+  .npdag{grid-template-columns:56px 1fr 66px;gap:10px}
+  .npbar{grid-column:2/-1;order:3}
+  .nptekst p{font-size:.86rem}
   .minikort{padding:13px}
   .turstop-punkt{grid-template-columns:26px 1fr;gap:13px}
   .tskort,.madlinks a{display:inline-block;padding-top:4px;padding-bottom:4px}

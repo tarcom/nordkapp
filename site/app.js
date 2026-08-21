@@ -174,6 +174,42 @@
       "</div></article>";
   }).join("");
 
+  /* ---------- revideret tidsplan ---------- */
+  (function () {
+    var N = window.NYPLAN, vaert = document.getElementById("nyplan-indhold");
+    if (!N || !vaert) return;
+    var maxKm = Math.max.apply(null, N.dage.map(function (d) { return d.km; })) || 1;
+
+    document.getElementById("nyplan-note").textContent = "Opdateret " + N.opdateret;
+
+    vaert.innerHTML =
+      '<p class="lead">' + esc(N.hvor) + "</p>" +
+      '<p class="dom">' + N.dom + "</p>" +
+
+      '<div class="nyplan">' + N.dage.map(function (d) {
+        var kls = [d.nu ? "nu" : "", d.hard ? "hard" : "", d.stjerne ? "stjerne" : ""]
+                  .filter(Boolean).join(" ");
+        return '<div class="npdag ' + kls + '">' +
+          '<span class="npdato">' + esc(d.dato) + "</span>" +
+          '<div class="nptekst"><h4>' + esc(d.titel) +
+            (d.nu ? '<em class="npmaerke">du er her</em>' : "") +
+            (d.stjerne ? '<em class="npmaerke ny">ny</em>' : "") + "</h4>" +
+            "<p>" + d.d + "</p></div>" +
+          '<div class="npbar"><span style="width:' + (d.km / maxKm * 100).toFixed(1) + '%"></span></div>' +
+          '<div class="nptal">' + (d.km ? DK(d.km) + " km<br><em>" + komma(d.t) + " t</em>"
+                                        : "\u2014<br><em>til fods</em>") + "</div>" +
+          "</div>";
+      }).join("") + "</div>" +
+
+      '<h3 class="fhd">Hvad forspringet k\u00f8ber</h3>' +
+      '<div class="hvorfor">' + N.vundet.map(function (v) {
+        return '<div class="hkort"><h3>' + esc(v[0]) + "</h3><p>" + esc(v[1]) + "</p></div>";
+      }).join("") + "</div>" +
+
+      '<p class="tur-note p"><b>Hvad det koster</b>' + esc(N.pris) + "</p>" +
+      '<p class="sadvarsel">' + esc(N.fast) + "</p>";
+  })();
+
   /* ---------- byafsnit: Trondheim og Tromsø ---------- */
   /* De to byafsnit er ens af opbygning — målt gangrute, minikort og spisesteder
      — så renderingen er skrevet én gang og kaldt to. `kort` bytter SVG'en ud
