@@ -123,7 +123,8 @@ window.DAYS = [
       ["Svolvær","Lofotens hovedby. Svolværgeita er de to klippehorn over byen"],
       ["Narvik","malmbyen. Svævebanen Narvikfjellet kører til 656 m, og krigsmuseet fortæller om slaget i 1940"],
       ["Polar Park","verdens nordligste dyrepark ved Bardu — ulve, bjørne, los og jærv på store arealer"],
-      ["Lyngsalpene","de takkede tinder øst for Tromsø dukker op på de sidste 50 km"]
+      ["Lyngsalpene","de takkede tinder øst for Tromsø dukker op på de sidste 50 km"],
+      ["Byvandring i Tromsø","3,7 km gennem polarhistorien, træbyen og domkirken — og den ender ved aftensmaden. Se afsnittet om Tromsø",1]
     ] },
 
   { n:7, dato:"2026-08-23", ugedag:"Søndag", titel:"Tromsø → Alta",
@@ -133,7 +134,7 @@ window.DAYS = [
     tekst:"Formiddagen i Tromsø, eftermiddagen på vejen. Landskabet skifter tydeligt her — skoven bliver lav, træerne forsvinder, og du er reelt på vidden.",
     sol:"Sol ned 21.05 i Alta",
     se:[
-      ["Fjellheisen","svævebanen op til Storsteinen over Tromsø. Tag den først på dagen for hele øens panorama",1],
+      ["Fjellheisen, Tromsø","svævebanen op til Storsteinen over byen. Tag den først på dagen for hele øens panorama",1],
       ["Ishavskatedralen","betonspidserne og glasmosaikken, byens vartegn — ligger lige ved svævebanen"],
       ["Polarmuseet","Amundsen, Nansen og de andre der tog herfra og ikke altid kom hjem"],
       ["Lyngenfjorden","E8 følger fjorden med Lyngsalpene på den anden side"],
@@ -237,6 +238,7 @@ window.STOPS = [
    Alle koordinater er slået op i OpenStreetMap som resten af sidens punkter.
    --------------------------------------------------------------------------- */
 window.TRONDHEIM = {
+  id: "trondheim", by: "Trondheim",
   dag: 2,
   intro: "Du er fremme tidligt på eftermiddagen, og hele byen ligger inden for halvanden kilometer. Sløjfen her tager det med i én tur: domkirken, den gamle bybro, Bakklandet, fæstningen med udsigten, og bryggerne på vejen tilbage. Bagefter er der aftensmad, og der er ét oplagt valg.",
 
@@ -308,6 +310,98 @@ window.TRONDHEIM = {
         note:"Der er to Graffi i Trondheim. Denne ligger på Solsiden ved TMV-kaia; den anden ligger inde i Midtbyen på Carl Johans gate." }
     ],
     bund:"Priserne er niveauer, ikke tilbud. Regn med at et hovedmåltid i Norge koster halvanden gang dansk niveau, og at øl trækker regningen op hurtigere end maden."
+  }
+};
+
+/* ---------------------------------------------------------------------------
+   Tromsø — ishavsbyen, og turens sidste rigtige by før Nordkapp. Samme
+   opbygning som Trondheim-afsnittet, og gangruten er målt på samme måde med
+   OSRM's gangprofil: 3.660 meter og 49 minutters ren gang. `linje` er den
+   målte geometri, forenklet fra 441 til 72 punkter — kun til minikortet.
+   Højdeforskellen er slået op i EU-DEM: laveste punkt 1 m, højeste 17 m.
+   --------------------------------------------------------------------------- */
+window.TROMSO = {
+  id: "tromso", by: "Tromsø",
+  dag: 6,
+  intro: "Efter 583 km fra Lofoten ligger hele Tromsø samlet på en håndfuld gader. Byen er hverken stor eller gammel, men den er der, hvorfra polarekspeditionerne sejlede — og den har Nordnorges bedste spisesteder inden for gåafstand af hinanden. Sløjfen her tager polarhistorien, træbyen og domkirken med og ender ved havnen, hvor du skal spise.",
+
+  tur: {
+    km: 3.7, min: 49, timer: 1.5, stigning: 17,
+    parkering: "Centrum er lille nok til at det er ligegyldigt hvor du stiller bilen. Nærmest sløjfen er P-huset ved Nerstranda eller kajen ved Prostneset; begge ligger få minutter fra Stortorget.",
+    note: "De 49 minutter er ren gang. Med Polarmuseet indenfor (regn med en time) bliver det halvanden til to timer. Turen er så godt som flad — kun 17 højdemeter mellem laveste og højeste punkt, mod Trondheims 60 op til fæstningen.",
+    ekstra: "Vil du gå længere, så fortsæt over Tromsø bru til Ishavskatedralen. Det lægger 2,9 km og 38 minutter til, og udsigten tilbage mod byen midtvejs på broen er turens bedste. Men katedralen og Fjellheisen står allerede på dag 7 i morgen, så du behøver ikke nå det i aften.",
+    stop: [
+      { n:1, navn:"Stortorget", lat:69.65136, lon:18.95860,
+        d:"Torvet ned mod havnen, med fiskeboder og udsigt over sundet til Ishavskatedralen og fjeldene bagved. Det er her byen samler sig, og det er det naturlige start- og slutpunkt." },
+      { n:2, navn:"Polarmuseet", lat:69.65221, lon:18.96332, stj:4,
+        d:"I et gammelt toldpakhus ude på bryggen. Amundsen, Nansen, fangstmændene på Svalbard og alle de andre, der tog herfra. Det var også fra Tromsø, Amundsen fløj ud i 1928 for at lede efter Nobile og aldrig kom tilbage. Regn med en time indenfor — det er turens bedste museum." },
+      { n:3, navn:"Skansen", lat:69.65291, lon:18.96426, stj:3,
+        d:"Tromsøs ældste hus fra 1789, bygget på en middelalderlig jordvold — den skanse, stedet har navn efter. Lille og let at gå forbi, men det er byens eneste rest fra før 1800-tallet." },
+      { n:4, navn:"Storgata", lat:69.65309, lon:18.95975,
+        d:"Hovedgaden gennem den gamle træby. Facaderne er 1800-tals trælængder i klare farver, og gaden er stadig byens rygrad — butikker, caféer og folk hele vejen." },
+      { n:5, navn:"Perspektivet Museum", lat:69.65233, lon:18.95925,
+        d:"Bymuseum i et gammelt købmandshus, med fotosamlingen som det bærende. Gratis entré, og en hurtig måde at forstå hvordan byen så ud, før den blev ishavshovedstad." },
+      { n:6, navn:"Tromsø domkirke", lat:69.64875, lon:18.95682, stj:3,
+        d:"Fra 1861 og en af Norges største trækirker — og landets eneste domkirke bygget i træ. Den står midt i byen med parken omkring, og den er værd at gå ind i, hvis den er åben." },
+      { n:7, navn:"Tromsø bibliotek", lat:69.65072, lon:18.95469,
+        d:"Det buede glastag over det gamle biografbygningsskelet. Et af de få steder i Nordnorge, hvor moderne arkitektur virkelig er lykkedes — og et varmt sted at sidde ti minutter, hvis vejret er norsk." },
+      { n:8, navn:"Ølhallen", lat:69.64590, lon:18.95047, stj:3,
+        d:"Macks ølhal fra 1928, byens ældste værtshus og bryggeriets egen udskænkning. Selve brygningen flyttede til Nordkjosbotn i 2012, så titlen som verdens nordligste bryggeri er blevet teknisk — men hallen står, med hovederne af isbjørn og hvalros på væggene." },
+      { n:9, navn:"Polaria", lat:69.64368, lon:18.94990,
+        d:"Bygningen der ser ud som fem isflager, der er skubbet op på land. Arktisk oplevelsescenter med sælerne indenfor — men selv facaden er værd at gå forbi på vejen tilbage langs vandet." }
+    ],
+    /* Målt gangrute, forenklet. Genereret — rediger ikke i hånden. */
+    linje: [
+    [69.65136,18.95860],[69.65130,18.95909],[69.65150,18.95931],[69.65145,18.95964],
+    [69.65235,18.96059],[69.65280,18.96138],[69.65264,18.96362],[69.65220,18.96350],
+    [69.65264,18.96362],[69.65265,18.96339],[69.65276,18.96380],[69.65301,18.96412],
+    [69.65298,18.96437],[69.65301,18.96412],[69.65276,18.96380],[69.65265,18.96339],
+    [69.65284,18.96104],[69.65279,18.96058],[69.65301,18.96035],[69.65317,18.95984],
+    [69.64971,18.95599],[69.64969,18.95612],[69.64954,18.95605],[69.64946,18.95715],
+    [69.64885,18.95693],[69.64904,18.95693],[69.64915,18.95559],[69.64950,18.95592],
+    [69.64967,18.95472],[69.64976,18.95483],[69.64982,18.95465],[69.65038,18.95518],
+    [69.65040,18.95500],[69.65045,18.95505],[69.65055,18.95418],[69.65077,18.95434],
+    [69.65055,18.95418],[69.65045,18.95505],[69.65040,18.95500],[69.65038,18.95518],
+    [69.64982,18.95465],[69.64975,18.95481],[69.64807,18.95283],[69.64790,18.95375],
+    [69.64776,18.95367],[69.64687,18.95262],[69.64622,18.95143],[69.64614,18.95112],
+    [69.64609,18.95119],[69.64553,18.94975],[69.64544,18.95006],[69.64467,18.94809],
+    [69.64457,18.94815],[69.64415,18.94957],[69.64409,18.94961],[69.64396,18.94902],
+    [69.64378,18.94894],[69.64366,18.94918],[69.64378,18.94894],[69.64396,18.94902],
+    [69.64409,18.94961],[69.64415,18.94957],[69.64457,18.94815],[69.64471,18.94812],
+    [69.64610,18.95177],[69.64615,18.95174],[69.64690,18.95300],[69.64781,18.95411],
+    [69.65126,18.95770],[69.65124,18.95785],[69.65141,18.95812],[69.65136,18.95860]
+    ]
+  },
+
+  mad: {
+    titel: "Aftensmad",
+    intro: "Det heldige er, at de to oplagte valg ligger i samme hus. Vertshuset Skarven på Strandtorget rummer både en steakhouse og Nordnorges klassiske sjømatrestaurant, hver sin etage — så du kan gå derned og bestemme dig i døren. Og huset ligger på vejen tilbage fra Polaria, altså sidst på sløjfen.",
+    steder: [
+      { navn:"Arctandria", kort:"Arctandria", valg:true, lat:69.64706, lon:18.95637,
+        adresse:"Strandtorget 1, 2. sal", tlf:"+47 77 60 07 20", tlfnr:"+4777600720",
+        web:"https://www.skarven.no/",
+        art:"Nordnorsk sjømat — og rensdyr",
+        pris:"høj",
+        d:"Husets sjømatrestaurant, og den der serverer det, du ikke kan få hjemme: delikatesser fra Ishavet, tørfisk, kongekrabbe og rensdyr. Ovenpå, med udsigt over havnen.",
+        hvorfor:"Du kan få en god bøf i Danmark. Nordnorsk ishavsmad over havnen i Tromsø kan du få i aften og ikke igen på turen — og hvis du savner kød, står rensdyret på samme kort.",
+        aabent:"Man–lør 16–23, lukket søndag. I dag er lørdag, så den er åben" },
+
+      { navn:"Biffhuset (Skarven Grill)", kort:"Biffhuset", lat:69.64718, lon:18.95618,
+        adresse:"Strandtorget 1", tlf:"+47 77 60 07 20", tlfnr:"+4777600720",
+        web:"https://www.skarven.no/",
+        art:"Steakhouse med lokale råvarer",
+        pris:"middel til høj",
+        d:"Husets steakhouse, med lange traditioner og lokale råvarer — og rensdyr på kortet ved siden af bøfferne. Samme bygning som Arctandria, bare en etage nede.",
+        aabent:"Alle dage 15.30–23" },
+
+      { navn:"Emmas Drømmekjøkken", kort:"Emmas", lat:69.64844, lon:18.95605,
+        adresse:"Kirkegata", tlfnr:"", web:"https://www.emmasdrommekjokken.no/",
+        art:"Byens mest omtalte køkken",
+        pris:"høj — turens dyreste måltid",
+        d:"Tromsøs berømte restaurant gennem tre årtier, med en mere afslappet bar i stueetagen hvis det fine er for meget. Den ligger 300 meter fra Skarven, altså også på sløjfen.",
+        note:"Lørdag aften i Tromsø: ring og hør efter bord, før du går derhen." }
+    ],
+    bund:"Priserne er niveauer, ikke tal jeg har set på et menukort — tjek selv. Bliver de fulde, ligger Skarven Kro i samme hus med fiskesuppe og rensdyrburger fra kl. 11 til 01, og Fiskekompaniet ved Killengreens gate og Mathallen er byens andre sikre kort."
   }
 };
 
@@ -386,6 +480,9 @@ window.POI = [
   { kat:"vandring", navn:"Husfjellet, Senja", lat:69.4702, lon:17.2731, dag:6, stj:3,
     t:"3 timer · 635 m · 360° over Senja", tid:"3 timer",
     d:"Mindre kendt end Segla og med udsigt til den. Fra toppen ser du hele Senjas vestside, Bergsfjorden og ud i Atlanterhavet." },
+  { kat:"vandring", navn:"Byvandring i Tromsø", lat:69.6510, lon:18.9586, dag:6, stj:3,
+    t:"3,7 km · polarhistorie, træby og domkirke · så godt som fladt", tid:"1,5 time",
+    d:"Hele Tromsø ligger på en håndfuld gader. Rundturen tager Polarmuseet, Skansen fra 1789, Storgatas træby, domkirken og Macks Ølhal med, og ender ved havnen hvor spisestederne ligger. Målt til 49 minutters ren gang. Se afsnittet om Tromsø." },
   { kat:"vandring", navn:"Sherpatrappa til Fløya", lat:69.6203, lon:18.9991, dag:7, stj:3,
     t:"1.200 trin · 1-2 timer · Tromsø under dig", tid:"1-2 timer",
     d:"Stentrappen op ad Fløya fra Tromsdalen. Ender lige over svævebanens topstation, så du kan gå op og køre ned — eller omvendt, hvis knæene foretrækker det." },
@@ -450,6 +547,10 @@ window.POI = [
     t:"Svævebane til 656 m · krigsmuseet nede i byen" },
   { kat:"udsigt", navn:"Polar Park, Bardu", lat:68.6916, lon:18.1104, dag:6, stj:3,
     t:"Verdens nordligste dyrepark · ulve, bjørne, los" },
+  { kat:"udsigt", navn:"Polarmuseet", lat:69.6522, lon:18.9633, dag:6, stj:4,
+    t:"Amundsen, Nansen og fangstmændene · i et toldpakhus på bryggen" },
+  { kat:"udsigt", navn:"Ishavskatedralen", lat:69.6480, lon:18.9874, dag:7, stj:3,
+    t:"Betonspidserne og glasmosaikken · byens vartegn" },
   { kat:"udsigt", navn:"Fjellheisen, Tromsø", lat:69.6385, lon:18.9908, dag:7, stj:4,
     t:"Svævebane til Storsteinen · hele øens panorama" },
   { kat:"udsigt", navn:"Sommarøy", lat:69.6336, lon:18.0074, dag:7, stj:3,

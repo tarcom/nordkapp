@@ -614,6 +614,7 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
 .mk-mad rect{fill:var(--night);stroke:var(--sun);stroke-width:4}
 .mk-mad.valg rect{fill:var(--sun)}
 .mk-mad text{fill:var(--sun);font-family:var(--mono);font-size:21px;letter-spacing:.04em}
+.mk-traad{stroke:var(--sun);stroke-width:2;opacity:.5}
 .minikort figcaption{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
   color:var(--glacial);opacity:.7;margin-top:15px;text-align:center;
@@ -653,6 +654,14 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--glacial);opacity:.6;
 .tur-note.p b{
   display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--aurora);margin-bottom:3px;
+}
+.tur-note.x{
+  padding:11px 14px;border-left:2px solid var(--sun);
+  background:rgba(232,163,61,.07);border-radius:0 8px 8px 0;color:var(--ice);
+}
+.tur-note.x b{
+  display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--sun);margin-bottom:3px;
 }
 .tur-links{margin:20px 0 0}
 

@@ -38,6 +38,7 @@ BEHOLD = {
     "Globusmonumentet":     "ikke i OSM; punktet ligger 120 m fra Nordkapphallen",
     "Nordkapp-platået":     "samme",
     "Byvandring i Trondheim": "en rundtur, ikke et sted; punktet er sat på Gamle Bybro",
+    "Byvandring i Tromsø": "samme — punktet er sat på Stortorget",
 }
 
 # Lokale/officielle navne, hvor det danske navn ikke findes i OSM.
