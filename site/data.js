@@ -384,7 +384,7 @@ window.TROMSO = {
         pris:"høj",
         d:"Husets sjømatrestaurant, og den der serverer det, du ikke kan få hjemme: delikatesser fra Ishavet, tørfisk, kongekrabbe og rensdyr. Ovenpå, med udsigt over havnen.",
         hvorfor:"Du kan få en god bøf i Danmark. Nordnorsk ishavsmad over havnen i Tromsø kan du få i aften og ikke igen på turen — og hvis du savner kød, står rensdyret på samme kort.",
-        aabent:"Man–lør 16–23, lukket søndag. I dag er lørdag, så den er åben" },
+        aabent:"Man–lør 16–23 · lukket søndag — den eneste dag den ikke kan bruges" },
 
       { navn:"Biffhuset (Skarven Grill)", kort:"Biffhuset", lat:69.64718, lon:18.95618,
         adresse:"Strandtorget 1", tlf:"+47 77 60 07 20", tlfnr:"+4777600720",
@@ -399,7 +399,7 @@ window.TROMSO = {
         art:"Byens mest omtalte køkken",
         pris:"høj — turens dyreste måltid",
         d:"Tromsøs berømte restaurant gennem tre årtier, med en mere afslappet bar i stueetagen hvis det fine er for meget. Den ligger 300 meter fra Skarven, altså også på sløjfen.",
-        note:"Lørdag aften i Tromsø: ring og hør efter bord, før du går derhen." }
+        note:"Fredag og lørdag aften i Tromsø: ring og hør efter bord, før du går derhen." }
     ],
     bund:"Priserne er niveauer, ikke tal jeg har set på et menukort — tjek selv. Bliver de fulde, ligger Skarven Kro i samme hus med fiskesuppe og rensdyrburger fra kl. 11 til 01, og Fiskekompaniet ved Killengreens gate og Mathallen er byens andre sikre kort."
   }
