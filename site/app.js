@@ -848,7 +848,7 @@
   /* ======================= KORT ======================= */
   var AURORA = "#5FD9A6", SUN = "#E8A33D", ICE = "#E4EFF3",
       NIGHT = "#08161F", VIOLET = "#B69CE8", ROSE = "#F0705B",
-      SKY = "#6FB3D9";
+      SKY = "#6FB3D9", TESLA = "#E82127";
 
   var KAT = {
     stop:     { navn: "Overnatning",   farve: ICE,    r: 6.5 },
@@ -856,8 +856,14 @@
     vandring: { navn: "Vandreture",    farve: AURORA, r: 6 },
     udsigt:   { navn: "Seværdigheder", farve: SUN,    r: 5 },
     omvej:    { navn: "Omveje",        farve: ROSE,   r: 6 },
-    mulighed: { navn: "Muligheder",   farve: SKY,    r: 5.5 }
+    mulighed: { navn: "Muligheder",   farve: SKY,    r: 5.5 },
+    lader:    { navn: "Superchargere", farve: TESLA, r: 5.5 }
   };
+
+  /* Lyn frem for cirkel, så laderne ikke kan forveksles med et sted man
+     skal se. Selve Tesla-logoet er et varemærke; lynet er det almindelige
+     ladesymbol og siger det samme. Tegnet omkring sit eget nulpunkt. */
+  var LYN = "M 0,-11 L -6.5,1.5 L -1.2,1.5 L -2.2,11 L 6.5,-2 L 1.2,-2 Z";
 
   /* Ét segment = ét stykke vejgeometri, knyttet til sin dag. */
   var SEGMENTER = [];
@@ -1092,6 +1098,29 @@
               s.top || s.hjem, s.top ? SUN : null, stopInfo(s));
     });
 
+    (window.LADERE || []).forEach(function (l) {
+      var linje = (l.stik ? l.stik + " stik" : "") +
+                  (l.stik && l.kw ? " · " : "") + (l.kw ? l.kw + " kW" : "");
+      var txt = "<b>⚡ " + esc(l.navn) + "</b>" +
+        '<span class="tl">Supercharger' + (linje ? " · " + linje : "") + "</span>";
+      var m = new google.maps.Marker({
+        position: { lat: l.lat, lng: l.lon }, map: map, zIndex: 3, clickable: true,
+        optimized: false,
+        icon: { path: LYN, scale: 0.85, fillColor: TESLA, fillOpacity: 1,
+                strokeColor: NIGHT, strokeWeight: 1.5, anchor: new google.maps.Point(0, 0) }
+      });
+      m.addListener("mouseover", function () { visTip(txt); });
+      m.addListener("mouseout", skjulTip);
+      m.addListener("click", function () {
+        skjulTip();
+        aabnInfo("<b>" + esc(l.navn) + " Supercharger</b>" +
+          '<span class="tl g">Tesla' + (linje ? " · " + linje : "") + "</span>" +
+          metaLinje(l.lat, l.lon) + handlinger(l.lat, l.lon, l.navn + " Supercharger"), null, m);
+      });
+      grupper.lader.push(m);
+      bounds.extend({ lat: l.lat, lng: l.lon });
+    });
+
     window.POI.forEach(function (p) {
       var txt = "<b>" + esc(p.navn) + " " + "★".repeat(p.stj) + "</b>" +
         '<span class="tl">' + esc(p.t) + "</span>" +
@@ -1252,6 +1281,19 @@
                      { maxWidth: 300 });
         all.push([p.lat, p.lon]);
       });
+      (window.LADERE || []).forEach(function (l) {
+        var linje = (l.stik ? l.stik + " stik" : "") +
+                    (l.stik && l.kw ? " · " : "") + (l.kw ? l.kw + " kW" : "");
+        L.marker([l.lat, l.lon], { icon: L.divIcon({
+            className: "lader-ikon", iconSize: [18, 18], iconAnchor: [9, 9],
+            html: '<svg viewBox="-12 -12 24 24" width="18" height="18">' +
+                  '<path d="' + LYN + '" fill="' + TESLA + '" stroke="' + NIGHT +
+                  '" stroke-width="1.5"/></svg>' }) }).addTo(map)
+          .bindTooltip("<b>⚡ " + esc(l.navn) + "</b><br>Supercharger" +
+                       (linje ? " · " + linje : ""), { sticky: true });
+        all.push([l.lat, l.lon]);
+      });
+
       map.fitBounds(L.latLngBounds(all), { padding: [40, 40] });
 
       var note = document.createElement("div");

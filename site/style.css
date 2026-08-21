@@ -390,6 +390,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.25rem
 .rkat.sove{background:#B69CE8}
 .rkat.omvej{background:var(--alarm)}
 .rkat.mulighed{background:#6FB3D9}
+.lader-ikon{background:none;border:0}
 .rnavn{color:var(--ice);font-weight:600}
 .rdag{font-family:var(--mono);font-size:10px;color:var(--glacial);opacity:.6}
 .rt{color:var(--glacial);opacity:.85;font-size:.85rem}

@@ -444,6 +444,48 @@ window.NYPLAN = {
   fast: "Det eneste der ikke kan flyttes: du skal være i Turku onsdag den 26. om aftenen, og hjemme fredag den 28."
 };
 
+/* ---------------------------------------------------------------------------
+   Tesla Superchargere på resten af ruten. Hentet fra OpenStreetMap og filtreret
+   mod vejgeometrien i geom.js, så det kun er dem inden for 12 km af den vej,
+   der faktisk køres — ikke alle i Norden. Hotelladere (Destination Charger,
+   22 kW) er sorteret fra; det her er kun lynladere.
+   De står for sig og ikke i POI, fordi en lader ikke er en seværdighed og
+   ikke skal have stjerner i rangeringen.
+   Antal stik og effekt er som OSM har dem, og kan være forældede.
+   --------------------------------------------------------------------------- */
+window.LADERE = [
+  { navn:"Honningsvåg", lat:70.9996, lon:25.9673, stik:3, kw:250 },
+  { navn:"Skaidi", lat:70.4321, lon:24.5064, stik:6, kw:250 },
+  { navn:"Alta", lat:69.9612, lon:23.2329, stik:6, kw:250 },
+  { navn:"Sørkjosen", lat:69.7924, lon:20.9392, stik:6, kw:150 },
+  { navn:"Tromsø", lat:69.6492, lon:18.9627, stik:2 },
+  { navn:"Karasjok", lat:69.4719, lon:25.5093, stik:4, kw:250 },
+  { navn:"Skibotn", lat:69.3924, lon:20.2683, stik:6, kw:150 },
+  { navn:"Inari", lat:68.9067, lon:27.0253, stik:8, kw:250 },
+  { navn:"Sodankylä", lat:67.4199, lon:26.5912, stik:4, kw:250 },
+  { navn:"Rovaniemi", lat:66.5019, lon:25.7232, stik:8, kw:250 },
+  { navn:"Keminmaa", lat:65.8000, lon:24.5039, stik:8, kw:250 },
+  { navn:"Kempele", lat:64.9018, lon:25.5356, stik:16, kw:250 },
+  { navn:"Kärsämäki", lat:63.9741, lon:25.7606, stik:12, kw:250 },
+  { navn:"Pyhäjärvi", lat:63.7152, lon:25.9201, stik:4, kw:150 },
+  { navn:"Äänekoski", lat:62.5168, lon:25.6913, stik:4, kw:150 },
+  { navn:"Jyväskylä", lat:62.2144, lon:25.7224, stik:8, kw:250 },
+  { navn:"Jämsä", lat:61.8700, lon:25.2352, stik:8, kw:250 },
+  { navn:"Tampere", lat:61.4517, lon:23.7698, stik:12, kw:250 },
+  { navn:"Akaa-Toijala", lat:61.1811, lon:23.8851, stik:8, kw:150 },
+  { navn:"Nacka", lat:59.3115, lon:18.1753, stik:12, kw:250 },
+  { navn:"Södertälje", lat:59.1872, lon:17.5810, stik:20, kw:250 },
+  { navn:"Sillekrog", lat:58.9182, lon:17.3679, stik:8, kw:150 },
+  { navn:"Herstadberg", lat:58.6219, lon:16.1545, stik:28, kw:150 },
+  { navn:"Linköping", lat:58.4354, lon:15.5910, stik:12, kw:250 },
+  { navn:"Mantorp", lat:58.3656, lon:15.2940, stik:40, kw:250 },
+  { navn:"Ödeshög", lat:58.2271, lon:14.6684, stik:14, kw:150 },
+  { navn:"Gränna", lat:57.9250, lon:14.3199, stik:20, kw:250 },
+  { navn:"Ulricehamn", lat:57.8140, lon:13.4190, stik:20, kw:150 },
+  { navn:"Jönköping", lat:57.7727, lon:14.1998, stik:40, kw:250 },
+  { navn:"Göteborg", lat:57.6517, lon:11.9512, stik:28, kw:250 }
+];
+
 /* Beslutninger hvor jeg har ændret eller udfordret det oprindelige udkast. */
 window.BESLUTNINGER = [
   { id:"faerge", titel:"Færgen nordpå: Larvik, ikke Göteborg",
